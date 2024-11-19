@@ -1,6 +1,6 @@
 class_name LevelManager extends Node3D
 
-@export var skip_intro:bool = false
+@export var skip_intro:bool = true
 
 @export var camera_start_rotation:Vector3 = Vector3(-35, 60, 0)
 @onready var player_start_point:Marker3D = %PlayerStartingPoint
