@@ -35,7 +35,7 @@
 [ext_resource type="PackedScene" uid="uid://h8pnjgggsrtm" path="res://characters/NPC/dr_megadroon.tscn" id="32_ktg0t"]
 [ext_resource type="PackedScene" uid="uid://ghvokiyi5vxr" path="res://assets/objects/laboratory/item_distributor.tscn" id="32_xsrdy"]
 [ext_resource type="PackedScene" uid="uid://cwk6ldidjdnnh" path="res://assets/objects/laboratory/cloning_tank.tscn" id="33_a67mj"]
-[ext_resource type="ArrayMesh" uid="uid://bs6c8eaebtib1" path="res://assets/objects/weapons/toy_gun/toygun.res" id="33_erj25"]
+[ext_resource type="ArrayMesh" uid="uid://bkeuk3ybun6mj" path="res://assets/objects/weapons/toy_gun/laser-gun-design1_Cube.res" id="33_erj25"]
 [ext_resource type="Resource" path="res://scenes/level1/level1_drmegadroon.dtl" id="34_507xk"]
 [ext_resource type="PackedScene" uid="uid://dhnoso0tnbnrd" path="res://assets/objects/laboratory/computer2.glb" id="34_ph7g1"]
 [ext_resource type="PackedScene" uid="uid://yqmkxyxy01sl" path="res://assets/objects/laboratory/collectable_building_pass.tscn" id="39_85vp3"]
