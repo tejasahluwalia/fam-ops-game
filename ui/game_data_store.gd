@@ -12,5 +12,5 @@ signal controller_scheme_changed
 		if not self.resource_path.is_empty():
 			ResourceSaver.save(self, self.resource_path)
 
-func _init(p_controller_scheme = 3):
+func _init(p_controller_scheme = 2):
 	controller_scheme = p_controller_scheme

@@ -8,8 +8,8 @@ var _aim_input := Vector2.ZERO
 
 
 func process(delta) -> void:
-	
 	_update_player_input()
+	print(_aiming_direction)
 	if _aiming_direction.length() <= 0.2:
 		_state_machine.transition_to("Rest")
 	if _timer.time_left <= 0: 
@@ -29,13 +29,14 @@ func enter(msg: = {}) -> void:
 	# NOTE: we delay the start of the shooting, kind of sucks for reactivity but
 	# the character skin needs to finish its aiming animation
 
-
+	
 func _shoot_arrow() -> void:
 	var arrow = arrow_prefab.instantiate()
 	get_tree().current_scene.add_child(arrow)
 	arrow.global_transform = player.shoot_anchor.global_transform
 	arrow.apply_central_impulse(arrow.transform.basis.z * arrow.initial_velocity)
 	player.model.play_shooting(true)
+
 
 func _update_player_input():
 	# get input for aiming

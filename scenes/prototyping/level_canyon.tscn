@@ -36,7 +36,6 @@
 [ext_resource type="PackedScene" uid="uid://b4pnyn61mwgsh" path="res://assets/prototype_bits/target.gltf" id="34_6xqhy"]
 [ext_resource type="Environment" uid="uid://13w4n7joxo58" path="res://scenes/prototyping/level_canyon_env.tres" id="35_64yo0"]
 
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e8opj"]
 resource_name = "prototype_texture.034"
 albedo_texture = ExtResource("16_j308v")

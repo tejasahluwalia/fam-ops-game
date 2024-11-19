@@ -7,6 +7,7 @@ var _player_input
 @export var cursor_arrow:Texture2D = null
 @export var cursor_hand:Texture2D = null
 
+
 # Called when the node enters the scene tree for the first time.
 func _enter_tree():
 	_parent = get_parent()
@@ -22,6 +23,7 @@ func _enter_tree():
 func _ready():
 	print("%s is Ready"%self.name)
 
+
 func _process(delta) -> void:
 	_update_player_input()
 
@@ -34,6 +36,7 @@ func _update_player_input():
 func on_death():
 	$MovementController.transition_to("Dead")
 	$AimingController.transition_to("Dead")
+
 
 func on_respawn():
 	$MovementController.transition_to("Move/Run")
