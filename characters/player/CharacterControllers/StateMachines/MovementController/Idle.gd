@@ -11,7 +11,7 @@ func _ready() -> void:
 	_break_timer.one_shot = false
 	await get_tree().root.ready
 	_break_timer.connect("timeout", Callable(player.model, "play_idle_break").bind(true))
-	
+
 
 func unhandled_input(event: InputEvent) -> void:
 	_parent.unhandled_input(event)

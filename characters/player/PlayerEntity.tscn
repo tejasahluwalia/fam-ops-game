@@ -1,8 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://jga6pbb5xpug"]
+[gd_scene load_steps=13 format=3 uid="uid://jga6pbb5xpug"]
 
 [ext_resource type="PackedScene" uid="uid://ds848t2x4cxyt" path="res://characters/player/CharacterSkins/IcySkin_inherited.tscn" id="1"]
 [ext_resource type="Script" path="res://characters/player/PlayerEntity.gd" id="2"]
-[ext_resource type="Resource" uid="uid://ldabq12bw0gj" path="res://ui/game_data_store.tres" id="2_gbwfc"]
+[ext_resource type="Resource" path="res://ui/game_data_store.tres" id="2_gbwfc"]
 [ext_resource type="PackedScene" uid="uid://d3yswfl2m7nue" path="res://characters/player/CharacterControllers/OneStickController.tscn" id="2_njm8p"]
 [ext_resource type="PackedScene" uid="uid://d1rmoxdu5yefv" path="res://characters/player/CharacterControllers/TwoStickController.tscn" id="3_k2os6"]
 [ext_resource type="PackedScene" uid="uid://drvgaalhd5v8s" path="res://characters/player/CharacterControllers/TwoStickControllerAuto.tscn" id="5_n2q7r"]
@@ -15,6 +15,11 @@ radius = 0.492627
 height = 1.97047
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_q0x46"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_lc4er"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
 
 [node name="PlayerEntity" type="CharacterBody3D"]
 collision_mask = 27
@@ -50,6 +55,9 @@ collision_mask = 8
 [node name="CollisionShape3D" type="CollisionShape3D" parent="IcySkin/PlayerHand"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00531, 0.798733)
 shape = SubResource("SphereShape3D_q0x46")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_lc4er")
 
 [connection signal="damage" from="HealthManager" to="." method="on_hit"]
 [connection signal="health_depleted" from="HealthManager" to="." method="on_death"]

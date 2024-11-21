@@ -8,8 +8,10 @@ static var level:LevelManager = null
 static func get_player()->PlayerEntity:
 	return player
 
+
 static func has_player()->bool:
 	return true if player else false
+
 
 static func on_pickup_item(name:String):
 	if player:
@@ -19,12 +21,12 @@ static func on_pickup_item(name:String):
 	if name == "building_card":
 		level.on_card_picked_up()
 
+
 func _ready():
-	
 	find_game_elements() # find player, level and gameovermenu
 	if not player and level and level.skip_intro:
 		spawn_player()
-	if level: 
+	if level:
 		level.introscene_finished.connect(initialise_player)
 	if gameover_menu:
 		gameover_menu.restart_pressed.connect(on_restart_pressed)
@@ -49,7 +51,6 @@ func initialise_player():
 	player.camera.current = true
 
 
-
 func spawn_player():
 	player = player_packed_scene.instantiate()
 	add_child(player)
@@ -68,5 +69,5 @@ func on_quit_pressed():
 func on_restart_pressed():
 	player.position_resetter.reset_position()
 	player.on_respawn()
-	if gameover_menu: 
+	if gameover_menu:
 		gameover_menu.hide()

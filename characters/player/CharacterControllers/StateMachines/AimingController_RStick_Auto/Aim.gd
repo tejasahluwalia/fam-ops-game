@@ -9,11 +9,10 @@ var _aim_input := Vector2.ZERO
 
 func process(delta) -> void:
 	_update_player_input()
-	print(_aiming_direction)
 	if _aiming_direction.length() <= 0.2:
 		_state_machine.transition_to("Rest")
-	if _timer.time_left <= 0: 
-		# NOTE: we tried with event handling, but weirdly the deadzone was noisy, 
+	if _timer.time_left <= 0:
+		# NOTE: we tried with event handling, but weirdly the deadzone was noisy,
 		# 1) it would trigger many bullets when near the deadzone
 		# 2) it would trigger a second bullet on release
 		_timer.start()
@@ -25,11 +24,11 @@ func process(delta) -> void:
 func enter(msg: = {}) -> void:
 	super(msg) # parent send a signal and we dont want to override it!
 	player.model.play_aiming(true)
-	_timer.start() 
+	_timer.start()
 	# NOTE: we delay the start of the shooting, kind of sucks for reactivity but
 	# the character skin needs to finish its aiming animation
 
-	
+
 func _shoot_arrow() -> void:
 	var arrow = arrow_prefab.instantiate()
 	get_tree().current_scene.add_child(arrow)

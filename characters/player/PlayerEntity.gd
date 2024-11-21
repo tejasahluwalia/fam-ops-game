@@ -19,7 +19,9 @@ extends CharacterBody3D
 @export var inventory:Array = []
 signal is_dead
 
+
 func _ready():
+	inventory.append("toygun")
 	game_data.controller_scheme_changed.connect(_on_controller_scheme_changed)
 	if use_saved_controller:
 		_on_controller_scheme_changed(game_data.controller_scheme)
@@ -37,7 +39,7 @@ func on_death():
 	#current_controller.process_mode = Node.PROCESS_MODE_DISABLED
 	current_controller.on_death()
 	GameManager.on_player_death()
-	
+
 
 func on_respawn():
 	model.move_to_running()
@@ -48,8 +50,10 @@ func on_respawn():
 func _on_dialog_started():
 	current_controller.process_mode = Node.PROCESS_MODE_DISABLED
 
+
 func _on_dialog_ended():
 	current_controller.process_mode = Node.PROCESS_MODE_INHERIT
+
 
 func _on_controller_scheme_changed(value):
 	if current_controller:

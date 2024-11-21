@@ -12,7 +12,7 @@ func physics_process(delta: float) -> void:
 			_state_machine.transition_to("Move/Idle")
 	# else:
 	# 	_state_machine.transition_to("Move/Jump")
-	if not player.is_on_floor(): 
+	if not player.is_on_floor():
 		_state_machine.transition_to("Move/Fall")
 
 
