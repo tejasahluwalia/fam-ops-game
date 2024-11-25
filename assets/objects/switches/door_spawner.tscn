@@ -9,9 +9,12 @@ script/source = "extends Node3D
 @export var time_between_waves : int = 3
 @export var nb_spawn_by_wave : int = 3
 @export var flow_rate : int = 1
+@export var total_waves : int = 5 # New variable to set the total number of waves
 
 @onready var wave_timer : Timer = $WaveTimer
 @onready var switch_component : SwitchComponent = $SwitchComponent
+
+var current_wave : int = 0 # Tracks the number of waves spawned so far
 
 func _ready():
 	wave_timer.wait_time = time_between_waves
@@ -33,14 +36,19 @@ func spawn():
 	print(\"Spawn!\")
 
 func _on_wave_timer_timeout():
-	if not switch_component.is_activated:
+	if not switch_component.is_activated or current_wave >= total_waves:
 		return
+	current_wave += 1 # Increment wave count
 	var tween = self.create_tween()
 	tween.set_loops(nb_spawn_by_wave).tween_callback(spawn).set_delay(flow_rate)
 	tween.finished.connect(restart_wave_timer)
 
 func restart_wave_timer():
-	wave_timer.start()
+	if current_wave < total_waves:
+		wave_timer.start()
+	else:
+		$AnimationPlayer.play(\"Closing\")
+		print(\"All waves completed!\") # Optional log
 "
 
 [sub_resource type="Animation" id="Animation_mcon7"]

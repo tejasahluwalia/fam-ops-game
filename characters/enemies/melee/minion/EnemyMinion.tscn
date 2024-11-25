@@ -61,7 +61,6 @@ input_2/break_loop_at_end = false
 input_2/reset = true
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_o08rm"]
-graph_offset = Vector2(-102.121, 44.8465)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_1hmg7")
 nodes/Animation/position = Vector2(600, 480)
 nodes/attack/node = SubResource("AnimationNodeAnimation_a2nrj")
@@ -174,7 +173,7 @@ debug_path_custom_point_size = 10.04
 [node name="BeehaveTree" type="Node" parent="." node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("3_1stn8")
 actor_node_path = NodePath("..")
-blackboard = NodePath("@Node@17980")
+blackboard = NodePath("@Node@62048")
 actor = NodePath("..")
 
 [node name="SelectBehaviour" type="Node" parent="BeehaveTree"]
