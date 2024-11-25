@@ -15,6 +15,12 @@ extends CharacterBody3D
 @export var use_saved_controller:bool = true
 @export var controller_schemes:Array[PackedScene]
 @export var game_data:GameDataStore
+@export var projectile_spawn_path: Node3D
+
+@export var player_id := 1:
+	set(id):
+		player_id = id
+		%InputSynchronizer.set_multiplayer_authority(id)
 
 @export var inventory:Array = []
 signal is_dead
@@ -22,11 +28,12 @@ signal is_dead
 
 func _ready():
 	inventory.append("toygun")
-	game_data.controller_scheme_changed.connect(_on_controller_scheme_changed)
-	if use_saved_controller:
-		_on_controller_scheme_changed(game_data.controller_scheme)
-	Dialogic.timeline_started.connect(_on_dialog_started)
-	Dialogic.timeline_ended.connect(_on_dialog_ended)
+	
+	if multiplayer.get_unique_id() == player_id:
+		camera.make_current()
+		game_data.controller_scheme_changed.connect(_on_controller_scheme_changed)
+		if use_saved_controller:
+			_on_controller_scheme_changed(game_data.controller_scheme)
 
 
 func on_hit():
@@ -35,14 +42,13 @@ func on_hit():
 
 func on_death():
 	is_dead.emit()
-	model.move_to_dead()
+	model.move_to_dead.rpc()
 	#current_controller.process_mode = Node.PROCESS_MODE_DISABLED
 	current_controller.on_death()
-	GameManager.on_player_death()
 
 
 func on_respawn():
-	model.move_to_running()
+	model.move_to_running.rpc()
 	current_controller.on_respawn()
 	health_manager.get_full_health()
 

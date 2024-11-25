@@ -22,6 +22,8 @@ DebugStats="*res://tools/debugging/DebugStats.tscn"
 DebugOverlay="*res://tools/debugging/DebugOverlay.tscn"
 BeehaveGlobalMetrics="*res://addons/beehave/metrics/beehave_global_metrics.gd"
 BeehaveGlobalDebugger="*res://addons/beehave/debug/global_debugger.gd"
+MultiplayerManager="*res://scripts/multiplayer/multiplayer_manager.gd"
+Focus="*res://scripts/focus.gd"
 Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
 
 [dialogic]
@@ -30,9 +32,7 @@ directories/dch_directory={
 "dr_megadroon_character": "res://characters/NPC/dr_megadroon_character.dch"
 }
 directories/dtl_directory={
-"dr_megadroon": "res://characters/NPC/dr_megadroon.dtl",
-"level1_drmegadroon": "res://scenes/level1/level1_drmegadroon.dtl",
-"level1_intro": "res://scenes/level1/level1_intro.dtl"
+"dr_megadroon": "res://characters/NPC/dr_megadroon.dtl"
 }
 glossary/default_case_sensitive=true
 layout/style_list=["res://ui/dialogic_style/dialog_style.tres"]
@@ -84,6 +84,7 @@ folder_colors={
 "res://assets/": "orange",
 "res://characters/": "red",
 "res://scenes/": "blue",
+"res://scripts/": "pink",
 "res://tools/": "yellow",
 "res://ui/": "green"
 }
@@ -238,5 +239,4 @@ environment/ssao/quality=4
 environment/ssil/quality=4
 global_illumination/sdfgi/probe_ray_count=3
 anti_aliasing/quality/msaa_3d=3
-environment/defaults/default_environment="res://scenes/default_env.tres"
 vram_compression/import_etc=true

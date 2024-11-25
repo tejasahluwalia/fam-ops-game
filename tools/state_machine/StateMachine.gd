@@ -11,13 +11,12 @@ var _state_name: = ""
 
 func _init() -> void:
 	add_to_group("state_machine")
-	DebugStats.add_property(self, "state:name", "")
+
 
 func _ready() -> void:
-	print("State Machine ", self.name, " is waiting for root ", get_tree().root)
 	await get_tree().root.ready
-	print("Root is ready!")
 	state.enter()
+
 
 func _unhandled_input(event: InputEvent) -> void:
 	state.unhandled_input(event)
@@ -40,6 +39,7 @@ func transition_to(target_state_path: String, msg: = {}) -> void:
 	self.state = target_state
 	state.enter(msg)
 	emit_signal("transitioned", target_state_path)
+	print("Transitioned to: ", target_state_path )
 
 func set_state(value: State) -> void:
 	state = value

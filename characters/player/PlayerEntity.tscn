@@ -1,13 +1,14 @@
-[gd_scene load_steps=13 format=3 uid="uid://jga6pbb5xpug"]
+[gd_scene load_steps=15 format=3 uid="uid://jga6pbb5xpug"]
 
 [ext_resource type="PackedScene" uid="uid://ds848t2x4cxyt" path="res://characters/player/CharacterSkins/IcySkin_inherited.tscn" id="1"]
 [ext_resource type="Script" path="res://characters/player/PlayerEntity.gd" id="2"]
-[ext_resource type="Resource" path="res://ui/game_data_store.tres" id="2_gbwfc"]
+[ext_resource type="Resource" uid="uid://kd6arste1gur" path="res://ui/game_data_store.tres" id="2_gbwfc"]
 [ext_resource type="PackedScene" uid="uid://d3yswfl2m7nue" path="res://characters/player/CharacterControllers/OneStickController.tscn" id="2_njm8p"]
 [ext_resource type="PackedScene" uid="uid://d1rmoxdu5yefv" path="res://characters/player/CharacterControllers/TwoStickController.tscn" id="3_k2os6"]
 [ext_resource type="PackedScene" uid="uid://drvgaalhd5v8s" path="res://characters/player/CharacterControllers/TwoStickControllerAuto.tscn" id="5_n2q7r"]
 [ext_resource type="PackedScene" uid="uid://bwf5frggyeobl" path="res://characters/player/CharacterControllers/KeyboardMouseController.tscn" id="5_rys30"]
 [ext_resource type="PackedScene" uid="uid://c5l20701ck6co" path="res://characters/player/health_manager.tscn" id="6_7wv34"]
+[ext_resource type="Script" path="res://characters/player/input_synchronizer.gd" id="10_33yqh"]
 [ext_resource type="Script" path="res://characters/PositionResetter.gd" id="14"]
 
 [sub_resource type="CapsuleShape3D" id="1"]
@@ -20,13 +21,37 @@ height = 1.97047
 properties/0/path = NodePath(".:position")
 properties/0/spawn = true
 properties/0/replication_mode = 1
+properties/1/path = NodePath(".:player_id")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("CameraPivot:rotation")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath("IcySkin:rotation")
+properties/3/spawn = true
+properties/3/replication_mode = 1
 
-[node name="PlayerEntity" type="CharacterBody3D"]
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_5p5in"]
+properties/0/path = NodePath("InputSynchronizer:input_camera")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("InputSynchronizer:input_movement_direction")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("InputSynchronizer:input_aim")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath("InputSynchronizer:input_jump")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+
+[node name="PlayerEntity" type="CharacterBody3D" node_paths=PackedStringArray("projectile_spawn_path")]
 collision_mask = 27
 floor_max_angle = 0.872665
 script = ExtResource("2")
 controller_schemes = Array[PackedScene]([ExtResource("2_njm8p"), ExtResource("3_k2os6"), ExtResource("5_n2q7r"), ExtResource("5_rys30")])
 game_data = ExtResource("2_gbwfc")
+projectile_spawn_path = NodePath("ProjectileSpawnPath")
 
 [node name="Collider" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.987748, 0)
@@ -37,14 +62,14 @@ shape = SubResource("1")
 [node name="PositionResetter" type="Node" parent="."]
 script = ExtResource("14")
 
-[node name="TwoStickControllerAuto" parent="." instance=ExtResource("5_n2q7r")]
+[node name="TwoStickControllerAuto" parent="." node_paths=PackedStringArray("input_synchronizer") instance=ExtResource("5_n2q7r")]
+input_synchronizer = NodePath("../InputSynchronizer")
 
 [node name="CameraPivot" type="Node3D" parent="."]
 transform = Transform3D(-0.707107, 0.298836, -0.640857, 0, 0.906308, 0.422618, 0.707107, 0.298836, -0.640857, 0, 0, 0)
 
 [node name="ThirdPersonCamera" type="Camera3D" parent="CameraPivot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 35)
-current = true
 fov = 40.0
 
 [node name="IcySkin" parent="." instance=ExtResource("1")]
@@ -56,8 +81,18 @@ collision_mask = 8
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00531, 0.798733)
 shape = SubResource("SphereShape3D_q0x46")
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+[node name="PlayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_lc4er")
+
+[node name="InputSynchronizer" type="MultiplayerSynchronizer" parent="."]
+unique_name_in_owner = true
+replication_config = SubResource("SceneReplicationConfig_5p5in")
+script = ExtResource("10_33yqh")
+
+[node name="ProjectileSpawner" type="MultiplayerSpawner" parent="."]
+spawn_path = NodePath("../ProjectileSpawnPath")
+
+[node name="ProjectileSpawnPath" type="Node3D" parent="."]
 
 [connection signal="damage" from="HealthManager" to="." method="on_hit"]
 [connection signal="health_depleted" from="HealthManager" to="." method="on_death"]

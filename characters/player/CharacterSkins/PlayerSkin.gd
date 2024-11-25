@@ -10,12 +10,15 @@ extends Node3D
 var _last_strong_direction := Vector3.FORWARD
 var muzzle_tween:Tween
 
+
 func _ready() -> void:
 	anim_tree.active = true
 	muzzle_vfx.visible = false
 	muzzle_vfx.scale = Vector3()
 	reset_animations()
 
+
+@rpc("authority", "call_remote", "reliable", 0)
 func reset_animations():
 	anim_tree["parameters/blend_running/blend_amount"] = 0
 	anim_tree["parameters/blend_straffing/blend_amount"] = 0
@@ -25,27 +28,33 @@ func reset_animations():
 	anim_tree["parameters/state/transition_request"] = "Running"
 
 
+@rpc("authority", "call_remote", "reliable", 0)
 func update_move_animation(velocity_ratio, delta) -> void:
 	anim_tree["parameters/blend_running/blend_amount"] = velocity_ratio
 	anim_tree["parameters/blend_straffing/blend_amount"] = velocity_ratio
 
 
+@rpc("authority", "call_remote", "reliable", 0)
 func move_to_falling() -> void:
 	anim_tree["parameters/state/transition_request"] = "Falling"
 
 
+@rpc("authority", "call_remote", "reliable", 0)
 func move_to_jumping() -> void:
 	anim_tree["parameters/state/transition_request"] = "Jumping"
 
 
+@rpc("authority", "call_remote", "reliable", 0)
 func move_to_running() -> void:
 	anim_tree["parameters/state/transition_request"] = "Running"
 
 
+@rpc("authority", "call_remote", "reliable", 0)
 func move_to_dead() -> void:
 	anim_tree["parameters/state/transition_request"] = "Dead"
 
 
+@rpc("authority", "call_remote", "reliable", 0)
 func play_idle_break(is_requested: bool) -> void:
 	if is_requested:
 		anim_tree["parameters/on_idle_break/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
@@ -53,6 +62,7 @@ func play_idle_break(is_requested: bool) -> void:
 		anim_tree["parameters/on_idle_break/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FADE_OUT
 
 
+@rpc("authority", "call_remote", "reliable", 0)
 func play_on_hit(is_requested:bool):
 	if is_requested:
 		anim_tree["parameters/on_hit/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
@@ -60,7 +70,9 @@ func play_on_hit(is_requested:bool):
 		anim_tree["parameters/on_hit/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FADE_OUT
 
 
+@rpc("authority", "call_remote", "reliable", 0)
 func play_aiming(value: bool) -> void:
+	print("Play aiming")
 	if value:
 		anim_tree["parameters/blend_aim/blend_amount"] = 1
 		anim_tree["parameters/draw_weapon/scale"] = 1
@@ -69,6 +81,7 @@ func play_aiming(value: bool) -> void:
 		anim_tree["parameters/draw_weapon/scale"] = -1
 
 
+@rpc("authority", "call_remote", "reliable", 0)
 func play_shooting(is_requested: bool) -> void:
 	muzzle_vfx.visible = true
 	#muzzle_vfx.rotate(Vector3(1,0,0), randf_range(-2*PI,2*PI))
@@ -90,7 +103,6 @@ func play_shooting(is_requested: bool) -> void:
 
 
 func orient_model_to_direction(direction: Vector3, delta: float) -> void:
-
 	if direction.length() > 0.2:
 		_last_strong_direction = direction
 

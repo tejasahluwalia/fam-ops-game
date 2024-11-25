@@ -9,8 +9,8 @@ signal controller_scheme_changed
 	set(value):
 		controller_scheme_changed.emit(value)
 		controller_scheme = value
-		if not self.resource_path.is_empty():
-			ResourceSaver.save(self, self.resource_path)
+		#if not self.resource_path.is_empty():
+			#ResourceSaver.save(self, self.resource_path)
 
 func _init(p_controller_scheme = 2):
 	controller_scheme = p_controller_scheme

@@ -18,14 +18,15 @@ func unhandled_input(event: InputEvent) -> void:
 
 
 func physics_process(delta: float) -> void:
-	_parent.physics_process(delta)
-	if player.is_on_floor() and _parent.velocity.length() > 0.01:
-		_state_machine.transition_to("Move/Run")
+	if multiplayer.is_server():
+		_parent.physics_process(delta)
+		if player.is_on_floor() and _parent.velocity.length() > 0.01:
+			_state_machine.transition_to("Move/Run")
 
 
 func enter(msg: = {}) -> void:
 	_break_timer.start(IDLE_BREAK_WAIT_TIME)
-	player.model.move_to_running()
+	player.model.move_to_running.rpc()
 	_parent.velocity = Vector3.ZERO
 	_parent.enter(msg)
 

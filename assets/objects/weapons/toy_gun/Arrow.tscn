@@ -31,7 +31,7 @@ rings = 3
 cap_top = false
 cap_bottom = false
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_vcdmr"]
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_414hx"]
 properties/0/path = NodePath(".:position")
 properties/0/spawn = true
 properties/0/replication_mode = 1
@@ -60,6 +60,6 @@ transform = Transform3D(0.979131, 3.40005e-09, -0.203232, 0.203232, -3.31106e-08
 mesh = SubResource("CylinderMesh_onipk")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_vcdmr")
+replication_config = SubResource("SceneReplicationConfig_414hx")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

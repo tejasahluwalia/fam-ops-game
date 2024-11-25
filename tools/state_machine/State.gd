@@ -9,10 +9,9 @@ var _parent: State = null
 signal enter_state
 signal exit_state
 
+
 func _ready() -> void:
-	print("State ", self.name, " is waiting for owner ", self.owner.name)
 	await self.owner.ready
-	print("State Owner ", self.owner.name, " is ready")
 	var parent: = get_parent()
 	if not parent.is_in_group("state_machine"):
 		_parent = parent
