@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://b821m58vfnh3q"]
+[gd_scene load_steps=19 format=3 uid="uid://px1klf8v388h"]
 
 [ext_resource type="PackedScene" uid="uid://jga6pbb5xpug" path="res://characters/player/PlayerEntity.tscn" id="2_bx2m8"]
 [ext_resource type="MeshLibrary" uid="uid://dcjglgl7pvpgu" path="res://assets/kits/meshlib_space_ground.tres" id="3_omsy0"]
@@ -9,6 +9,7 @@
 [ext_resource type="Environment" uid="uid://13w4n7joxo58" path="res://scenes/world_environment.tres" id="8_8km3u"]
 [ext_resource type="PackedScene" uid="uid://dk1e5h13iicq3" path="res://assets/objects/switches/switch_hub.tscn" id="9_k5v2b"]
 [ext_resource type="Script" path="res://assets/objects/switches/switch_connection.gd" id="10_64fw7"]
+[ext_resource type="PackedScene" uid="uid://b2edwi7wulkxq" path="res://characters/enemies/melee/minion/ChaserMinion.tscn" id="10_453nk"]
 [ext_resource type="PackedScene" uid="uid://ds5itulgl8xim" path="res://assets/objects/switches/door_spawner.tscn" id="11_j2ui3"]
 [ext_resource type="PackedScene" uid="uid://dyssgs4g0elmf" path="res://characters/enemies/melee/minion/EnemyMinion.tscn" id="12_chl1f"]
 [ext_resource type="PackedScene" uid="uid://ttqp6dhghvut" path="res://assets/objects/switches/oneoff_area_switch.tscn" id="13_41t2f"]
@@ -149,7 +150,7 @@ switch_receivers = Array[ExtResource("10_64fw7")]([SubResource("Resource_ba5yx")
 
 [node name="DoorSpawner" parent="SwitchHub" instance=ExtResource("11_j2ui3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 52.8627, -0.483974, -21.3191)
-to_spawn = ExtResource("12_chl1f")
+to_spawn = ExtResource("10_453nk")
 
 [node name="DoorSpawner2" parent="SwitchHub" instance=ExtResource("11_j2ui3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 68.0043, -0.483974, -21.3191)
