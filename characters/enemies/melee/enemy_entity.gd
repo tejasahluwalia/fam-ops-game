@@ -26,39 +26,42 @@ var detection_range = null
 signal target_reached
 
 func _ready() -> void:
-	self.navigation_agent.velocity_computed.connect(Callable(_on_velocity_computed))
-	DebugStats.add_property(self, "velocity", "")
+	if multiplayer.is_server():
+		self.navigation_agent.velocity_computed.connect(Callable(_on_velocity_computed))
+		DebugStats.add_property(self, "velocity", "")
+		detection_range = detection_shape.shape.radius
 	anim_tree.active = true
 	transition = anim_tree.tree_root.get("nodes/state/node")
-	detection_range = detection_shape.shape.radius
 
 
 func update_animation_skin(delta):
-	anim_state = self.anim_tree["parameters/state/current_state"]
-	if  anim_state == "Idling":
-		#if target_object: # align with target if any
-			#self.look_at(target_object.global_position)
-		if self.velocity.length_squared() > 0.01:
-			self.move_to_running()
-	if anim_state == "Running":
-		self.orient_model_to_direction(Vector3(self.velocity.x,0, self.velocity.z), delta)
-		if self.velocity.length_squared() <= 0.01:
-			self.move_to_idling()
+	if multiplayer.is_server():
+		anim_state = self.anim_tree["parameters/state/current_state"]
+		if  anim_state == "Idling":
+			#if target_object: # align with target if any
+				#self.look_at(target_object.global_position)
+			if self.velocity.length_squared() > 0.01:
+				self.move_to_running.rpc()
+		if anim_state == "Running":
+			self.orient_model_to_direction(Vector3(self.velocity.x,0, self.velocity.z), delta)
+			if self.velocity.length_squared() <= 0.01:
+				self.move_to_idling.rpc()
 	
 
 func update_navigation_agent(delta, target_object):
-	if self.navigation_agent.is_navigation_finished():
-		self.velocity = Vector3(0,0,0)
-		target_reached.emit()
-		return
+	if multiplayer.is_server():
+		if self.navigation_agent.is_navigation_finished():
+			self.velocity = Vector3(0,0,0)
+			target_reached.emit()
+			return
 
-	var next_path_position: Vector3 = self.navigation_agent.get_next_path_position()
-	var new_velocity: Vector3 = self.global_position.direction_to(next_path_position) * movement_speed
-	new_velocity.y = self.velocity.y + gravity*delta
-	if self.navigation_agent.avoidance_enabled:
-		self.navigation_agent.set_velocity(new_velocity)
-	else:# we call it manually because only called by set_velocity when avoidance is true
-		_on_velocity_computed(new_velocity)
+		var next_path_position: Vector3 = self.navigation_agent.get_next_path_position()
+		var new_velocity: Vector3 = self.global_position.direction_to(next_path_position) * movement_speed
+		new_velocity.y = self.velocity.y + gravity*delta
+		if self.navigation_agent.avoidance_enabled:
+			self.navigation_agent.set_velocity(new_velocity)
+		else:# we call it manually because only called by set_velocity when avoidance is true
+			_on_velocity_computed(new_velocity)
 
 
 func set_movement_target(movement_target: Vector3):
@@ -70,16 +73,19 @@ func _on_velocity_computed(safe_velocity: Vector3):
 	self.move_and_slide()
 
 
+@rpc("authority", "call_remote", "reliable", 0)
 func move_to_running() -> void:
 	transition.xfade_time = 0.1
 	anim_tree["parameters/state/transition_request"] = "Running"
 
 
+@rpc("authority", "call_remote", "reliable", 0)
 func move_to_idling() -> void:
 	transition.xfade_time = 0.1
 	anim_tree["parameters/state/transition_request"] = "Idling"
 
 
+@rpc("authority", "call_remote", "reliable", 0)
 func move_to_dying() -> void:
 	transition.xfade_time = 0
 	anim_tree["parameters/state/transition_request"] = "Dying"
@@ -95,6 +101,7 @@ func move_to_dying() -> void:
 	.set_delay(2))
 
 
+@rpc("authority", "call_remote", "reliable", 0)
 func play_on_attacking(is_requested: bool) -> void:
 	if is_requested:
 		anim_tree["parameters/on_attacking/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
@@ -102,6 +109,7 @@ func play_on_attacking(is_requested: bool) -> void:
 		anim_tree["parameters/on_attacking/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FADE_OUT
 
 
+@rpc("authority", "call_remote", "reliable", 0)
 func play_on_hit(is_requested:bool):
 	if is_requested:
 		anim_tree["parameters/on_hit/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
@@ -117,12 +125,10 @@ func deal_damage():
 
 
 func orient_model_to_direction(direction: Vector3, delta: float) -> void:
-	
 	#if direction.length() > 0.05:
 	_last_strong_direction = direction
 	if target_object: # prioritize aligning with target if any
 		_last_strong_direction = global_position.direction_to(target_object.global_position)
-	
 	# Remember that Y is the Up Axis
 	# LERP is used cumulatively here
 	rotation.y = lerp_angle(
@@ -133,32 +139,37 @@ func orient_model_to_direction(direction: Vector3, delta: float) -> void:
 
 
 func _on_detection_range_body_entered(body):
-	if body is PlayerEntity:
-		is_target_detected = true
-		target_object = body
-		detection_shape.shape.radius = detection_range*1.5
+	if multiplayer.is_server():
+		if body is PlayerEntity:
+			is_target_detected = true
+			target_object = body
+			detection_shape.shape.radius = detection_range*1.5
 
 
 func _on_attack_range_body_entered(body):
-	if body is PlayerEntity:
-		is_target_in_reach = true
+	if multiplayer.is_server():
+		if body is PlayerEntity:
+			is_target_in_reach = true
 
 
 func _on_detection_range_body_exited(body):
-	if body is PlayerEntity:
-		is_target_detected = false
-		target_object = null
-		detection_shape.shape.radius = detection_range
+	if multiplayer.is_server():
+		if body is PlayerEntity:
+			is_target_detected = false
+			target_object = null
+			detection_shape.shape.radius = detection_range
 
 
 func _on_attack_range_body_exited(body):
-	if body is PlayerEntity:
-		is_target_in_reach = false
+	if multiplayer.is_server():
+		if body is PlayerEntity:
+			is_target_in_reach = false
 
 
 func _on_hit_area_body_entered(colliding_body):
-	if colliding_body.is_in_group("bullet"):
-		print("hit by", colliding_body.name, "!")
-		health_points -= 1
-		colliding_body.remove_from_group("bullet")
-		play_on_hit(true)
+	if multiplayer.is_server():
+		if colliding_body.is_in_group("bullet"):
+			print("hit by", colliding_body.name, "!")
+			health_points -= 1
+			colliding_body.remove_from_group("bullet")
+			play_on_hit.rpc(true)

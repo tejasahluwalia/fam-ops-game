@@ -22,6 +22,7 @@ func set_health(value:int):
 	health_changed.emit(health_points, value)
 	health_points = value
 	update_ui_hearts(health_points)
+	print(health_points)
 	if health_points <= 0:
 		health_depleted.emit()
 	if health_points == max_health:

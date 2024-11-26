@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://og0akbc31x1j"]
+[gd_scene load_steps=12 format=3 uid="uid://og0akbc31x1j"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_pw6e1"]
 [ext_resource type="PackedScene" uid="uid://jga6pbb5xpug" path="res://characters/player/PlayerEntity.tscn" id="2"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://7lnqxlh2nl8j" path="res://assets/space_base_bits/rocks_B.gltf" id="6_flhsd"]
 [ext_resource type="PackedScene" uid="uid://dy1h4xg8uhvdg" path="res://assets/space_base_bits/rock_A.gltf" id="7_pmle0"]
 [ext_resource type="Environment" uid="uid://13w4n7joxo58" path="res://scenes/world_environment.tres" id="8_5s5wh"]
+[ext_resource type="PackedScene" uid="uid://dj87iwlbmqxwu" path="res://scenes/enemy_spawn.tscn" id="9_xkmni"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_tjlhm"]
 vertices = PackedVector3Array(-15, 1, -15, -15, 1, 11, 15, 1, 11, 15, 1, -15)
@@ -17,10 +18,11 @@ agent_radius = 1.0
 [sub_resource type="PlaneMesh" id="PlaneMesh_b5pri"]
 size = Vector2(32, 28)
 
-[node name="Main" type="Node3D" node_paths=PackedStringArray("buttons")]
+[node name="Main" type="Node3D" node_paths=PackedStringArray("buttons", "enemy_spawner")]
 script = ExtResource("1_pw6e1")
 player_scene = ExtResource("2")
 buttons = [NodePath("JoinButton")]
+enemy_spawner = NodePath("EnemySpawn")
 
 [node name="GridMapExterior" type="GridMap" parent="."]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 2, -0.5, 0)
@@ -115,11 +117,6 @@ offset_right = 387.0
 offset_bottom = 325.0
 text = "Join"
 
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://characters/player/PlayerEntity.tscn")
-spawn_path = NodePath("../PlayerSpawnPath")
-spawn_limit = 4
-
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 transform = Transform3D(2.79892, 0, 0, 0, 1, 0, 0, 0, 5.92909, 0, -1.2475, 55.7768)
 navigation_mesh = SubResource("NavigationMesh_tjlhm")
@@ -129,12 +126,27 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -2)
 visible = false
 mesh = SubResource("PlaneMesh_b5pri")
 
-[node name="PlayerSpawnPath" type="Node3D" parent="."]
+[node name="PlayerSpawnNode" type="Node3D" parent="."]
+
+[node name="PlayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://characters/player/PlayerEntity.tscn")
+spawn_path = NodePath("../PlayerSpawnNode")
+spawn_limit = 4
 
 [node name="ProjectileSpawnNode" type="Node3D" parent="."]
 
 [node name="ProjectileSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://assets/objects/weapons/toy_gun/Arrow.tscn")
 spawn_path = NodePath("../ProjectileSpawnNode")
+
+[node name="EnemySpawn" parent="." node_paths=PackedStringArray("enemy_spawn_marker", "enemy_spawn_node") instance=ExtResource("9_xkmni")]
+enemy_spawn_marker = NodePath("EnemySpawnMarker")
+enemy_spawn_node = NodePath("../EnemySpawnNode")
+
+[node name="EnemySpawnMarker" type="Marker3D" parent="EnemySpawn"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.20363, 1.44046, 9.48614)
+
+[node name="EnemySpawnNode" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0883694, 14.822)
 
 [connection signal="pressed" from="JoinButton" to="." method="_on_join_button_pressed"]

@@ -12,9 +12,10 @@ signal tree_enabled
 signal tree_disabled
 
 ## Whether this behavior tree should be enabled or not.
-@export var enabled: bool = true:
+@export var enabled: bool = OS.has_feature("dedicated_server"):
 	set(value):
-		enabled = value
+		enabled = OS.has_feature("dedicated_server")
+		print(enabled)
 		set_physics_process(enabled and process_thread == ProcessThread.PHYSICS)
 		set_process(enabled and process_thread == ProcessThread.IDLE)
 		if value:

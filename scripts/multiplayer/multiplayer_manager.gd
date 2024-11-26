@@ -1,14 +1,14 @@
 extends Node
 
-const SERVER_HOST = "192.168.1.15"
+const SERVER_HOST = "127.0.0.1"
 const SERVER_PORT = 6060
 
 var player_scene = preload("res://characters/player/PlayerEntity.tscn")
-var _player_spawn_path
+var _player_spawn_node
 
 
 func start_server():
-	_player_spawn_path = get_tree().get_current_scene().get_node("PlayerSpawnPath")
+	_player_spawn_node = get_tree().get_current_scene().get_node("PlayerSpawnNode")
 	
 	var server_peer = ENetMultiplayerPeer.new()
 	server_peer.create_server(SERVER_PORT)
@@ -23,21 +23,21 @@ func join_game():
 	client_peer.create_client(SERVER_HOST, SERVER_PORT)
 	
 	multiplayer.multiplayer_peer = client_peer
+	
 
-
-func _add_player(id: int):
+func _add_player(id: int = 1):
 	print("Player %s joined the game."%id)
 	var player = player_scene.instantiate()
 	player.player_id = id
 	player.name = str(id)
-	_player_spawn_path.call_deferred("add_child", player)
+	_player_spawn_node.call_deferred("add_child", player)
 
 
 func _remove_player(id: int):
 	print("Player disconnected")
-	if not _player_spawn_path.has_node(str(id)):
+	if not _player_spawn_node.has_node(str(id)):
 		return
-	_player_spawn_path.get_node(str(id)).queue_free()
+	_player_spawn_node.get_node(str(id)).queue_free()
 
 
 # Called when the node enters the scene tree for the first time.
