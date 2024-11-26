@@ -5,46 +5,40 @@ signal damage
 signal health_depleted
 signal health_replenished
 
-@export var ui_hearts: Array[TextureRect]
-@export var max_health: int = 6
-@export var start_health: int = 6
-
-var heart_full = preload("res://assets/objects/heart_full.png")
-var heart_empty = preload("res://assets/objects/heart_null.png")
-var heart_half = preload("res://assets/objects/heart_half.png")
+@export var max_health: int = 100 # Max health is now a single value (e.g., 100)
+@export var start_health: int = 100 # Starting health
 
 var health_points: int = 0: set = set_health
+@onready var health_bar: ProgressBar = $HealthBar # Reference to the health bar node
 
 func _ready():
 	health_points = start_health
+	update_health_bar()
 
-func set_health(value:int):
-	health_changed.emit(health_points, value)
-	health_points = value
-	update_ui_hearts(health_points)
-	if health_points <= 0:
-		health_depleted.emit()
-	if health_points == max_health:
-		health_replenished.emit()
+func set_health(value: int):
 
-func update_ui_hearts(value):
-	for i in len(ui_hearts):
-		if value > i * 2 + 1:
-			ui_hearts[i].texture = heart_full
-		elif value > i * 2:
-			ui_hearts[i].texture = heart_half
-		else:
-			ui_hearts[i].texture = heart_empty
+		var old_value = health_points
+		health_points = clamp(value, 0, max_health) # Clamp the health value between 0 and max_health
+		health_changed.emit(old_value, health_points)
+		update_health_bar()
+		if health_points <= 0:
+			health_depleted.emit()
+		elif health_points == max_health:
+			health_replenished.emit()
 
-func get_damage(amount:int):
-	health_points = max(0, health_points - amount)
+func update_health_bar():
+	# Set the health bar's value to the current health
+	health_bar.value = health_points
+
+func get_damage(amount: int):
+	set_health(health_points - amount)
 	damage.emit()
 
-func get_health(amount:int):
-	health_points = min(max_health, health_points + amount)
+func get_health(amount: int):
+	set_health(health_points + amount)
 
 func get_full_health():
-	health_points = max_health
+	set_health(max_health)
 
 func instant_death():
-	health_points = 0
+	set_health(0)

@@ -1,6 +1,7 @@
 # Godot 4+ specific ignores
 export
 .godot/
+dist/
 
 # Godot-specific ignores
 .import/
