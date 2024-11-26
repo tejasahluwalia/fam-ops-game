@@ -1,6 +1,6 @@
 extends Node
 
-const SERVER_HOST = "192.168.1.16"
+const SERVER_HOST = "192.168.1.15"
 const SERVER_PORT = 6060
 
 var player_scene = preload("res://characters/player/PlayerEntity.tscn")

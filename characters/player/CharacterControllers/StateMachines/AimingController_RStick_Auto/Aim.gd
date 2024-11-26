@@ -17,7 +17,7 @@ func process(delta) -> void:
 			# 1) it would trigger many bullets when near the deadzone
 			# 2) it would trigger a second bullet on release
 			_timer.start()
-			_shoot_arrow()
+			call_deferred("_shoot_arrow")
 
 		player.model.orient_model_to_direction(_aiming_direction, delta)
 
@@ -31,9 +31,8 @@ func enter(msg: = {}) -> void:
 
 
 func _shoot_arrow() -> void:
-	var projectile_spawn_path = player.projectile_spawn_path
 	var arrow = arrow_prefab.instantiate()
-	projectile_spawn_path.add_child(arrow)
+	get_tree().current_scene.get_node("ProjectileSpawnNode").add_child(arrow, true)
 	arrow.global_transform = player.shoot_anchor.global_transform
 	arrow.apply_central_impulse(arrow.transform.basis.z * arrow.initial_velocity)
 	player.model.play_shooting.rpc(true)

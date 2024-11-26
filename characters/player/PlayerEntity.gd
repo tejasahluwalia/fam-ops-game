@@ -15,7 +15,6 @@ extends CharacterBody3D
 @export var use_saved_controller:bool = true
 @export var controller_schemes:Array[PackedScene]
 @export var game_data:GameDataStore
-@export var projectile_spawn_path: Node3D
 
 @export var player_id := 1:
 	set(id):

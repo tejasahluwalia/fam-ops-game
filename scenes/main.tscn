@@ -131,4 +131,10 @@ mesh = SubResource("PlaneMesh_b5pri")
 
 [node name="PlayerSpawnPath" type="Node3D" parent="."]
 
+[node name="ProjectileSpawnNode" type="Node3D" parent="."]
+
+[node name="ProjectileSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://assets/objects/weapons/toy_gun/Arrow.tscn")
+spawn_path = NodePath("../ProjectileSpawnNode")
+
 [connection signal="pressed" from="JoinButton" to="." method="_on_join_button_pressed"]

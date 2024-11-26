@@ -45,13 +45,12 @@ properties/3/path = NodePath("InputSynchronizer:input_jump")
 properties/3/spawn = true
 properties/3/replication_mode = 1
 
-[node name="PlayerEntity" type="CharacterBody3D" node_paths=PackedStringArray("projectile_spawn_path")]
+[node name="PlayerEntity" type="CharacterBody3D"]
 collision_mask = 27
 floor_max_angle = 0.872665
 script = ExtResource("2")
 controller_schemes = Array[PackedScene]([ExtResource("2_njm8p"), ExtResource("3_k2os6"), ExtResource("5_n2q7r"), ExtResource("5_rys30")])
 game_data = ExtResource("2_gbwfc")
-projectile_spawn_path = NodePath("ProjectileSpawnPath")
 
 [node name="Collider" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.987748, 0)
@@ -88,11 +87,6 @@ replication_config = SubResource("SceneReplicationConfig_lc4er")
 unique_name_in_owner = true
 replication_config = SubResource("SceneReplicationConfig_5p5in")
 script = ExtResource("10_33yqh")
-
-[node name="ProjectileSpawner" type="MultiplayerSpawner" parent="."]
-spawn_path = NodePath("../ProjectileSpawnPath")
-
-[node name="ProjectileSpawnPath" type="Node3D" parent="."]
 
 [connection signal="damage" from="HealthManager" to="." method="on_hit"]
 [connection signal="health_depleted" from="HealthManager" to="." method="on_death"]

@@ -72,7 +72,6 @@ func play_on_hit(is_requested:bool):
 
 @rpc("authority", "call_remote", "reliable", 0)
 func play_aiming(value: bool) -> void:
-	print("Play aiming")
 	if value:
 		anim_tree["parameters/blend_aim/blend_amount"] = 1
 		anim_tree["parameters/draw_weapon/scale"] = 1
