@@ -1,0 +1,451 @@
+[gd_scene load_steps=47 format=3 uid="uid://b2edwi7wulkxq"]
+
+[ext_resource type="Script" path="res://characters/enemies/melee/chaser_minion.gd" id="1_bgrwq"]
+[ext_resource type="ArrayMesh" uid="uid://bptnevpcunpnm" path="res://assets/objects/weapons/grass_hockey_bat/grass_hockey.res" id="2_bvm3m"]
+[ext_resource type="Script" path="res://characters/enemies/melee/weapon.gd" id="3_ry063"]
+[ext_resource type="Material" uid="uid://yy4wl7opy4lu" path="res://assets/objects/explosion/SmokeExplosion.material" id="4_bwu78"]
+[ext_resource type="ArrayMesh" uid="uid://chs03lfaocohd" path="res://assets/objects/explosion/explosion_bits_B.res" id="5_0c0lb"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/beehave_tree.gd" id="5_s2oxv"]
+[ext_resource type="PackedScene" uid="uid://duds002tisele" path="res://characters/enemies/melee/minion/small_ennemy_animated.glb" id="6_6ov1q"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/composites/selector.gd" id="6_tk8b7"]
+[ext_resource type="Script" path="res://characters/enemies/melee/minion/is_dead.gd" id="7_gu6mg"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/composites/sequence.gd" id="8_cimi7"]
+[ext_resource type="Script" path="res://characters/enemies/melee/minion/health_below_zero.gd" id="9_8e7t0"]
+[ext_resource type="Script" path="res://characters/enemies/melee/minion/play_death.gd" id="10_eqn7w"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/decorators/inverter.gd" id="11_206iy"]
+[ext_resource type="Script" path="res://characters/enemies/melee/minion/is_idling.gd" id="12_u2ln2"]
+[ext_resource type="Script" path="res://characters/enemies/melee/minion/player_is_detected.gd" id="13_18vcj"]
+[ext_resource type="Script" path="res://characters/enemies/melee/minion/play_idle.gd" id="14_elj12"]
+[ext_resource type="Script" path="res://characters/enemies/melee/minion/player_is_in_reach.gd" id="15_tm7gm"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/decorators/succeeder.gd" id="16_3y1g4"]
+[ext_resource type="Script" path="res://characters/enemies/melee/minion/stop_cool_attack_down.gd" id="17_cc4o7"]
+[ext_resource type="Script" path="res://characters/enemies/melee/minion/reach_player.gd" id="18_64kpj"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1hmg7"]
+animation = &"Hit-impact"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_a2nrj"]
+animation = &"Attack"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_h4w4y"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wcs7x"]
+animation = &"Killed-impact"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_xdwv5"]
+filter_enabled = true
+filters = ["../..", "Skeleton3D:DEF-Blindfold", "Skeleton3D:DEF-forearm.R", "Skeleton3D:DEF-forearm.R.001", "Skeleton3D:DEF-hand.R", "Skeleton3D:DEF-shoulder.R", "Skeleton3D:DEF-spine", "Skeleton3D:DEF-spine.001", "Skeleton3D:DEF-spine.002", "Skeleton3D:DEF-spine.003", "Skeleton3D:DEF-spine.004", "Skeleton3D:DEF-spine.005", "Skeleton3D:DEF-spine.006", "Skeleton3D:DEF-upper_arm.R", "Skeleton3D:DEF-upper_arm.R.001", "Skeleton3D:DEF-weapon-anchor"]
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_sf8yh"]
+filter_enabled = true
+filters = ["Skeleton3D/Body_001:material_overlay", "Skeleton3D/Body_001:material_overlay:albedo_color", "Skeleton3D/Body_001:surface_material_override/0", "Skeleton3D:DEF-Blindfold", "Skeleton3D:DEF-spine.005", "Skeleton3D:DEF-spine.006"]
+mix_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ce2nm"]
+animation = &"Run"
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_wld3h"]
+xfade_time = 0.1
+input_0/name = "Idling"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = true
+input_1/name = "Running"
+input_1/auto_advance = false
+input_1/break_loop_at_end = false
+input_1/reset = true
+input_2/name = "Dying"
+input_2/auto_advance = false
+input_2/break_loop_at_end = false
+input_2/reset = true
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_o08rm"]
+graph_offset = Vector2(-340.043, -29.8495)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_1hmg7")
+nodes/Animation/position = Vector2(600, 480)
+nodes/attack/node = SubResource("AnimationNodeAnimation_a2nrj")
+nodes/attack/position = Vector2(380, 480)
+nodes/idle/node = SubResource("AnimationNodeAnimation_h4w4y")
+nodes/idle/position = Vector2(30, 140)
+nodes/killed/node = SubResource("AnimationNodeAnimation_wcs7x")
+nodes/killed/position = Vector2(160, 460)
+nodes/on_attacking/node = SubResource("AnimationNodeOneShot_xdwv5")
+nodes/on_attacking/position = Vector2(580, 160)
+nodes/on_hit/node = SubResource("AnimationNodeOneShot_sf8yh")
+nodes/on_hit/position = Vector2(780, 140)
+nodes/output/position = Vector2(980, 160)
+nodes/run/node = SubResource("AnimationNodeAnimation_ce2nm")
+nodes/run/position = Vector2(-40, 300)
+nodes/state/node = SubResource("AnimationNodeTransition_wld3h")
+nodes/state/position = Vector2(410, 150)
+node_connections = [&"on_attacking", 0, &"state", &"on_attacking", 1, &"attack", &"on_hit", 0, &"on_attacking", &"on_hit", 1, &"Animation", &"output", 0, &"on_hit", &"state", 0, &"idle", &"state", 1, &"run", &"state", 2, &"killed"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_khqmx"]
+radius = 1.30422
+height = 3.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_hsi84"]
+radius = 27.9865
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_vfolx"]
+radius = 2.06982
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_2ue0h"]
+radius = 0.56734
+
+[sub_resource type="Curve" id="Curve_hhmyj"]
+_data = [Vector2(0, 1), 0.0, -0.209878, 0, 0, Vector2(1, 0), -3.09458, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_7der6"]
+curve = SubResource("Curve_hhmyj")
+
+[sub_resource type="Gradient" id="Gradient_y2pog"]
+offsets = PackedFloat32Array(0, 0.466667, 1)
+colors = PackedColorArray(1, 0.77664, 0.532883, 1, 1, 0.452615, 0.250092, 1, 0.418536, 0.258217, 0.203763, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ee05i"]
+gradient = SubResource("Gradient_y2pog")
+
+[sub_resource type="Curve" id="Curve_137f5"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.538461), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_a3wc3"]
+curve = SubResource("Curve_137f5")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mkqib"]
+emission_shape = 1
+emission_sphere_radius = 1.0
+gravity = Vector3(0, 2, 0)
+scale_min = 0.5
+scale_max = 1.5
+scale_curve = SubResource("CurveTexture_a3wc3")
+color = Color(0.85301, 0.762545, 0.740656, 1)
+color_ramp = SubResource("GradientTexture1D_ee05i")
+alpha_curve = SubResource("CurveTexture_7der6")
+
+[sub_resource type="SphereMesh" id="SphereMesh_nrawn"]
+material = ExtResource("4_bwu78")
+
+[sub_resource type="Curve" id="Curve_7hyx8"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.631285, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_p41r3"]
+curve = SubResource("Curve_7hyx8")
+
+[sub_resource type="Curve" id="Curve_l6dqp"]
+_data = [Vector2(0, 1), 0.0, -4.28403, 0, 0, Vector2(0.73029, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_g55m5"]
+curve = SubResource("Curve_l6dqp")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sx1j5"]
+lifetime_randomness = 0.22
+particle_flag_align_y = true
+emission_shape = 1
+emission_sphere_radius = 1.0
+angle_min = -180.0
+angle_max = 180.0
+direction = Vector3(0, 1, 10)
+spread = 67.693
+initial_velocity_min = 10.0
+initial_velocity_max = 10.0
+angular_velocity_min = -300.0
+angular_velocity_max = 300.0
+angular_velocity_curve = SubResource("CurveTexture_p41r3")
+radial_velocity_min = 9.99998
+radial_velocity_max = 30.0
+radial_velocity_curve = SubResource("CurveTexture_g55m5")
+tangential_accel_min = -2.23517e-06
+tangential_accel_max = -2.23517e-06
+attractor_interaction_enabled = false
+scale_min = 0.8
+scale_max = 1.2
+collision_mode = 1
+collision_friction = 0.1
+collision_bounce = 0.12
+
+[node name="Enemy_Minion" type="CharacterBody3D"]
+collision_layer = 16
+collision_mask = 27
+script = ExtResource("1_bgrwq")
+movement_speed = 12.0
+explosion_delay = 1.0
+explosion_damage = 10.0
+explosion_radius = 7.0
+explosion_movement_speed = 0.4
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+process_mode = 1
+root_node = NodePath("../MeleeSkin/Skin")
+tree_root = SubResource("AnimationNodeBlendTree_o08rm")
+anim_player = NodePath("../MeleeSkin/Skin/AnimationPlayer")
+parameters/on_attacking/active = false
+parameters/on_attacking/internal_active = false
+parameters/on_attacking/request = 0
+parameters/on_hit/active = false
+parameters/on_hit/internal_active = false
+parameters/on_hit/request = 0
+parameters/state/current_state = "Dying"
+parameters/state/transition_request = ""
+parameters/state/current_index = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+shape = SubResource("CapsuleShape3D_khqmx")
+
+[node name="HitArea" type="Area3D" parent="."]
+collision_layer = 16
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0.230515)
+shape = SubResource("CapsuleShape3D_khqmx")
+
+[node name="DetectionRange" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+collision_layer = 16
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DetectionRange"]
+shape = SubResource("SphereShape3D_hsi84")
+
+[node name="AttackRange" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+collision_layer = 16
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AttackRange"]
+shape = SubResource("SphereShape3D_vfolx")
+
+[node name="WeaponAnchor" type="BoneAttachment3D" parent="."]
+transform = Transform3D(0.393251, -0.0232529, 0.919137, 0.79503, 0.510733, -0.327232, -0.461824, 0.859426, 0.219333, -0.599293, 0.00299174, -9.52384)
+bone_name = "DEF-weapon-anchor"
+bone_idx = 25
+use_external_skeleton = true
+external_skeleton = NodePath("../MeleeSkin/Skin/Skeleton3D")
+
+[node name="Weapon" type="MeshInstance3D" parent="WeaponAnchor" node_paths=PackedStringArray("hit_area")]
+visible = false
+mesh = ExtResource("2_bvm3m")
+script = ExtResource("3_ry063")
+hit_area = NodePath("AttackHitArea")
+
+[node name="AttackHitArea" type="Area3D" parent="WeaponAnchor/Weapon"]
+transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, 1.11759e-08, 2.80233, -0.329513)
+collision_layer = 16
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WeaponAnchor/Weapon/AttackHitArea"]
+transform = Transform3D(1, 1.49012e-08, -8.84756e-09, 0, 1, -2.8871e-08, -2.35625e-07, -4.19095e-08, 1, 2.16465e-08, -0.672331, 3.56276e-08)
+shape = SubResource("SphereShape3D_2ue0h")
+
+[node name="MeleeSkin" type="Node3D" parent="."]
+process_mode = 1
+
+[node name="DustParticles" type="GPUParticles3D" parent="MeleeSkin"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9.98181)
+emitting = false
+amount = 40
+process_material = SubResource("ParticleProcessMaterial_mkqib")
+draw_pass_1 = SubResource("SphereMesh_nrawn")
+
+[node name="BlindfoldParticles" type="GPUParticles3D" parent="MeleeSkin"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.95838, -1.63399)
+emitting = false
+amount = 6
+lifetime = 0.4
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_sx1j5")
+draw_pass_1 = ExtResource("5_0c0lb")
+
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="MeleeSkin/BlindfoldParticles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.95838, 1.63399)
+size = Vector3(40.3376, 0.979858, 53.9834)
+
+[node name="Skin" parent="MeleeSkin" instance=ExtResource("6_6ov1q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
+
+[node name="Skeleton3D" parent="MeleeSkin/Skin" index="0"]
+bones/0/position = Vector3(-6.60061e-16, 0.294759, -3.74443)
+bones/0/rotation = Quaternion(-0.682438, 8.71353e-08, -8.13529e-08, 0.730944)
+bones/0/scale = Vector3(1, 1, 1)
+bones/1/position = Vector3(-1.96595e-15, 0.311559, -3.9889)
+bones/1/rotation = Quaternion(-0.663794, 1.75149e-14, -1.54815e-14, 0.747915)
+bones/1/scale = Vector3(1, 0.999999, 1)
+bones/2/position = Vector3(-1.96595e-15, 0.339789, -4.22494)
+bones/2/rotation = Quaternion(-0.612371, -2.64698e-23, 4.23516e-22, 0.79057)
+bones/2/scale = Vector3(1, 1, 1)
+bones/3/position = Vector3(-1.96595e-15, 0.38322, -4.39315)
+bones/3/rotation = Quaternion(-0.861385, 6.06239e-08, -1.02562e-07, 0.507953)
+bones/3/scale = Vector3(0.636359, 2.46942, 0.636359)
+bones/4/position = Vector3(-2.37724e-11, 0.336721, -4.47722)
+bones/4/rotation = Quaternion(-0.868335, 0.00805326, -0.0141067, 0.495713)
+bones/4/scale = Vector3(0.636617, 2.46742, 0.636617)
+bones/5/position = Vector3(-5.79732e-09, 0.300285, -4.53894)
+bones/5/rotation = Quaternion(-0.394647, 0.085575, 0.0369456, 0.914093)
+bones/6/position = Vector3(1257.63, 7354.83, 6653.41)
+bones/6/rotation = Quaternion(0.362139, 0.0868255, -0.0339025, 0.927452)
+bones/6/scale = Vector3(1, 1, 1)
+bones/7/position = Vector3(0.27466, 0.27315, -3.35042)
+bones/7/rotation = Quaternion(0.747186, 0.0502631, 0.0397233, 0.66152)
+bones/7/scale = Vector3(0.881866, 1.28586, 0.881865)
+bones/8/position = Vector3(0.279636, 0.246742, -3.13149)
+bones/8/rotation = Quaternion(0.7472, 0.0500283, 0.039458, 0.661538)
+bones/8/scale = Vector3(0.844898, 1.40085, 0.844898)
+bones/9/position = Vector3(0.283501, 0.226224, -2.96141)
+bones/9/rotation = Quaternion(0.746391, -0.0315707, -0.0525782, 0.662676)
+bones/9/scale = Vector3(0.844898, 1.40085, 0.844896)
+bones/10/position = Vector3(0.287366, 0.205707, -2.79132)
+bones/10/rotation = Quaternion(0.382831, -0.0745182, -0.255044, 0.884783)
+bones/10/scale = Vector3(0.999855, 1.00029, 0.999851)
+bones/11/position = Vector3(0.409346, 0.384159, -2.56997)
+bones/11/rotation = Quaternion(0.261376, 0.924338, 0.274766, 0.0422492)
+bones/12/position = Vector3(-0.27465, 0.255448, -3.3495)
+bones/12/rotation = Quaternion(0.772428, -0.0479744, -0.0411245, 0.631951)
+bones/12/scale = Vector3(0.874534, 1.30751, 0.874533)
+bones/13/position = Vector3(-0.279615, 0.211337, -3.12965)
+bones/13/rotation = Quaternion(0.77245, -0.0476466, -0.0407237, 0.631975)
+bones/13/scale = Vector3(0.83589, 1.43121, 0.83589)
+bones/14/position = Vector3(-0.28349, 0.176904, -2.95804)
+bones/14/rotation = Quaternion(0.773482, -0.00784422, 0.00789112, 0.633721)
+bones/14/scale = Vector3(0.83589, 1.43121, 0.835887)
+bones/15/position = Vector3(-0.287366, 0.142471, -2.78642)
+bones/15/rotation = Quaternion(0.297151, 0.0307956, 0.133007, 0.94502)
+bones/15/scale = Vector3(0.999861, 1.00028, 0.999857)
+bones/16/position = Vector3(-0.359473, 0.386249, -2.61015)
+bones/16/rotation = Quaternion(-0.136344, 0.973684, 0.181912, -0.0160619)
+bones/17/position = Vector3(0.52189, 0.227148, -4.13711)
+bones/17/rotation = Quaternion(0.0597071, -0.303277, -0.844162, 0.438006)
+bones/17/scale = Vector3(0.920282, 1.18075, 0.920282)
+bones/18/position = Vector3(0.693627, 0.121571, -3.9993)
+bones/18/rotation = Quaternion(0.320189, -0.527559, -0.612548, 0.493908)
+bones/18/scale = Vector3(0.953402, 1.10014, 0.953403)
+bones/19/position = Vector3(0.747913, 0.130616, -3.80377)
+bones/19/rotation = Quaternion(0.258149, -0.573745, -0.641167, 0.43941)
+bones/19/scale = Vector3(0.953402, 1.10014, 0.953403)
+bones/20/position = Vector3(0.802198, 0.139661, -3.60824)
+bones/20/rotation = Quaternion(0.271291, -0.628392, -0.661675, 0.306122)
+bones/21/position = Vector3(-0.558334, 0.260833, -4.10824)
+bones/21/rotation = Quaternion(-0.0197969, 0.391817, 0.793569, 0.465119)
+bones/21/scale = Vector3(0.865316, 1.33552, 0.865316)
+bones/22/position = Vector3(-0.766514, 0.188941, -3.94157)
+bones/22/rotation = Quaternion(0.292476, 0.723551, 0.516154, 0.35287)
+bones/22/scale = Vector3(0.821095, 1.48325, 0.821095)
+bones/23/position = Vector3(-0.750364, 0.270029, -3.68048)
+bones/23/rotation = Quaternion(0.216276, 0.766301, 0.552432, 0.24663)
+bones/23/scale = Vector3(0.821094, 1.48325, 0.821094)
+bones/24/position = Vector3(-0.734213, 0.351116, -3.4194)
+bones/24/rotation = Quaternion(0.181484, 0.288235, 0.938989, 0.0477948)
+bones/25/position = Vector3(-0.599293, 0.00299174, -3.52384)
+bones/25/rotation = Quaternion(0.407181, 0.473853, 0.28078, 0.72858)
+bones/27/position = Vector3(-2.74169e-15, 0.256759, -3.54091)
+bones/27/rotation = Quaternion(-0.638928, 9.17037e-08, -7.61662e-08, 0.769266)
+bones/27/scale = Vector3(1, 1, 1)
+bones/28/position = Vector3(-1.84379e-08, 0.256759, -3.54091)
+bones/28/rotation = Quaternion(-0.578601, -0.792032, 0.0910621, 0.172085)
+bones/28/scale = Vector3(1, 1, 1)
+bones/29/position = Vector3(1.85131e-08, 0.256759, -3.54091)
+bones/29/rotation = Quaternion(-0.578601, 0.792033, -0.0910621, 0.172085)
+bones/29/scale = Vector3(1, 1, 1)
+bones/30/position = Vector3(0.269685, 0.299559, -3.56935)
+bones/30/rotation = Quaternion(0.747172, 0.0504982, 0.0399889, 0.661503)
+bones/30/scale = Vector3(0.881866, 1.28586, 0.881866)
+bones/31/position = Vector3(-0.269685, 0.299559, -3.56935)
+bones/31/rotation = Quaternion(0.772407, -0.0483026, -0.0415256, 0.631926)
+bones/31/scale = Vector3(0.874534, 1.30751, 0.874534)
+bones/32/position = Vector3(0.0183, 0.460922, -4.37455)
+bones/32/rotation = Quaternion(0.805941, 0.570546, 0.152021, 0.0427418)
+bones/32/scale = Vector3(1, 1, 1)
+bones/33/position = Vector3(0.350153, 0.332725, -4.27492)
+bones/33/rotation = Quaternion(-0.0801971, -0.3713, -0.842462, 0.38205)
+bones/33/scale = Vector3(0.920282, 1.18075, 0.920282)
+bones/34/position = Vector3(-0.0183, 0.460922, -4.37455)
+bones/34/rotation = Quaternion(0.805941, -0.570546, -0.152021, 0.0427418)
+bones/34/scale = Vector3(1, 1, 1)
+bones/35/position = Vector3(-0.350154, 0.332725, -4.27492)
+bones/35/rotation = Quaternion(-0.0607627, 0.41532, 0.791487, 0.444259)
+bones/35/scale = Vector3(0.865316, 1.33552, 0.865315)
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+target_desired_distance = 2.0
+debug_path_custom_color = Color(0.595041, 0.133162, 0.133162, 1)
+debug_path_custom_point_size = 10.04
+
+[node name="BeehaveTree" type="Node" parent="." node_paths=PackedStringArray("blackboard", "actor")]
+script = ExtResource("5_s2oxv")
+actor_node_path = NodePath("..")
+blackboard = NodePath("@Node@50963")
+actor = NodePath("..")
+
+[node name="SelectBehaviour" type="Node" parent="BeehaveTree"]
+script = ExtResource("6_tk8b7")
+
+[node name="IsDead" type="Node" parent="BeehaveTree/SelectBehaviour"]
+script = ExtResource("7_gu6mg")
+
+[node name="GoToDie" type="Node" parent="BeehaveTree/SelectBehaviour"]
+script = ExtResource("8_cimi7")
+
+[node name="HealthBelowZero" type="Node" parent="BeehaveTree/SelectBehaviour/GoToDie"]
+script = ExtResource("9_8e7t0")
+
+[node name="PlayDeath" type="Node" parent="BeehaveTree/SelectBehaviour/GoToDie"]
+script = ExtResource("10_eqn7w")
+
+[node name="GoToIdle" type="Node" parent="BeehaveTree/SelectBehaviour"]
+script = ExtResource("8_cimi7")
+
+[node name="IsNotIdling" type="Node" parent="BeehaveTree/SelectBehaviour/GoToIdle"]
+script = ExtResource("11_206iy")
+
+[node name="IsIdling" type="Node" parent="BeehaveTree/SelectBehaviour/GoToIdle/IsNotIdling"]
+script = ExtResource("12_u2ln2")
+
+[node name="PlayerIsNotDetected" type="Node" parent="BeehaveTree/SelectBehaviour/GoToIdle"]
+script = ExtResource("11_206iy")
+
+[node name="PlayerIsDetected" type="Node" parent="BeehaveTree/SelectBehaviour/GoToIdle/PlayerIsNotDetected"]
+script = ExtResource("13_18vcj")
+
+[node name="PlayIdle" type="Node" parent="BeehaveTree/SelectBehaviour/GoToIdle"]
+script = ExtResource("14_elj12")
+
+[node name="GoToReach" type="Node" parent="BeehaveTree/SelectBehaviour"]
+script = ExtResource("8_cimi7")
+
+[node name="PlayerIsDetected" type="Node" parent="BeehaveTree/SelectBehaviour/GoToReach"]
+script = ExtResource("13_18vcj")
+
+[node name="PlayerNotInReach" type="Node" parent="BeehaveTree/SelectBehaviour/GoToReach"]
+script = ExtResource("11_206iy")
+
+[node name="PlayerIsInReach" type="Node" parent="BeehaveTree/SelectBehaviour/GoToReach/PlayerNotInReach"]
+script = ExtResource("15_tm7gm")
+
+[node name="TryStopAttackCooldown" type="Node" parent="BeehaveTree/SelectBehaviour/GoToReach"]
+script = ExtResource("16_3y1g4")
+
+[node name="StopCoolAttackDown" type="Node" parent="BeehaveTree/SelectBehaviour/GoToReach/TryStopAttackCooldown" node_paths=PackedStringArray("attack_cooldown")]
+script = ExtResource("17_cc4o7")
+attack_cooldown = NodePath("")
+
+[node name="ReachPlayer" type="Node" parent="BeehaveTree/SelectBehaviour/GoToReach"]
+script = ExtResource("18_64kpj")
+
+[node name="RadiusMesh" type="MeshInstance3D" parent="."]
+
+[connection signal="body_entered" from="HitArea" to="." method="_on_hit_area_body_entered"]
+[connection signal="body_entered" from="DetectionRange" to="." method="_on_detection_range_body_entered"]
+[connection signal="body_exited" from="DetectionRange" to="." method="_on_detection_range_body_exited"]
+[connection signal="body_entered" from="AttackRange" to="." method="_on_attack_range_body_entered"]
+[connection signal="body_exited" from="AttackRange" to="." method="_on_attack_range_body_exited"]
+
+[editable path="MeleeSkin/Skin"]
