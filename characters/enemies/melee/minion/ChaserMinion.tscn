@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://b2edwi7wulkxq"]
+[gd_scene load_steps=48 format=3 uid="uid://b2edwi7wulkxq"]
 
 [ext_resource type="Script" path="res://characters/enemies/melee/chaser_minion.gd" id="1_bgrwq"]
 [ext_resource type="ArrayMesh" uid="uid://bptnevpcunpnm" path="res://assets/objects/weapons/grass_hockey_bat/grass_hockey.res" id="2_bvm3m"]
@@ -168,6 +168,23 @@ scale_max = 1.2
 collision_mode = 1
 collision_friction = 0.1
 collision_bounce = 0.12
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_chcap"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:velocity_for_animations")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath(".:rotation")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath("RadiusMesh:visible")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+properties/4/path = NodePath(".:is_exploding")
+properties/4/spawn = true
+properties/4/replication_mode = 1
 
 [node name="Enemy_Minion" type="CharacterBody3D"]
 collision_layer = 16
@@ -382,7 +399,7 @@ debug_path_custom_point_size = 10.04
 [node name="BeehaveTree" type="Node" parent="." node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("5_s2oxv")
 actor_node_path = NodePath("..")
-blackboard = NodePath("@Node@50963")
+blackboard = NodePath("@Node@17975")
 actor = NodePath("..")
 
 [node name="SelectBehaviour" type="Node" parent="BeehaveTree"]
@@ -433,14 +450,16 @@ script = ExtResource("15_tm7gm")
 [node name="TryStopAttackCooldown" type="Node" parent="BeehaveTree/SelectBehaviour/GoToReach"]
 script = ExtResource("16_3y1g4")
 
-[node name="StopCoolAttackDown" type="Node" parent="BeehaveTree/SelectBehaviour/GoToReach/TryStopAttackCooldown" node_paths=PackedStringArray("attack_cooldown")]
+[node name="StopCoolAttackDown" type="Node" parent="BeehaveTree/SelectBehaviour/GoToReach/TryStopAttackCooldown"]
 script = ExtResource("17_cc4o7")
-attack_cooldown = NodePath("")
 
 [node name="ReachPlayer" type="Node" parent="BeehaveTree/SelectBehaviour/GoToReach"]
 script = ExtResource("18_64kpj")
 
 [node name="RadiusMesh" type="MeshInstance3D" parent="."]
+
+[node name="EnemySynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_chcap")
 
 [connection signal="body_entered" from="HitArea" to="." method="_on_hit_area_body_entered"]
 [connection signal="body_entered" from="DetectionRange" to="." method="_on_detection_range_body_entered"]

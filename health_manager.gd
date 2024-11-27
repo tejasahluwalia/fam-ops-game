@@ -35,7 +35,10 @@ func update_health_bar():
 
 
 func get_damage(amount: int):
-	set_health.rpc_id(1, health_points - amount)
+	if multiplayer.is_server():
+		set_health(health_points - amount)
+	else:
+		set_health.rpc_id(1, health_points - amount)
 	damage.emit()
 
 

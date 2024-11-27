@@ -23,6 +23,8 @@ var is_target_in_reach = false
 var is_target_aligned = false
 var detection_range = null
 var original_speed: float
+var velocity_for_animations = Vector3.ZERO
+
 
 # Add only these new properties
 @export var explosion_delay: float = 2.0
@@ -35,18 +37,22 @@ var original_speed: float
 var is_exploding: bool = false
 var explosion_timer: float = 0.0
 
-@onready var mesh_instance: MeshInstance3D = $Body_001  # Reference to your model
+#@onready var mesh_instance: MeshInstance3D = $Body_001  # Reference to your model
 @onready var radius_mesh: MeshInstance3D = $RadiusMesh   # Add this in editor
+
 
 signal target_reached
 
 func _ready() -> void:
 	setup_radius_visualization()
-	self.navigation_agent.velocity_computed.connect(Callable(_on_velocity_computed))
-	DebugStats.add_property(self, "velocity", "")
+	if multiplayer.is_server():
+		self.navigation_agent.velocity_computed.connect(Callable(_on_velocity_computed))
+		DebugStats.add_property(self, "velocity", "")
+		detection_range = detection_shape.shape.radius
+		velocity_for_animations = self.velocity
+	anim_tree.set_multiplayer_authority(multiplayer.get_unique_id())
 	anim_tree.active = true
 	transition = anim_tree.tree_root.get("nodes/state/node")
-	detection_range = detection_shape.shape.radius
 	original_speed = movement_speed
 
 
@@ -69,27 +75,28 @@ func setup_radius_visualization() -> void:
 
 
 
-
+@rpc("authority", "call_remote", "reliable", 0)
 func update_animation_skin(delta):
 	anim_state = self.anim_tree["parameters/state/current_state"]
 	if  anim_state == "Idling":
 		#if target_object: # align with target if any
 			#self.look_at(target_object.global_position)
-		if self.velocity.length_squared() > 0.01:
+		if self.velocity_for_animations.length_squared() > 0.01:
 			self.move_to_running()
 	if anim_state == "Running":
 		var speed_scale = movement_speed / original_speed  # Normalize to original speed
 		#anim_tree["parameters/run/TimeScale"] = speed_scale
-		self.orient_model_to_direction(Vector3(self.velocity.x,0, self.velocity.z), delta)
-		if self.velocity.length_squared() <= 0.01:
+		self.orient_model_to_direction.rpc_id(1, Vector3(self.velocity_for_animations.x,0, self.velocity_for_animations.z), delta)
+		if self.velocity_for_animations.length_squared() <= 0.01:
 			self.move_to_idling()
 	
 
 func update_navigation_agent(delta, target_object):
-	if self.navigation_agent.is_navigation_finished():
-		self.velocity = Vector3(0,0,0)
-		target_reached.emit()
-		return
+	if multiplayer.is_server():
+		if self.navigation_agent.is_navigation_finished():
+			self.velocity = Vector3(0,0,0)
+			target_reached.emit()
+			return
 
 	var next_path_position: Vector3 = self.navigation_agent.get_next_path_position()
 	var new_velocity: Vector3 = self.global_position.direction_to(next_path_position) * movement_speed
@@ -107,18 +114,23 @@ func set_movement_target(movement_target: Vector3):
 func _on_velocity_computed(safe_velocity: Vector3):
 	self.velocity = safe_velocity
 	self.move_and_slide()
+	velocity_for_animations = safe_velocity
 
 
+
+@rpc("authority", "call_remote", "reliable", 0)
 func move_to_running() -> void:
 	transition.xfade_time = 0.1
 	anim_tree["parameters/state/transition_request"] = "Running"
 
 
+@rpc("authority", "call_remote", "reliable", 0)
 func move_to_idling() -> void:
 	transition.xfade_time = 0.1
 	anim_tree["parameters/state/transition_request"] = "Idling"
 
 
+@rpc("authority", "call_remote", "reliable", 0)
 func move_to_dying() -> void:
 	transition.xfade_time = 0
 	anim_tree["parameters/state/transition_request"] = "Dying"
@@ -134,6 +146,7 @@ func move_to_dying() -> void:
 	.set_delay(2))
 
 
+@rpc("authority", "call_remote", "reliable", 0)
 func play_on_attacking(is_requested: bool) -> void:
 	if is_requested:
 		anim_tree["parameters/on_attacking/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
@@ -141,6 +154,7 @@ func play_on_attacking(is_requested: bool) -> void:
 		anim_tree["parameters/on_attacking/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FADE_OUT
 
 
+@rpc("authority", "call_remote", "reliable", 0)
 func play_on_hit(is_requested:bool):
 	if is_requested:
 		anim_tree["parameters/on_hit/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
@@ -155,6 +169,7 @@ func deal_damage():
 		weapon.deal_damage()
 
 
+@rpc("any_peer", "call_remote", "reliable", 0)
 func orient_model_to_direction(direction: Vector3, delta: float) -> void:
 	
 	#if direction.length() > 0.05:
@@ -172,28 +187,32 @@ func orient_model_to_direction(direction: Vector3, delta: float) -> void:
 
 
 func _on_detection_range_body_entered(body):
-	if body is PlayerEntity:
-		is_target_detected = true
-		target_object = body
-		detection_shape.shape.radius = detection_range*1.5
+	if multiplayer.is_server():
+		if body is PlayerEntity:
+			is_target_detected = true
+			target_object = body
+			detection_shape.shape.radius = detection_range*1.5
 
 
 func _on_attack_range_body_entered(body):
-	if body is PlayerEntity and not is_exploding:
-		is_target_in_reach = true
-		start_explosion_sequence()
+	if multiplayer.is_server():
+		if body is PlayerEntity and not is_exploding:
+			is_target_in_reach = true
+			start_explosion_sequence()
 
 
 func _on_detection_range_body_exited(body):
-	if body is PlayerEntity:
-		is_target_detected = false
-		target_object = null
-		detection_shape.shape.radius = detection_range
+	if multiplayer.is_server():
+		if body is PlayerEntity:
+			is_target_detected = false
+			target_object = null
+			detection_shape.shape.radius = detection_range
 
 
 func _on_attack_range_body_exited(body):
-	if body is PlayerEntity:
-		is_target_in_reach = false
+	if multiplayer.is_server():
+		if body is PlayerEntity:
+			is_target_in_reach = false
 
 # Add these new functions
 func start_explosion_sequence() -> void:
@@ -203,52 +222,64 @@ func start_explosion_sequence() -> void:
 	if radius_mesh:
 		radius_mesh.visible = true  # Show radius indicator
 
+@rpc("any_peer")
+func disable_radius_mesh() -> void:
+	radius_mesh.visible = false
+
+
+
 func _physics_process(delta: float) -> void:
-	if is_exploding:
-		explosion_timer += delta
-		update_blinking(delta)
-		if explosion_timer >= explosion_delay:
-			trigger_explosion()
+	if not multiplayer.is_server():
+		if is_exploding:
+			explosion_timer += delta
+			#update_blinking(delta)
+			if explosion_timer >= explosion_delay:
+				trigger_explosion()
 
 func trigger_explosion() -> void:
 	# Hide the radius visualization immediately
-		if radius_mesh:
-			radius_mesh.visible = false
-
-		var space_state = get_world_3d().direct_space_state
-		var query = PhysicsShapeQueryParameters3D.new()
-		var shape = SphereShape3D.new()
-		shape.radius = explosion_radius
-		query.shape = shape
-		query.transform = global_transform
+	if radius_mesh:
+		disable_radius_mesh.rpc_id(1)
 	
-		var results = space_state.intersect_shape(query)
-		for result in results:
-			var collider = result.collider
-			if collider is PlayerEntity:
-				var distance = global_position.distance_to(collider.global_position)
-				var damage = explosion_damage * (1.0 - (distance / explosion_radius))
-				collider.health_manager.get_damage(damage)
-	
-		move_to_dying()
+	deal_explosion_damage.rpc_id(1)
+	move_to_dying()
 
 
+@rpc("any_peer", "call_remote", "reliable", 0)
+func deal_explosion_damage() -> void:
+	print("deal_explosion_damage()")
+	var space_state = get_world_3d().direct_space_state
+	var query = PhysicsShapeQueryParameters3D.new()
+	var shape = SphereShape3D.new()
+	shape.radius = explosion_radius
+	query.shape = shape
+	query.transform = global_transform
+	var results = space_state.intersect_shape(query)
+	for result in results:
+		var collider = result.collider
+		if collider is PlayerEntity:
+			print ("damage dealt")
+			var distance = global_position.distance_to(collider.global_position)
+			var damage = explosion_damage * (1.0 - (distance / explosion_radius))
+			collider.health_manager.get_damage(damage)
 
-func update_blinking(delta: float) -> void:
-	if mesh_instance and mesh_instance.get_surface_override_material(0):
-		var blink_value = abs(sin(explosion_timer * blink_speed))
-		var material = mesh_instance.get_surface_override_material(0)
-		material.albedo_color = Color(1, blink_value, blink_value, 1)  # Blink between red and white
-		material.emission_enabled = true
-		material.emission = Color(1, 0, 0, blink_value)  # Red emission
 
-		if radius_mesh and radius_mesh.material_override:
-			radius_mesh.material_override.albedo_color.a = 0.2 * blink_value
+#func update_blinking(delta: float) -> void:
+	#if mesh_instance and mesh_instance.get_surface_override_material(0):
+		#var blink_value = abs(sin(explosion_timer * blink_speed))
+		#var material = mesh_instance.get_surface_override_material(0)
+		#material.albedo_color = Color(1, blink_value, blink_value, 1)  # Blink between red and white
+		#material.emission_enabled = true
+		#material.emission = Color(1, 0, 0, blink_value)  # Red emission
+#
+		#if radius_mesh and radius_mesh.material_override:
+			#radius_mesh.material_override.albedo_color.a = 0.2 * blink_value
 
 
 func _on_hit_area_body_entered(colliding_body):
-	if colliding_body.is_in_group("bullet"):
-		print("hit by", colliding_body.name, "!")
-		health_points -= 1
-		colliding_body.remove_from_group("bullet")
-		play_on_hit(true)
+	if multiplayer.is_server():
+		if colliding_body.is_in_group("bullet"):
+			print("hit by", colliding_body.name, "!")
+			health_points -= 1
+			colliding_body.remove_from_group("bullet")
+			play_on_hit.rpc(true)

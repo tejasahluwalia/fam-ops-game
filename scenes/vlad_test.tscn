@@ -25,7 +25,7 @@ size = Vector2(32, 28)
 [sub_resource type="Resource" id="Resource_ba5yx"]
 script = ExtResource("10_64fw7")
 inverse_polarity = false
-switch = NodePath("DoorSpawner")
+switch = NodePath("")
 
 [sub_resource type="Resource" id="Resource_nar4e"]
 script = ExtResource("10_64fw7")
