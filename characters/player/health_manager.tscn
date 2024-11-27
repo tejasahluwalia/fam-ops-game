@@ -7,8 +7,11 @@ bg_color = Color(0.428755, 0.67605, 0.345992, 1)
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_2t67o"]
 properties/0/path = NodePath(".:health_points")
-properties/0/spawn = false
+properties/0/spawn = true
 properties/0/replication_mode = 1
+properties/1/path = NodePath("HealthBar:value")
+properties/1/spawn = true
+properties/1/replication_mode = 1
 
 [node name="HealthManager" type="Control"]
 layout_mode = 3

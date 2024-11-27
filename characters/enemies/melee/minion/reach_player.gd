@@ -14,7 +14,7 @@ func tick(actor, blackboard):
 		actor.set_movement_target(actor.target_object.position)
 		physics_delta_time = get_physics_process_delta_time()
 		delta_time = get_process_delta_time()
-		actor.update_animation_skin(delta_time)
+		actor.update_animation_skin.rpc(delta_time)
 		actor.update_navigation_agent(physics_delta_time, actor.target_object)
 		return RUNNING
 	else:

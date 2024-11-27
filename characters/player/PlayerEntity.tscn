@@ -57,8 +57,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.987748, 0)
 shape = SubResource("1")
 
 [node name="HealthManager" parent="." instance=ExtResource("6_7wv34")]
-max_health = 100
-start_health = 100
 
 [node name="PositionResetter" type="Node" parent="."]
 script = ExtResource("14")

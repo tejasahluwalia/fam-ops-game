@@ -39,7 +39,7 @@ func transition_to(target_state_path: String, msg: = {}) -> void:
 	self.state = target_state
 	state.enter(msg)
 	emit_signal("transitioned", target_state_path)
-	print("Transitioned to: ", target_state_path )
+
 
 func set_state(value: State) -> void:
 	state = value

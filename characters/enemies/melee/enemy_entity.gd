@@ -22,6 +22,7 @@ var is_target_detected = false
 var is_target_in_reach = false
 var is_target_aligned = false
 var detection_range = null
+var velocity_for_animations = Vector3.ZERO
 
 signal target_reached
 
@@ -30,22 +31,25 @@ func _ready() -> void:
 		self.navigation_agent.velocity_computed.connect(Callable(_on_velocity_computed))
 		DebugStats.add_property(self, "velocity", "")
 		detection_range = detection_shape.shape.radius
+		velocity_for_animations = self.velocity
 	anim_tree.active = true
+	anim_tree.set_multiplayer_authority(multiplayer.get_unique_id())
 	transition = anim_tree.tree_root.get("nodes/state/node")
+	self.move_to_idling()
 
 
+@rpc("authority", "call_remote", "reliable", 0)
 func update_animation_skin(delta):
-	if multiplayer.is_server():
-		anim_state = self.anim_tree["parameters/state/current_state"]
-		if  anim_state == "Idling":
-			#if target_object: # align with target if any
-				#self.look_at(target_object.global_position)
-			if self.velocity.length_squared() > 0.01:
-				self.move_to_running.rpc()
-		if anim_state == "Running":
-			self.orient_model_to_direction(Vector3(self.velocity.x,0, self.velocity.z), delta)
-			if self.velocity.length_squared() <= 0.01:
-				self.move_to_idling.rpc()
+	anim_state = self.anim_tree["parameters/state/current_state"]
+	if anim_state == "Idling":
+		#if target_object: # align with target if any
+			#self.look_at(target_object.global_position)
+		if self.velocity_for_animations.length_squared() > 0.01:
+			self.move_to_running()
+	if anim_state == "Running":
+		self.orient_model_to_direction.rpc_id(1, Vector3(self.velocity_for_animations.x,0, self.velocity_for_animations.z), delta)
+		if self.velocity_for_animations.length_squared() <= 0.01:
+			self.move_to_idling()
 	
 
 func update_navigation_agent(delta, target_object):
@@ -71,6 +75,7 @@ func set_movement_target(movement_target: Vector3):
 func _on_velocity_computed(safe_velocity: Vector3):
 	self.velocity = safe_velocity
 	self.move_and_slide()
+	velocity_for_animations = safe_velocity
 
 
 @rpc("authority", "call_remote", "reliable", 0)
@@ -124,6 +129,7 @@ func deal_damage():
 		weapon.deal_damage()
 
 
+@rpc("any_peer", "call_remote", "reliable", 0)
 func orient_model_to_direction(direction: Vector3, delta: float) -> void:
 	#if direction.length() > 0.05:
 	_last_strong_direction = direction
@@ -149,6 +155,7 @@ func _on_detection_range_body_entered(body):
 func _on_attack_range_body_entered(body):
 	if multiplayer.is_server():
 		if body is PlayerEntity:
+			print("Player detected in attack range")
 			is_target_in_reach = true
 
 

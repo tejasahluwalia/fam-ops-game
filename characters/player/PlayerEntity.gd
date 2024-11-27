@@ -41,7 +41,8 @@ func on_hit():
 
 func on_death():
 	is_dead.emit()
-	model.move_to_dead.rpc()
+	model.move_to_dead()
+	self.set_collision_layer_value(1, false)
 	#current_controller.process_mode = Node.PROCESS_MODE_DISABLED
 	current_controller.on_death()
 
