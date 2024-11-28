@@ -68,8 +68,8 @@ input_synchronizer = NodePath("../InputSynchronizer")
 transform = Transform3D(-0.707107, 0.298836, -0.640857, 0, 0.906308, 0.422618, 0.707107, 0.298836, -0.640857, 0, 0, 0)
 
 [node name="ThirdPersonCamera" type="Camera3D" parent="CameraPivot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 35)
-fov = 40.0
+transform = Transform3D(0.99989, 0.0134076, -0.00635271, -0.00627014, 0.769939, 0.638087, 0.0134464, -0.637976, 0.769938, -0.69771, 14.8504, 15.5082)
+fov = 85.0
 
 [node name="IcySkin" parent="." instance=ExtResource("1")]
 
