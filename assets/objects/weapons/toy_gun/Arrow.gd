@@ -3,6 +3,7 @@ class_name Arrow
 
 signal exploded
 
+var shooter: PlayerEntity = null
 @export var initial_velocity = 50
 @onready var impact_mesh = $ImpactMesh
 
@@ -42,3 +43,7 @@ func _on_body_entered(body):
 		
 	await get_tree().create_timer(0.3).timeout
 	queue_free()
+
+
+func set_shooter(player: PlayerEntity) -> void:
+	shooter = player

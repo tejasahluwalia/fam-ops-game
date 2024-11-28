@@ -12,6 +12,8 @@ extends CharacterBody3D
 @onready var position_resetter := $PositionResetter
 @onready var start_position := global_transform.origin
 
+var points: int = 0
+
 @export var use_saved_controller:bool = true
 @export var controller_schemes:Array[PackedScene]
 @export var game_data:GameDataStore
@@ -23,6 +25,7 @@ extends CharacterBody3D
 
 @export var inventory:Array = []
 signal is_dead
+signal points_changed(new_points: int)
 
 
 func _ready():
@@ -68,3 +71,8 @@ func _on_controller_scheme_changed(value):
 	add_child(new_controller)
 	new_controller.owner = self
 	current_controller = new_controller
+
+
+func add_points(amount: int) -> void:
+	points += amount
+	points_changed.emit(points)

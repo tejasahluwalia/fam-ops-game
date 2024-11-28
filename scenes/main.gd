@@ -2,8 +2,10 @@ extends Node3D
 
 var peer = ENetMultiplayerPeer.new()
 @export var player_scene: PackedScene
-@export var buttons: Array[Button]
+@export var main_menu: Control
 @export var enemy_spawner: EnemySpawner
+@export var hud: HUD
+@export var player_spawn_node: Node3D
 
 
 # Called when the node enters the scene tree for the first time.
@@ -24,5 +26,4 @@ func _on_join_button_pressed() -> void:
 
 
 func _remove_buttons() -> void:
-	for button in buttons:
-		button.queue_free()
+	main_menu.queue_free()
