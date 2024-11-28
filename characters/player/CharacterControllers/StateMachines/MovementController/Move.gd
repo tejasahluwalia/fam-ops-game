@@ -25,8 +25,6 @@ func _ready():
 
 
 func unhandled_input(event: InputEvent) -> void:
-	# TODO: I dont like that this logic is in the Player
-	# The logic of the switch input should be in the switch?
 	if event.is_action_pressed("p1_interact") and player.is_on_floor():
 		var interactibles = player.interaction_area.get_overlapping_areas()
 		for area:Area3D in interactibles:
@@ -34,7 +32,7 @@ func unhandled_input(event: InputEvent) -> void:
 			if switch_component:
 				_switch_component = switch_component
 				_switch_component.on_interaction(true)
-	if event.is_action_released("p1_interact") or not player.is_on_floor():
+	if event.is_action_released("p1_interact") and player.is_on_floor():
 		if _switch_component and is_instance_valid(_switch_component):
 			_switch_component.on_interaction(false)
 

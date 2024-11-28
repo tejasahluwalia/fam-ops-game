@@ -34,7 +34,7 @@ func spawn():
 	print(\"Spawning: \", enemy.name)
 
 
-@rpc(\"any_peer\")
+@rpc(\"any_peer\", \"call_local\")
 func _on_wave_timer_timeout():
 	if not switch_component.is_activated:
 		return
