@@ -10,6 +10,7 @@ enum BehaviorState {Idling, Reaching, Attacking, Dead}
 
 @export var movement_speed: float = 8.0
 @export var rotation_speed := 12.0
+@export var points_dropped: int = 5
 
 var target_object:Node3D = null
 var transition:AnimationNodeTransition=null
@@ -176,7 +177,11 @@ func _on_attack_range_body_exited(body):
 func _on_hit_area_body_entered(colliding_body):
 	if multiplayer.is_server():
 		if colliding_body.is_in_group("bullet"):
-			print("hit by", colliding_body.name, "!")
 			health_points -= 1
+			
+			if health_points <= 0:
+				if colliding_body.shooter != null:
+					colliding_body.shooter.add_points(points_dropped)
+			
 			colliding_body.remove_from_group("bullet")
 			play_on_hit.rpc(true)

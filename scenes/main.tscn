@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://og0akbc31x1j"]
+[gd_scene load_steps=14 format=3 uid="uid://og0akbc31x1j"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_pw6e1"]
 [ext_resource type="PackedScene" uid="uid://jga6pbb5xpug" path="res://characters/player/PlayerEntity.tscn" id="2"]
@@ -9,6 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://dy1h4xg8uhvdg" path="res://assets/space_base_bits/rock_A.gltf" id="7_pmle0"]
 [ext_resource type="Environment" uid="uid://13w4n7joxo58" path="res://scenes/world_environment.tres" id="8_5s5wh"]
 [ext_resource type="PackedScene" uid="uid://dj87iwlbmqxwu" path="res://scenes/enemy_spawn.tscn" id="9_xkmni"]
+[ext_resource type="Script" path="res://scenes/hud.gd" id="10_o67ro"]
+[ext_resource type="Script" path="res://scenes/points_display.gd" id="11_44721"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_tjlhm"]
 vertices = PackedVector3Array(-15, 1, -15, -15, 1, 11, 15, 1, 11, 15, 1, -15)
@@ -18,11 +20,13 @@ agent_radius = 1.0
 [sub_resource type="PlaneMesh" id="PlaneMesh_b5pri"]
 size = Vector2(32, 28)
 
-[node name="Main" type="Node3D" node_paths=PackedStringArray("buttons", "enemy_spawner")]
+[node name="Main" type="Node3D" node_paths=PackedStringArray("main_menu", "enemy_spawner", "hud", "player_spawn_node")]
 script = ExtResource("1_pw6e1")
 player_scene = ExtResource("2")
-buttons = [NodePath("JoinButton")]
+main_menu = NodePath("MainMenu")
 enemy_spawner = NodePath("EnemySpawn")
+hud = NodePath("HUD")
+player_spawn_node = NodePath("PlayerSpawnNode")
 
 [node name="GridMapExterior" type="GridMap" parent="."]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 2, -0.5, 0)
@@ -110,13 +114,6 @@ shadow_bias = 0.03
 shadow_blur = 0.0
 directional_shadow_mode = 0
 
-[node name="JoinButton" type="Button" parent="."]
-offset_left = 252.0
-offset_top = 260.0
-offset_right = 387.0
-offset_bottom = 325.0
-text = "Join"
-
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 transform = Transform3D(2.79892, 0, 0, 0, 1, 0, 0, 0, 5.92909, 0, -1.2475, 55.7768)
 navigation_mesh = SubResource("NavigationMesh_tjlhm")
@@ -149,4 +146,53 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.20363, 1.44046, 9.48614)
 [node name="EnemySpawnNode" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0883694, 14.822)
 
-[connection signal="pressed" from="JoinButton" to="." method="_on_join_button_pressed"]
+[node name="HUD" type="Control" parent="." node_paths=PackedStringArray("points_display")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("10_o67ro")
+points_display = NodePath("PointsDisplay")
+
+[node name="PointsDisplay" type="Label" parent="HUD"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("11_44721")
+
+[node name="MainMenu" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="JoinButton" type="Button" parent="MainMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.0
+offset_top = -15.5
+offset_right = 19.0
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Join"
+
+[connection signal="child_entered_tree" from="PlayerSpawnNode" to="HUD" method="_on_player_spawn_node_child_entered_tree"]
+[connection signal="pressed" from="MainMenu/JoinButton" to="." method="_on_join_button_pressed"]

@@ -33,6 +33,7 @@ func enter(msg: = {}) -> void:
 func _shoot_arrow() -> void:
 	var arrow = arrow_prefab.instantiate()
 	arrow.global_transform = player.shoot_anchor.global_transform
+	arrow.set_shooter(player)
 	get_tree().current_scene.get_node("ProjectileSpawnNode").add_child(arrow, true)
 	arrow.apply_central_impulse(arrow.transform.basis.z * arrow.initial_velocity)
 	player.model.play_shooting.rpc(true)
