@@ -74,5 +74,12 @@ func _on_controller_scheme_changed(value):
 
 
 func add_points(amount: int) -> void:
+	print("add_points called for player: ", player_id)
 	points += amount
+	points_changed.emit(points)
+	_on_points_changed.rpc(points)
+
+
+@rpc("call_remote", "authority", "reliable", 0)
+func _on_points_changed(points: int) -> void:
 	points_changed.emit(points)
