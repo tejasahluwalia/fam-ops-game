@@ -36,11 +36,12 @@ func spawn():
 
 @rpc(\"any_peer\", \"call_local\")
 func _on_wave_timer_timeout():
-	if not switch_component.is_activated:
-		return
-	var tween = self.create_tween()
-	tween.set_loops(nb_spawn_by_wave).tween_callback(spawn).set_delay(flow_rate)
-	tween.finished.connect(restart_wave_timer)
+	if multiplayer.is_server():
+		if not switch_component.is_activated:
+			return
+		var tween = self.create_tween()
+		tween.set_loops(nb_spawn_by_wave).tween_callback(spawn).set_delay(flow_rate)
+		tween.finished.connect(restart_wave_timer)
 
 
 func restart_wave_timer():

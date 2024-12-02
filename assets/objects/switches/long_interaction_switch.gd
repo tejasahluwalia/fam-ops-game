@@ -18,7 +18,7 @@ func _ready():
 func _process(delta):
 	if state == PROGRESSING:
 		progress = min(100, progress + progression_rate*delta)
-		anim_loading.play("switch_charging")
+		play_switch_charging.rpc()
 		if progress >= 100:
 			state = ON
 			anim_loading.stop()
@@ -32,7 +32,14 @@ func _process(delta):
 
 	anim_progress.play("progression_bar")
 	anim_progress.seek(progress/100.0, -1, 0)
-	
+
+
+@rpc("authority", "call_remote", "reliable", 0)
+func play_switch_charging():
+	anim_loading.play("switch_charging")
+	pass
+
+
 func on_interaction(requested:bool):
 	if requested and (state == OFF or state == REGRESSING):
 		state = PROGRESSING
