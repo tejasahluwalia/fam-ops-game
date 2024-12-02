@@ -10,7 +10,7 @@ var peer = ENetMultiplayerPeer.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	if OS.has_feature("dedicated_server"):
+	if OS.has_feature("dedicated_server") or DisplayServer.get_name() == "headless":
 		MultiplayerManager.start_server()
 		enemy_spawner.spawn_enemies()
 
