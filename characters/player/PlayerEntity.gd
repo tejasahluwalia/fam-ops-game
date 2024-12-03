@@ -25,7 +25,8 @@ var points: int = 0
 
 @export var inventory:Array = []
 signal is_dead
-signal points_changed(new_points: int)
+signal points_changed_server(new_points: int)
+signal points_changed_client(new_points: int)
 
 
 func _ready():
@@ -76,10 +77,10 @@ func _on_controller_scheme_changed(value):
 func add_points(amount: int) -> void:
 	print("add_points called for player: ", player_id)
 	points += amount
-	points_changed.emit(points)
+	points_changed_server.emit(points)
 	_on_points_changed.rpc(points)
 
 
 @rpc("call_remote", "authority", "reliable", 0)
 func _on_points_changed(points: int) -> void:
-	points_changed.emit(points)
+	points_changed_client.emit(points)
