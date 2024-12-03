@@ -60,6 +60,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.987748, 0)
 shape = SubResource("1")
 
 [node name="HealthManager" parent="." instance=ExtResource("6_7wv34")]
+max_health = 20
+start_health = 20
 
 [node name="PositionResetter" type="Node" parent="."]
 script = ExtResource("14")
@@ -90,6 +92,10 @@ replication_config = SubResource("SceneReplicationConfig_lc4er")
 unique_name_in_owner = true
 replication_config = SubResource("SceneReplicationConfig_5p5in")
 script = ExtResource("10_33yqh")
+
+[node name="FirstPerson" type="Camera3D" parent="."]
+transform = Transform3D(-0.99961, -0.00697224, 0.0270485, -0.0063585, 0.999722, 0.0227104, -0.0271993, 0.0225295, -0.999376, 0.0243711, 1.99052, 0.561921)
+visible = false
 
 [connection signal="damage" from="HealthManager" to="." method="on_hit"]
 [connection signal="health_depleted" from="HealthManager" to="." method="on_death"]
