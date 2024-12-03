@@ -23,21 +23,43 @@ var points: int = 0
 		player_id = id
 		%InputSynchronizer.set_multiplayer_authority(id)
 
-@export var inventory:Array = []
+@export var inventory:Dictionary = {
+		"weapons": {
+				"toygun": {
+					"fire_rate": 2,
+					"damage": 1,
+					"initial_velocity": 50
+				}
+			}
+	}
+
+var current_weapon = "toygun"
+
 signal is_dead
 signal points_changed_server(new_points: int)
 signal points_changed_client(new_points: int)
 
 
-func _ready():
-	inventory.append("toygun")
-	
+func _ready():	
 	if multiplayer.get_unique_id() == player_id:
 		camera.make_current()
 		game_data.controller_scheme_changed.connect(_on_controller_scheme_changed)
 		if use_saved_controller:
 			_on_controller_scheme_changed(game_data.controller_scheme)
 
+
+func _input(event: InputEvent) -> void:
+	if Focus.focused && not multiplayer.is_server() && multiplayer.get_unique_id() == player_id:
+		if event.is_action_pressed("p1_interact"):
+			_interact.rpc_id(1)
+
+
+@rpc("any_peer", "call_remote", "reliable", 0)
+func _interact() -> void:
+	if player_id == multiplayer.get_remote_sender_id():
+		var interactibles = interaction_area.get_overlapping_areas()
+		for area:InteractableArea3D in interactibles:
+			area.interact(self)
 
 func on_hit():
 	model.play_on_hit(true)

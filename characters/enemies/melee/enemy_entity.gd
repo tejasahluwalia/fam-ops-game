@@ -177,7 +177,7 @@ func _on_attack_range_body_exited(body):
 func _on_hit_area_body_entered(colliding_body):
 	if multiplayer.is_server():
 		if colliding_body.is_in_group("bullet"):
-			health_points -= 1
+			health_points -= colliding_body.damage
 			
 			if health_points <= 0:
 				if colliding_body.shooter != null:

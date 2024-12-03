@@ -4,6 +4,8 @@ class_name Arrow
 signal exploded
 
 var shooter: PlayerEntity = null
+var damage: int = 1
+
 @export var initial_velocity = 50
 @onready var impact_mesh = $ImpactMesh
 
