@@ -176,12 +176,17 @@ func _on_attack_range_body_exited(body):
 
 func _on_hit_area_body_entered(colliding_body):
 	if multiplayer.is_server():
+		# Check health at start to avoid race conditions.
+		if health_points <= 0:
+			return
+			
 		if colliding_body.is_in_group("bullet"):
 			health_points -= colliding_body.damage
 			
 			if health_points <= 0:
 				if colliding_body.shooter != null:
 					colliding_body.shooter.add_points(points_dropped)
+			else:
+				play_on_hit.rpc(true)
 			
 			colliding_body.remove_from_group("bullet")
-			play_on_hit.rpc(true)

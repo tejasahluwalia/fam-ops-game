@@ -21,19 +21,23 @@ func _ready():
 
 func on_interaction(requested:bool):
 	if requested:
-		print(\"Wave requested on client\")
 		_on_wave_timer_timeout.rpc_id(1)
-		$AnimationPlayer.play(\"Opening\")
+		_play_animation.rpc(\"Opening\")
 	else:
 		stop_wave_timer.rpc_id(1)
-		$AnimationPlayer.play(\"Closing\")
+		_play_animation.rpc(\"Closing\")
+
+
+@rpc(\"any_peer\", \"call_local\", \"reliable\", 0)
+func _play_animation(animation: StringName) -> void:
+	if not multiplayer.is_server():
+		$AnimationPlayer.play(animation)
 
 
 func spawn():
 	var enemy = to_spawn.instantiate()
 	enemy.global_transform = enemy_spawn_marker.global_transform
 	enemy_spawn_node.add_child(enemy, true)
-	print(\"Spawning: \", enemy.name)
 
 
 @rpc(\"any_peer\", \"call_remote\")
