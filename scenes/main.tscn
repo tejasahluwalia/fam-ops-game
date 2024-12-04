@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://og0akbc31x1j"]
+[gd_scene load_steps=30 format=3 uid="uid://og0akbc31x1j"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_pw6e1"]
 [ext_resource type="PackedScene" uid="uid://jga6pbb5xpug" path="res://characters/player/PlayerEntity.tscn" id="2"]
@@ -14,7 +14,9 @@
 [ext_resource type="Script" path="res://scenes/points_display.gd" id="11_44721"]
 [ext_resource type="PackedScene" uid="uid://dk1e5h13iicq3" path="res://assets/objects/switches/switch_hub.tscn" id="11_panqy"]
 [ext_resource type="Script" path="res://assets/objects/switches/switch_connection.gd" id="12_spi73"]
+[ext_resource type="Script" path="res://scenes/weapon_upgrade_area.gd" id="13_06ubn"]
 [ext_resource type="PackedScene" uid="uid://ds5itulgl8xim" path="res://assets/objects/switches/door_spawner.tscn" id="13_s7n2e"]
+[ext_resource type="PackedScene" uid="uid://cpxkladyjcj8d" path="res://ui/interaction_tip.tscn" id="14_4aek7"]
 [ext_resource type="PackedScene" uid="uid://dyssgs4g0elmf" path="res://characters/enemies/melee/minion/EnemyMinion.tscn" id="14_m2k0h"]
 [ext_resource type="PackedScene" uid="uid://bgbyxysfhnde2" path="res://assets/objects/switches/short_interaction_switch.tscn" id="15_i2tmt"]
 [ext_resource type="PackedScene" uid="uid://b2nlcgg1yuy7o" path="res://assets/objects/switches/door_switch.tscn" id="16_j2h1y"]
@@ -34,6 +36,9 @@ size = Vector2(32, 28)
 material = SubResource("StandardMaterial3D_i086e")
 text = "Weapon Upgrade"
 font_size = 127
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pxv1w"]
+size = Vector3(10.5922, 7.81677, 5.44705)
 
 [sub_resource type="TextMesh" id="TextMesh_5huct"]
 text = "Increase Difficulty"
@@ -235,6 +240,16 @@ metadata/_editor_floor_ = Vector3(0, 0, 0)
 transform = Transform3D(1.49012e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, 1.49012e-08, 13.6891, 3.67267, 1.01476)
 mesh = SubResource("TextMesh_slltj")
 skeleton = NodePath("../..")
+
+[node name="WeaponUpgradeArea" type="Area3D" parent="GridMapExterior/WeaponUpgrade"]
+collision_layer = 8
+script = ExtResource("13_06ubn")
+
+[node name="InteractionTip" parent="GridMapExterior/WeaponUpgrade/WeaponUpgradeArea" instance=ExtResource("14_4aek7")]
+
+[node name="WeaponUpgradeCollision" type="CollisionShape3D" parent="GridMapExterior/WeaponUpgrade/WeaponUpgradeArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.111223, -3.40839, 1.52647)
+shape = SubResource("BoxShape3D_pxv1w")
 
 [node name="IncreaseDifficulty" type="MeshInstance3D" parent="GridMapExterior"]
 transform = Transform3D(-2.18557e-08, 0, 0.5, 0, 0.5, 0, -0.5, 0, -2.18557e-08, -15.3101, 3.67267, -2.60354)

@@ -6,7 +6,7 @@ signal pickedup(object_name:String)
 var tweens:Array[Tween] = []
 
 func _ready():
-	self.pickedup.connect(GameManager.on_pickup_item)
+	#self.pickedup.connect(GameManager.on_pickup_item)
 	var mesh_instance = MeshInstance3D.new()
 	$ItemSlot.add_child(mesh_instance)
 	mesh_instance.mesh = item_mesh

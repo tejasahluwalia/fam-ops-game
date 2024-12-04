@@ -28,12 +28,6 @@ func _ready():
 	tweens[1].tween_property($ItemSlot, "rotation", Vector3(0, 360,0), 300).as_relative()
 
 
-func _on_dialog_finished():
-	#var item_name = item_mesh.get_meta("name", "")
-	if GameManager.has_player():
-		GameManager.get_player().inventory.append('toygun')
-
-
 func _on_dialog_started():
 	$ItemSlot.visible = false
 	$ItemSlot.process_mode=Node.PROCESS_MODE_DISABLED

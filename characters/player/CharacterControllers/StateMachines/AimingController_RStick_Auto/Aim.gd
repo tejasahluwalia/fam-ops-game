@@ -17,6 +17,9 @@ func process(delta) -> void:
 			# 1) it would trigger many bullets when near the deadzone
 			# 2) it would trigger a second bullet on release
 			_timer.start()
+			var weapon = player.inventory.weapons.get(player.current_weapon)
+			if weapon:
+				_timer.wait_time = (1.0 / weapon["fire_rate"])
 			call_deferred("_shoot_arrow")
 
 		player.model.orient_model_to_direction(_aiming_direction, delta)
@@ -30,10 +33,12 @@ func enter(msg: = {}) -> void:
 	# the character skin needs to finish its aiming animation
 
 
-func _shoot_arrow() -> void:
+func _shoot_arrow(initial_velocity: int = 50, damage: int = 1) -> void:
 	var arrow = arrow_prefab.instantiate()
 	arrow.global_transform = player.shoot_anchor.global_transform
 	arrow.set_shooter(player)
+	arrow.damage = damage
+	arrow.initial_velocity = initial_velocity
 	get_tree().current_scene.get_node("ProjectileSpawnNode").add_child(arrow, true)
 	arrow.apply_central_impulse(arrow.transform.basis.z * arrow.initial_velocity)
 	player.model.play_shooting.rpc(true)
