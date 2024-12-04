@@ -58,8 +58,9 @@ func _input(event: InputEvent) -> void:
 func _interact() -> void:
 	if player_id == multiplayer.get_remote_sender_id():
 		var interactibles = interaction_area.get_overlapping_areas()
-		for area:InteractableArea3D in interactibles:
+		for area:Area3D in interactibles:
 			area.interact(self)
+
 
 func on_hit():
 	model.play_on_hit(true)
@@ -97,12 +98,17 @@ func _on_controller_scheme_changed(value):
 
 
 func add_points(amount: int) -> void:
-	print("add_points called for player: ", player_id)
 	points += amount
 	points_changed_server.emit(points)
 	_on_points_changed.rpc(points)
 
 
+func remove_points(amount: int) -> void:
+	points -= amount
+	points_changed_server.emit(points)
+	_on_points_changed.rpc(points)
+
+
 @rpc("call_remote", "authority", "reliable", 0)
-func _on_points_changed(points: int) -> void:
-	points_changed_client.emit(points)
+func _on_points_changed(new_points_value: int) -> void:
+	points_changed_client.emit(new_points_value)
