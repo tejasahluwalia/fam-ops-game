@@ -30,11 +30,13 @@ var can_regenerate: bool = true
 @onready var health_bar: ProgressBar = $HealthBar
 @onready var damage_bar: ProgressBar = $DamageBar
 
+
 func _ready():
 	health_points = start_health
 	damage_bar_value = start_health
 	update_health_bar()
 	update_damage_bar()
+
 
 func _process(delta):
 	handle_damage_bar(delta)
@@ -42,6 +44,7 @@ func _process(delta):
 	# Only server handles regeneration logic
 	if multiplayer.is_server():
 		handle_health_regeneration(delta)
+
 
 func handle_damage_bar(delta):
 	if is_damage_bar_active:
@@ -54,6 +57,7 @@ func handle_damage_bar(delta):
 			
 			if damage_bar_value == health_points:
 				is_damage_bar_active = false
+
 
 func handle_health_regeneration(delta):
 	if health_points >= max_health:
@@ -81,9 +85,7 @@ func handle_health_regeneration(delta):
 		accumulated_health -= heal_amount
 		set_health(health_points + heal_amount)
 		is_damage_bar_active = true
-		
-		
-		
+
 
 @rpc("any_peer", "call_remote", "reliable")
 func set_health(value: int):
@@ -92,11 +94,9 @@ func set_health(value: int):
 	health_changed.emit(old_value, health_points)
 	update_health_bar()
 	
-	
 	if old_value > health_points: # Took damage
 		start_damage_bar_effect()
 		reset_regen_timer()
-	
 	
 	if health_points <= 0:
 		health_depleted.emit()
@@ -120,6 +120,7 @@ func update_health_bar():
 
 func update_damage_bar():
 	damage_bar.value = damage_bar_value
+
 
 func get_damage(amount: int):
 	if multiplayer.is_server():

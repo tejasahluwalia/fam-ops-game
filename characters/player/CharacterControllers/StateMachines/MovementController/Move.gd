@@ -25,16 +25,19 @@ func _ready():
 
 
 func unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("p1_interact") and player.is_on_floor():
-		var interactibles = player.interaction_area.get_overlapping_areas()
-		for area:Area3D in interactibles:
-			var switch_component = area.get_node_or_null("SwitchComponent")
-			if switch_component:
-				_switch_component = switch_component
-				_switch_component.on_interaction(true)
-	if event.is_action_released("p1_interact") and player.is_on_floor():
-		if _switch_component and is_instance_valid(_switch_component):
-			_switch_component.on_interaction(false)
+	if not multiplayer.is_server() && player.player_id == multiplayer.get_unique_id():
+		if event.is_action_pressed("p1_interact"):
+			print("p1_interact pressed on client: ", player.player_id)
+			var interactibles = player.interaction_area.get_overlapping_areas()
+			for area:Area3D in interactibles:
+				var switch_component = area.get_node_or_null("SwitchComponent")
+				if switch_component:
+					print("SwitchComponent found")
+					_switch_component = switch_component
+					_switch_component.on_interaction(true)
+		if event.is_action_released("p1_interact"):
+			if _switch_component and is_instance_valid(_switch_component):
+				_switch_component.on_interaction(false)
 
 
 func physics_process(delta: float) -> void:

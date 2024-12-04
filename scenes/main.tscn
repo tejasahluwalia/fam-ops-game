@@ -262,12 +262,12 @@ switch_emitters = [NodePath("WaveSwitch")]
 switch_receivers = Array[ExtResource("12_spi73")]([SubResource("Resource_3eetj"), SubResource("Resource_rw2pk")])
 
 [node name="DoorSpawner" parent="WaveSystem" node_paths=PackedStringArray("enemy_spawn_node") instance=ExtResource("13_s7n2e")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 31.276, -0.484, -40)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 41.8466, -0.484, -40)
 to_spawn = ExtResource("14_m2k0h")
 enemy_spawn_node = NodePath("../../EnemySpawnNode")
 
 [node name="DoorSpawner2" parent="WaveSystem" node_paths=PackedStringArray("enemy_spawn_node") instance=ExtResource("13_s7n2e")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 91.172, -0.484, -40)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 84.8843, -0.484, -40)
 to_spawn = ExtResource("14_m2k0h")
 enemy_spawn_node = NodePath("../../EnemySpawnNode")
 

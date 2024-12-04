@@ -21,11 +21,13 @@ func _ready():
 
 func on_interaction(requested:bool):
 	if requested:
+		print(\"Wave requested on client\")
 		_on_wave_timer_timeout.rpc_id(1)
 		$AnimationPlayer.play(\"Opening\")
 	else:
-		wave_timer.stop()
+		stop_wave_timer.rpc_id(1)
 		$AnimationPlayer.play(\"Closing\")
+
 
 func spawn():
 	var enemy = to_spawn.instantiate()
@@ -34,18 +36,24 @@ func spawn():
 	print(\"Spawning: \", enemy.name)
 
 
-@rpc(\"any_peer\", \"call_local\")
+@rpc(\"any_peer\", \"call_remote\")
 func _on_wave_timer_timeout():
 	if multiplayer.is_server():
-		if not switch_component.is_activated:
-			return
+		#if not switch_component.is_activated:
+			#return
 		var tween = self.create_tween()
 		tween.set_loops(nb_spawn_by_wave).tween_callback(spawn).set_delay(flow_rate)
 		tween.finished.connect(restart_wave_timer)
 
 
+@rpc(\"any_peer\", \"call_remote\")
 func restart_wave_timer():
 	wave_timer.start()
+
+
+@rpc(\"any_peer\", \"call_remote\")
+func stop_wave_timer():
+	wave_timer.stop()
 "
 
 [sub_resource type="Animation" id="Animation_mcon7"]
