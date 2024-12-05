@@ -229,6 +229,7 @@ dialogic_default_action={
 
 [physics]
 
+3d/physics_engine="JoltPhysics3D"
 common/enable_pause_aware_picking=true
 
 [rendering]
