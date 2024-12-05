@@ -9,9 +9,11 @@ emission_enabled = true
 [sub_resource type="GDScript" id="GDScript_p3r0o"]
 script/source = "extends SwitchComponent
 
+
 func _ready():
 	if not is_activated:
 		close_door()
+
 
 func on_interaction(requested:bool):
 	if requested == is_activated:
@@ -21,13 +23,20 @@ func on_interaction(requested:bool):
 	else:
 		close_door()
 
+
 func open_door():
 	is_activated = true
-	$AnimationPlayer.play(\"Opening\")
+	_play_animation.rpc(\"Opening\")
+
 	
 func close_door():
 	is_activated = false
-	$AnimationPlayer.play(\"Closing\")
+	_play_animation.rpc(\"Closing\")
+
+
+@rpc(\"any_peer\", \"call_local\", \"reliable\", 0)
+func _play_animation(animation_name: StringName):
+	$AnimationPlayer.play(animation_name)
 "
 
 [sub_resource type="Animation" id="Animation_470fy"]

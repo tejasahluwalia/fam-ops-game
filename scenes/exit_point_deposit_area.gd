@@ -1,5 +1,9 @@
-class_name InteractableArea3D
+class_name PointDepositArea
 extends Area3D
+
+signal points_deposited(points: int)
+
+@export var cost = 5
 
 
 # Called when the node enters the scene tree for the first time.
@@ -13,8 +17,9 @@ func _process(delta: float) -> void:
 
 
 func interact(player: PlayerEntity) -> void:
-	if player.points >= 5:
-		player.remove_points(5)
-		player.inventory.weapons.toygun["fire_rate"] += 2	
+	print("Interacting with exit point deposit area.")
+	if player.points >= cost:
+		player.remove_points(cost)
+		points_deposited.emit(cost)
 	else:
-		print("Can't afford upgrade")
+		print("Can't afford to deposit points.")

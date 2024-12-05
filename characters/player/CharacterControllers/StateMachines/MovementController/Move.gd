@@ -27,7 +27,6 @@ func _ready():
 func unhandled_input(event: InputEvent) -> void:
 	if not multiplayer.is_server() && player.player_id == multiplayer.get_unique_id():
 		if event.is_action_pressed("p1_interact"):
-			print("p1_interact pressed on client: ", player.player_id)
 			var interactibles = player.interaction_area.get_overlapping_areas()
 			for area:Area3D in interactibles:
 				var switch_component = area.get_node_or_null("SwitchComponent")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://og0akbc31x1j"]
+[gd_scene load_steps=33 format=3 uid="uid://og0akbc31x1j"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_pw6e1"]
 [ext_resource type="PackedScene" uid="uid://jga6pbb5xpug" path="res://characters/player/PlayerEntity.tscn" id="2"]
@@ -14,13 +14,15 @@
 [ext_resource type="Script" path="res://scenes/points_display.gd" id="11_44721"]
 [ext_resource type="PackedScene" uid="uid://dk1e5h13iicq3" path="res://assets/objects/switches/switch_hub.tscn" id="11_panqy"]
 [ext_resource type="Script" path="res://assets/objects/switches/switch_connection.gd" id="12_spi73"]
-[ext_resource type="Script" path="res://scenes/weapon_upgrade_area.gd" id="13_06ubn"]
+[ext_resource type="Script" path="res://scenes/weapon_upgrade.gd" id="13_2iydg"]
 [ext_resource type="PackedScene" uid="uid://ds5itulgl8xim" path="res://assets/objects/switches/door_spawner.tscn" id="13_s7n2e"]
 [ext_resource type="PackedScene" uid="uid://cpxkladyjcj8d" path="res://ui/interaction_tip.tscn" id="14_4aek7"]
 [ext_resource type="PackedScene" uid="uid://dyssgs4g0elmf" path="res://characters/enemies/melee/minion/EnemyMinion.tscn" id="14_m2k0h"]
+[ext_resource type="Script" path="res://scripts/interactable_area_3d.gd" id="14_scx14"]
 [ext_resource type="PackedScene" uid="uid://bgbyxysfhnde2" path="res://assets/objects/switches/short_interaction_switch.tscn" id="15_i2tmt"]
 [ext_resource type="PackedScene" uid="uid://b2nlcgg1yuy7o" path="res://assets/objects/switches/door_switch.tscn" id="16_j2h1y"]
-[ext_resource type="PackedScene" uid="uid://hcqc6rr7cqwf" path="res://assets/objects/switches/long_interaction_switch.tscn" id="17_itypy"]
+[ext_resource type="Script" path="res://assets/objects/switches/exit_door.gd" id="22_2a87a"]
+[ext_resource type="Script" path="res://scenes/exit_point_deposit_area.gd" id="22_hujxi"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_tjlhm"]
 vertices = PackedVector3Array(-15, 1, -15, -15, 1, 11, 15, 1, 11, 15, 1, -15)
@@ -53,6 +55,9 @@ switch = NodePath("DoorSpawner")
 script = ExtResource("12_spi73")
 inverse_polarity = false
 switch = NodePath("DoorSpawner2")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fr05a"]
+size = Vector3(7.10271, 1.53003, 3.02713)
 
 [node name="Main" type="Node3D" node_paths=PackedStringArray("main_menu", "enemy_spawner", "hud", "player_spawn_node")]
 script = ExtResource("1_pw6e1")
@@ -115,10 +120,8 @@ enemy_spawn_marker = NodePath("EnemySpawnMarker")
 enemy_spawn_node = NodePath("../EnemySpawnNode")
 
 [node name="EnemySpawnMarker" type="Marker3D" parent="EnemySpawn"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.20363, 1.44046, 9.48614)
 
 [node name="EnemySpawnNode" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0883694, 14.822)
 
 [node name="HUD" type="Control" parent="." node_paths=PackedStringArray("points_display")]
 layout_mode = 3
@@ -240,10 +243,11 @@ metadata/_editor_floor_ = Vector3(0, 0, 0)
 transform = Transform3D(1.49012e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, 1.49012e-08, 13.6891, 3.67267, 1.01476)
 mesh = SubResource("TextMesh_slltj")
 skeleton = NodePath("../..")
+script = ExtResource("13_2iydg")
 
 [node name="WeaponUpgradeArea" type="Area3D" parent="GridMapExterior/WeaponUpgrade"]
 collision_layer = 8
-script = ExtResource("13_06ubn")
+script = ExtResource("14_scx14")
 
 [node name="InteractionTip" parent="GridMapExterior/WeaponUpgrade/WeaponUpgradeArea" instance=ExtResource("14_4aek7")]
 
@@ -282,11 +286,26 @@ to_spawn = ExtResource("14_m2k0h")
 [node name="WaveSwitch" parent="WaveSystem" instance=ExtResource("15_i2tmt")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 58.0828, -0.5, -54.812)
 
-[node name="ExitDoor" parent="." instance=ExtResource("16_j2h1y")]
+[node name="ExitDoor" parent="." node_paths=PackedStringArray("point_deposit_area", "points_remaining_label") instance=ExtResource("16_j2h1y")]
 transform = Transform3D(1.855, 0, 0, 0, 1.855, 0, 0, 0, 1.855, 2.00971, -0.5, -29.7778)
+script = ExtResource("22_2a87a")
+point_deposit_area = NodePath("ExitPointDepositArea")
+points_remaining_label = NodePath("PointsRemainingLabel")
 
-[node name="ExitSwitch" parent="." instance=ExtResource("17_itypy")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -6.24523, -0.487575, -24.719)
+[node name="ExitPointDepositArea" type="Area3D" parent="ExitDoor"]
+collision_layer = 8
+script = ExtResource("22_hujxi")
+
+[node name="ExitPointDepositCollision" type="CollisionShape3D" parent="ExitDoor/ExitPointDepositArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.199897, 0.776489, 1.01356)
+shape = SubResource("BoxShape3D_fr05a")
+
+[node name="InteractionTip" parent="ExitDoor/ExitPointDepositArea" instance=ExtResource("14_4aek7")]
+
+[node name="PointsRemainingLabel" type="Label3D" parent="ExitDoor"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, -3.78729, 2.27067, 0.441083)
+text = "Points"
+font_size = 48
 
 [connection signal="child_entered_tree" from="PlayerSpawnNode" to="HUD" method="_on_player_spawn_node_child_entered_tree"]
 [connection signal="pressed" from="MainMenu/JoinButton" to="." method="_on_join_button_pressed"]

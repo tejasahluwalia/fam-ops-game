@@ -59,7 +59,8 @@ func _interact() -> void:
 	if player_id == multiplayer.get_remote_sender_id():
 		var interactibles = interaction_area.get_overlapping_areas()
 		for area:Area3D in interactibles:
-			area.interact(self)
+			if area is InteractableArea3D or area is PointDepositArea:
+				area.interact(self)
 
 
 func on_hit():

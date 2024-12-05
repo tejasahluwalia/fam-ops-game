@@ -77,7 +77,6 @@ func handle_health_regeneration(delta):
 	
 	# Calculate health to regenerate this frame
 	accumulated_health += base_regen_rate * regen_multiplier * delta
-	print(accumulated_health)
 
 	# Ensure we regenerate at least 1 health point if there's any regeneration
 	if accumulated_health >= 1.0:
