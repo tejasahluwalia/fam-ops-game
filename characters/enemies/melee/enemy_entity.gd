@@ -156,7 +156,6 @@ func _on_detection_range_body_entered(body):
 func _on_attack_range_body_entered(body):
 	if multiplayer.is_server():
 		if body is PlayerEntity:
-			print("Player detected in attack range")
 			is_target_in_reach = true
 
 

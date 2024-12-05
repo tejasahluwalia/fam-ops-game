@@ -60,7 +60,7 @@ func add_property(object, property, display):
 	$VBoxContainer.add_child(label)
 	props.append(Property.new(object, property, label, display))
 	object.tree_exiting.connect(on_property_exiting.bind(object))
-	print("property %s from %s was added!"%[property, object.name] )
+
 
 
 func on_property_exiting(object):

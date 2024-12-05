@@ -17,7 +17,6 @@ func _process(delta: float) -> void:
 
 
 func interact(player: PlayerEntity) -> void:
-	print("Interacting with exit point deposit area.")
 	if player.points >= cost:
 		player.remove_points(cost)
 		points_deposited.emit(cost)

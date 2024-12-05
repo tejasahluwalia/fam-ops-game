@@ -1,6 +1,6 @@
 extends Node3D
 
-@export var total_cost: int = 20
+@export var total_cost: int = 500
 @export var point_deposit_area: PointDepositArea
 @export var points_remaining_label: Label3D
 
