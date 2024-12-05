@@ -70,6 +70,7 @@ window/size/window_height_override=540
 
 [editor]
 
+import/use_multiple_threads=false
 version_control/plugin_name="GitPlugin"
 version_control/autoload_on_startup=true
 
