@@ -22,4 +22,4 @@ func _process(delta: float) -> void:
 func spawn_enemies() -> void:
 	var minion: EnemyEntity = _enemy_scene.instantiate()
 	minion.global_transform = enemy_spawn_marker.global_transform
-	enemy_spawn_node.add_child(minion, true)
+	enemy_spawn_node.call_deferred("add_child", minion, true)

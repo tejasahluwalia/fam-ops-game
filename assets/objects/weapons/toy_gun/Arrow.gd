@@ -43,7 +43,7 @@ func _on_body_entered(body):
 		call_deferred("set_contact_monitor", false)
 		self.max_contacts_reported = 0
 		
-	await get_tree().create_timer(0.3).timeout
+	await get_tree().create_timer(0.15).timeout
 	queue_free()
 
 
