@@ -10,7 +10,6 @@ extends PlayerState
 var _switch_component :SwitchComponent = null
 var _move_direction := Vector3.ZERO
 var _player_input := Vector3.ZERO
-var _do_jump := true
 var _is_directing := true
 var velocity: Vector3:
 	get:
@@ -43,10 +42,6 @@ func physics_process(delta: float) -> void:
 	if multiplayer.is_server():
 		_update_player_input()
 		
-		if _do_jump and player.is_on_floor():
-			_state_machine.transition_to("Move/Jump", {velocity = player.velocity})
-			_do_jump = false
-		
 		_move_direction.x = _player_input.x
 		_move_direction.z = _player_input.z
 		
@@ -61,7 +56,6 @@ func physics_process(delta: float) -> void:
 
 
 func _update_player_input():
-	_do_jump = input_synchronizer.input_jump
 	var input = input_synchronizer.input_movement_direction
 	_player_input = Vector3(input.x, 0, input.y)
 

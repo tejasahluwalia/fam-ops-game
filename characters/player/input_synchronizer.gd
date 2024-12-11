@@ -27,4 +27,3 @@ func _physics_process(delta: float) -> void:
 func _process(delta: float) -> void:
 	input_camera = Focus.input_get_action_raw_strength("p1_camera_RR") - Focus.input_get_action_raw_strength("p1_camera_RL")
 	input_aim = Focus.input_get_vector("p1_aim_left", "p1_aim_right", "p1_aim_up", "p1_aim_down")
-	input_jump = Focus.input_is_action_just_pressed("p1_jump")

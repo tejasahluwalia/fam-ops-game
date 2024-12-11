@@ -10,16 +10,16 @@ var _aim_input := Vector2.ZERO
 func process(delta) -> void:
 	if multiplayer.is_server():
 		_update_player_input()
+		
+		#TODO: Move this to a _on_weapon_updated() function
+		var weapon = player.inventory.weapons.get(player.current_weapon)
+		if weapon:
+			_timer.wait_time = (1.0 / weapon["fire_rate"])
+		
 		if _aiming_direction.length() <= 0.2:
 			_state_machine.transition_to("Rest")
 		if _timer.time_left <= 0:
-			# NOTE: we tried with event handling, but weirdly the deadzone was noisy,
-			# 1) it would trigger many bullets when near the deadzone
-			# 2) it would trigger a second bullet on release
 			_timer.start()
-			var weapon = player.inventory.weapons.get(player.current_weapon)
-			if weapon:
-				_timer.wait_time = (1.0 / weapon["fire_rate"])
 			call_deferred("_shoot_arrow")
 
 		player.model.orient_model_to_direction(_aiming_direction, delta)

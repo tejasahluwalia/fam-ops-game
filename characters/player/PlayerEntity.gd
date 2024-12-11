@@ -40,12 +40,15 @@ signal points_changed_server(new_points: int)
 signal points_changed_client(new_points: int)
 
 
-func _ready():	
-	if multiplayer.get_unique_id() == player_id:
-		camera.make_current()
-		game_data.controller_scheme_changed.connect(_on_controller_scheme_changed)
-		if use_saved_controller:
-			_on_controller_scheme_changed(game_data.controller_scheme)
+func _ready():
+	if multiplayer.is_server():
+		current_controller.on_start()
+	else:
+		if multiplayer.get_unique_id() == player_id:
+			camera.make_current()
+		#game_data.controller_scheme_changed.connect(_on_controller_scheme_changed)
+		#if use_saved_controller:
+			#_on_controller_scheme_changed(game_data.controller_scheme)
 
 
 func _input(event: InputEvent) -> void:
@@ -89,13 +92,13 @@ func _on_dialog_ended():
 	current_controller.process_mode = Node.PROCESS_MODE_INHERIT
 
 
-func _on_controller_scheme_changed(value):
-	if current_controller:
-		current_controller.queue_free()
-	var new_controller = controller_schemes[value].instantiate()
-	add_child(new_controller)
-	new_controller.owner = self
-	current_controller = new_controller
+#func _on_controller_scheme_changed(value):
+	#if current_controller:
+		#current_controller.queue_free()
+	#var new_controller = controller_schemes[value].instantiate()
+	#add_child(new_controller)
+	#new_controller.owner = self
+	#current_controller = new_controller
 
 
 func add_points(amount: int) -> void:

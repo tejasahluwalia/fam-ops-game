@@ -29,7 +29,11 @@ func _process(delta) -> void:
 func _update_player_input():
 	_player_input = input_synchronizer.input_camera
 	_parent.camera_pivot.rotate_y(_player_input * _camera_rotation_speed)
-	pass
+
+
+func on_start():
+	$MovementController.transition_to("Move/Idle")
+	$AimingController.transition_to("Rest")
 
 
 func on_death():
