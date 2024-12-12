@@ -39,7 +39,7 @@ func _shoot_arrow(initial_velocity: int = 50, damage: int = 1) -> void:
 	arrow.set_shooter(player)
 	arrow.damage = damage
 	arrow.initial_velocity = initial_velocity
-	get_tree().current_scene.get_node("ProjectileSpawnNode").add_child(arrow, true)
+	get_tree().current_scene.projectile_spawn_node.add_child(arrow, true)
 	arrow.apply_central_impulse(arrow.transform.basis.z * arrow.initial_velocity)
 	player.model.play_shooting.rpc(true)
 

@@ -1,9 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dj87iwlbmqxwu"]
-
-[ext_resource type="Script" path="res://scenes/enemy_spawn.gd" id="1_om6aw"]
-
-[node name="EnemySpawn" type="Node3D"]
-script = ExtResource("1_om6aw")
-
-[node name="EnemySpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://characters/enemies/melee/minion/EnemyMinion.tscn", "res://characters/enemies/melee/minion/ChaserMinion.tscn")

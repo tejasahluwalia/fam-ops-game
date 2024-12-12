@@ -1,15 +1,15 @@
 [gd_scene load_steps=15 format=3 uid="uid://jga6pbb5xpug"]
 
-[ext_resource type="PackedScene" uid="uid://ds848t2x4cxyt" path="res://characters/player/CharacterSkins/IcySkin_inherited.tscn" id="1"]
-[ext_resource type="Script" path="res://characters/player/PlayerEntity.gd" id="2"]
-[ext_resource type="Resource" uid="uid://kd6arste1gur" path="res://ui/game_data_store.tres" id="2_gbwfc"]
-[ext_resource type="PackedScene" uid="uid://d3yswfl2m7nue" path="res://characters/player/CharacterControllers/OneStickController.tscn" id="2_njm8p"]
-[ext_resource type="PackedScene" uid="uid://d1rmoxdu5yefv" path="res://characters/player/CharacterControllers/TwoStickController.tscn" id="3_k2os6"]
-[ext_resource type="PackedScene" uid="uid://drvgaalhd5v8s" path="res://characters/player/CharacterControllers/TwoStickControllerAuto.tscn" id="5_n2q7r"]
-[ext_resource type="PackedScene" uid="uid://bwf5frggyeobl" path="res://characters/player/CharacterControllers/KeyboardMouseController.tscn" id="5_rys30"]
-[ext_resource type="PackedScene" uid="uid://c5l20701ck6co" path="res://characters/player/health_manager.tscn" id="6_7wv34"]
-[ext_resource type="Script" path="res://characters/player/input_synchronizer.gd" id="10_33yqh"]
-[ext_resource type="Script" path="res://characters/PositionResetter.gd" id="14"]
+[ext_resource type="Script" path="res://characters/player/player_entity.gd" id="1_eomfg"]
+[ext_resource type="PackedScene" uid="uid://d3yswfl2m7nue" path="res://characters/player/CharacterControllers/OneStickController.tscn" id="2_0hlv6"]
+[ext_resource type="PackedScene" uid="uid://d1rmoxdu5yefv" path="res://characters/player/CharacterControllers/TwoStickController.tscn" id="3_nmqp5"]
+[ext_resource type="PackedScene" uid="uid://drvgaalhd5v8s" path="res://characters/player/CharacterControllers/TwoStickControllerAuto.tscn" id="4_q8iiu"]
+[ext_resource type="PackedScene" uid="uid://bwf5frggyeobl" path="res://characters/player/CharacterControllers/KeyboardMouseController.tscn" id="5_rn5te"]
+[ext_resource type="Resource" uid="uid://kd6arste1gur" path="res://ui/game_data_store.tres" id="6_p2ddh"]
+[ext_resource type="PackedScene" uid="uid://c5l20701ck6co" path="res://characters/player/health_manager.tscn" id="7_lfx3x"]
+[ext_resource type="Script" path="res://characters/position_resetter.gd" id="8_ia8k3"]
+[ext_resource type="PackedScene" uid="uid://ds848t2x4cxyt" path="res://characters/player/CharacterSkins/IcySkin_inherited.tscn" id="9_h7s8y"]
+[ext_resource type="Script" path="res://characters/player/input_synchronizer.gd" id="10_u5yos"]
 
 [sub_resource type="CapsuleShape3D" id="1"]
 radius = 0.492627
@@ -54,22 +54,22 @@ properties/3/replication_mode = 1
 [node name="PlayerEntity" type="CharacterBody3D"]
 collision_mask = 27
 floor_max_angle = 0.872665
-script = ExtResource("2")
-controller_schemes = Array[PackedScene]([ExtResource("2_njm8p"), ExtResource("3_k2os6"), ExtResource("5_n2q7r"), ExtResource("5_rys30")])
-game_data = ExtResource("2_gbwfc")
+script = ExtResource("1_eomfg")
+controller_schemes = Array[PackedScene]([ExtResource("2_0hlv6"), ExtResource("3_nmqp5"), ExtResource("4_q8iiu"), ExtResource("5_rn5te")])
+game_data = ExtResource("6_p2ddh")
 
 [node name="Collider" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.987748, 0)
 shape = SubResource("1")
 
-[node name="HealthManager" parent="." instance=ExtResource("6_7wv34")]
+[node name="HealthManager" parent="." instance=ExtResource("7_lfx3x")]
 max_health = 20
 start_health = 20
 
 [node name="PositionResetter" type="Node" parent="."]
-script = ExtResource("14")
+script = ExtResource("8_ia8k3")
 
-[node name="TwoStickControllerAuto" parent="." node_paths=PackedStringArray("input_synchronizer") instance=ExtResource("5_n2q7r")]
+[node name="TwoStickControllerAuto" parent="." node_paths=PackedStringArray("input_synchronizer") instance=ExtResource("4_q8iiu")]
 input_synchronizer = NodePath("../InputSynchronizer")
 
 [node name="CameraPivot" type="Node3D" parent="."]
@@ -79,7 +79,7 @@ transform = Transform3D(-0.707107, 0.298836, -0.640857, 0, 0.906308, 0.422618, 0
 transform = Transform3D(0.99989, 0.0134076, -0.00635271, -0.00627014, 0.769939, 0.638087, 0.0134464, -0.637976, 0.769938, -0.69771, 14.8504, 15.5082)
 fov = 85.0
 
-[node name="IcySkin" parent="." instance=ExtResource("1")]
+[node name="IcySkin" parent="." instance=ExtResource("9_h7s8y")]
 
 [node name="PlayerHand" type="Area3D" parent="IcySkin"]
 collision_mask = 8
@@ -94,7 +94,7 @@ replication_config = SubResource("SceneReplicationConfig_lc4er")
 [node name="InputSynchronizer" type="MultiplayerSynchronizer" parent="."]
 unique_name_in_owner = true
 replication_config = SubResource("SceneReplicationConfig_5p5in")
-script = ExtResource("10_33yqh")
+script = ExtResource("10_u5yos")
 
 [connection signal="damage" from="HealthManager" to="." method="on_hit"]
 [connection signal="health_depleted" from="HealthManager" to="." method="on_death"]

@@ -1,11 +1,11 @@
-[gd_scene load_steps=35 format=3 uid="uid://xq68p4fevhl2"]
+[gd_scene load_steps=35 format=3 uid="uid://ur2jl4cfm2nt"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_t2lln"]
-[ext_resource type="PackedScene" uid="uid://jga6pbb5xpug" path="res://characters/player/PlayerEntity.tscn" id="2_837wg"]
+[ext_resource type="PackedScene" uid="uid://jga6pbb5xpug" path="res://characters/player/player_entity.tscn" id="2_837wg"]
 [ext_resource type="Environment" uid="uid://13w4n7joxo58" path="res://scenes/world_environment.tres" id="3_ufby6"]
-[ext_resource type="PackedScene" uid="uid://dj87iwlbmqxwu" path="res://scenes/enemy_spawn.tscn" id="4_7gtnm"]
-[ext_resource type="Script" path="res://scenes/hud.gd" id="5_dawyh"]
-[ext_resource type="Script" path="res://scenes/points_display.gd" id="6_ypmp1"]
+[ext_resource type="PackedScene" uid="uid://dj87iwlbmqxwu" path="res://characters/enemies/enemy_spawn.tscn" id="4_7gtnm"]
+[ext_resource type="Script" path="res://ui/hud/hud.gd" id="5_dawyh"]
+[ext_resource type="Script" path="res://ui/hud/points_display.gd" id="6_ypmp1"]
 [ext_resource type="MeshLibrary" uid="uid://dcjglgl7pvpgu" path="res://assets/kits/meshlib_space_ground.tres" id="7_623ro"]
 [ext_resource type="PackedScene" uid="uid://ms5nau2lw1o4" path="res://assets/space_base_bits/rock_B.gltf" id="8_i7g54"]
 [ext_resource type="PackedScene" uid="uid://dppaged5omlt8" path="res://assets/space_base_bits/rocks_A.gltf" id="9_s77pf"]
@@ -61,12 +61,9 @@ switch = NodePath("DoorSpawner2")
 [sub_resource type="BoxShape3D" id="BoxShape3D_fr05a"]
 size = Vector3(7.10271, 1.53003, 3.02713)
 
-[node name="Main" type="Node3D" node_paths=PackedStringArray("main_menu", "enemy_spawner", "hud", "player_spawn_node")]
+[node name="Main" type="Node3D" node_paths=PackedStringArray("main_menu", "player_spawn_node")]
 script = ExtResource("1_t2lln")
-player_scene = ExtResource("2_837wg")
 main_menu = NodePath("MainMenu")
-enemy_spawner = NodePath("EnemySpawn")
-hud = NodePath("HUD")
 player_spawn_node = NodePath("PlayerSpawnNode")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -107,7 +104,6 @@ mesh = SubResource("PlaneMesh_b5pri")
 [node name="PlayerSpawnNode" type="Node3D" parent="."]
 
 [node name="PlayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://characters/player/PlayerEntity.tscn")
 spawn_path = NodePath("../PlayerSpawnNode")
 spawn_limit = 4
 

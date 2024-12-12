@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://k1tusc0f3jyo"]
+
+[node name="Projectiles" type="Node3D"]
+
+[node name="ProjectileSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://assets/objects/weapons/toy_gun/Arrow.tscn")
+spawn_path = NodePath("..")

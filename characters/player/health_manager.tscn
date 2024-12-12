@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://c5l20701ck6co"]
 
-[ext_resource type="Script" path="res://health_manager.gd" id="1_kkp7n"]
+[ext_resource type="Script" path="res://characters/player/health_manager.gd" id="1_kkp7n"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lnysi"]
 bg_color = Color(0.889992, 0.861158, 0.981073, 1)

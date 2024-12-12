@@ -1,6 +1,6 @@
 [gd_scene load_steps=23 format=3 uid="uid://px1klf8v388h"]
 
-[ext_resource type="PackedScene" uid="uid://jga6pbb5xpug" path="res://characters/player/PlayerEntity.tscn" id="2_bx2m8"]
+[ext_resource type="PackedScene" uid="uid://jga6pbb5xpug" path="res://characters/player/player_entity.tscn" id="2_bx2m8"]
 [ext_resource type="MeshLibrary" uid="uid://dcjglgl7pvpgu" path="res://assets/kits/meshlib_space_ground.tres" id="3_omsy0"]
 [ext_resource type="PackedScene" uid="uid://ms5nau2lw1o4" path="res://assets/space_base_bits/rock_B.gltf" id="4_w23yo"]
 [ext_resource type="PackedScene" uid="uid://dppaged5omlt8" path="res://assets/space_base_bits/rocks_A.gltf" id="5_cneyb"]

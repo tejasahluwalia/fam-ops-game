@@ -24,6 +24,7 @@ BeehaveGlobalMetrics="*res://addons/beehave/metrics/beehave_global_metrics.gd"
 BeehaveGlobalDebugger="*res://addons/beehave/debug/global_debugger.gd"
 MultiplayerManager="*res://scripts/multiplayer/multiplayer_manager.gd"
 Focus="*res://scripts/focus.gd"
+WaveManager="*res://scripts/wave_manager.gd"
 Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
 
 [dialogic]

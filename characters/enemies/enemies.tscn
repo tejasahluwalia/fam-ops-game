@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cskbagj1qsvfu"]
+
+[ext_resource type="Script" path="res://characters/enemies/enemies.gd" id="1_of8h3"]
+
+[node name="Enemies" type="Node3D"]
+script = ExtResource("1_of8h3")
+
+[node name="EnemySpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://characters/enemies/melee/minion/EnemyMinion.tscn", "res://characters/enemies/melee/minion/ChaserMinion.tscn")
+spawn_path = NodePath("..")
