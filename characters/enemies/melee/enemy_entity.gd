@@ -8,6 +8,8 @@ enum BehaviorState {Idling, Reaching, Attacking, Dead}
 @onready var detection_shape: CollisionShape3D = $DetectionRange/CollisionShape3D
 @onready var detection_area: Area3D = $DetectionRange
 @onready var weapon_anchor: Node3D = $WeaponAnchor
+@onready var beehave_tree: BeehaveTree = $BeehaveTree
+@onready var attack_range: Area3D = $AttackRange
 
 @export var movement_speed: float = 8.0
 @export var rotation_speed := 12.0
@@ -35,6 +37,8 @@ func _ready() -> void:
 		DebugStats.add_property(self, "velocity", "")
 		detection_range = detection_shape.shape.radius
 		velocity_for_animations = self.velocity
+	else:
+		beehave_tree.queue_free()
 	anim_tree.active = true
 	anim_tree.set_multiplayer_authority(multiplayer.get_unique_id())
 	transition = anim_tree.tree_root.get("nodes/state/node")
@@ -171,6 +175,7 @@ func _get_nearest_player() -> PlayerEntity:
 			var distance = global_position.distance_squared_to(body.global_position)
 			if distance < target_distance:
 				target_body = body
+				target_distance = distance
 	
 	return target_body
 
@@ -178,7 +183,8 @@ func _get_nearest_player() -> PlayerEntity:
 func _on_attack_range_body_exited(body):
 	if multiplayer.is_server():
 		if body is PlayerEntity:
-			is_target_in_reach = false
+			if len(attack_range.get_overlapping_bodies()) == 0:
+				is_target_in_reach = false
 
 
 func _on_hit_area_body_entered(colliding_body):
