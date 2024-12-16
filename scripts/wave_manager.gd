@@ -14,7 +14,7 @@ var _current_wave: Dictionary = {
 # flow_rate is seconds per spawn
 var _wave_tiers: Dictionary = {
 	1: {
-		"range": [1, 99],
+		"range": [1, 1],
 		"base_spawn": {
 			"minion": {
 				"tier": 1,
@@ -25,7 +25,7 @@ var _wave_tiers: Dictionary = {
 		}
 	},
 	2: {
-		"range": [100,999],
+		"range": [2, 999],
 		"base_spawn": {
 			"minion": {
 				"tier": 1,

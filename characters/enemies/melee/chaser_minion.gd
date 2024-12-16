@@ -8,9 +8,11 @@ enum BehaviorState {Idling, Reaching, Attacking, Dead}
 @onready var detection_shape: CollisionShape3D = $DetectionRange/CollisionShape3D
 @onready var weapon_anchor: Node3D = $WeaponAnchor
 @onready var detection_area: Area3D = $DetectionRange
+@onready var beehave_tree: BeehaveTree = $BeehaveTree
 
 @export var movement_speed: float = 8.0
 @export var rotation_speed := 12.0
+@export var points_dropped: int = 10
 
 var target_object:Node3D = null
 var transition:AnimationNodeTransition=null
@@ -29,7 +31,7 @@ var velocity_for_animations = Vector3.ZERO
 
 # Add only these new properties
 @export var explosion_delay: float = 2.0
-@export var explosion_damage: float = 2.0
+@export var explosion_damage: float = 20.0
 @export var explosion_radius: float = 5.0
 @export var blink_speed: float = 8.0
 @export var explosion_movement_speed: float = 0.3  # Controls how fast the blinking happens
@@ -51,6 +53,8 @@ func _ready() -> void:
 		DebugStats.add_property(self, "velocity", "")
 		detection_range = detection_shape.shape.radius
 		velocity_for_animations = self.velocity
+	else:
+		beehave_tree.queue_free()
 	anim_tree.set_multiplayer_authority(multiplayer.get_unique_id())
 	anim_tree.active = true
 	transition = anim_tree.tree_root.get("nodes/state/node")
@@ -74,8 +78,6 @@ func setup_radius_visualization() -> void:
 		radius_mesh.visible = false  # Hide initially
 
 
-
-
 @rpc("authority", "call_remote", "reliable", 0)
 func update_animation_skin(delta):
 	anim_state = self.anim_tree["parameters/state/current_state"]
@@ -90,7 +92,7 @@ func update_animation_skin(delta):
 		self.orient_model_to_direction.rpc_id(1, Vector3(self.velocity_for_animations.x,0, self.velocity_for_animations.z), delta)
 		if self.velocity_for_animations.length_squared() <= 0.01:
 			self.move_to_idling()
-	
+
 
 func update_target() -> void:
 	var nearest_player = _get_nearest_player()
@@ -238,6 +240,7 @@ func _on_attack_range_body_exited(body):
 		if body is PlayerEntity:
 			is_target_in_reach = false
 
+
 # Add these new functions
 func start_explosion_sequence() -> void:
 	is_exploding = true
@@ -246,10 +249,10 @@ func start_explosion_sequence() -> void:
 	if radius_mesh:
 		radius_mesh.visible = true  # Show radius indicator
 
+
 @rpc("any_peer")
 func disable_radius_mesh() -> void:
 	radius_mesh.visible = false
-
 
 
 func _physics_process(delta: float) -> void:
@@ -259,6 +262,7 @@ func _physics_process(delta: float) -> void:
 			#update_blinking(delta)
 			if explosion_timer >= explosion_delay:
 				trigger_explosion()
+
 
 func trigger_explosion() -> void:
 	# Hide the radius visualization immediately
@@ -283,9 +287,13 @@ func deal_explosion_damage() -> void:
 		var collider = result.collider
 		if collider is PlayerEntity:
 			print ("damage dealt")
-			var distance = global_position.distance_to(collider.global_position)
-			var damage = explosion_damage * (1.0 - (distance / explosion_radius))
-			collider.health_manager.get_damage(damage)
+			var distance = global_position.distance_squared_to(collider.global_position)
+			print(distance)
+			if distance < explosion_radius:
+				var damage = explosion_damage
+				collider.health_manager.get_damage(damage)
+	
+	get_tree().create_timer(1.0).timeout.connect(queue_free)
 
 
 #func update_blinking(delta: float) -> void:
@@ -302,8 +310,19 @@ func deal_explosion_damage() -> void:
 
 func _on_hit_area_body_entered(colliding_body):
 	if multiplayer.is_server():
+		# Check health at start to avoid race conditions.
+		if health_points <= 0:
+			return
+			
 		if colliding_body.is_in_group("bullet"):
-			print("hit by", colliding_body.name, "!")
-			health_points -= 1
+			health_points -= colliding_body.damage
+			
+			if health_points <= 0:
+				if colliding_body.shooter != null:
+					colliding_body.shooter.add_points(points_dropped)
+				get_tree().create_timer(1.0).timeout.connect(queue_free)
+			
+			else:
+				play_on_hit.rpc(true)
+			
 			colliding_body.remove_from_group("bullet")
-			play_on_hit.rpc(true)

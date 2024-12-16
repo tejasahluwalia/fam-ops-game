@@ -1,6 +1,6 @@
 extends Node
 
-const SERVER_HOST = "127.0.0.1"
+const SERVER_HOST = "localhost"
 const SERVER_PORT = 6060
 
 signal player_instantiated(id: PlayerEntity)
