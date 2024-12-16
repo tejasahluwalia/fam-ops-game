@@ -4,9 +4,10 @@ extends Node
 
 signal transitioned(state_path)
 
-@export var initial_state: = NodePath() 
-@onready var state: State = get_node(initial_state): set = set_state
-var _state_name: = ""
+@export var initial_state := NodePath()
+@onready var state: State = get_node(initial_state):
+	set = set_state
+var _state_name := ""
 
 
 func _init() -> void:
@@ -30,11 +31,11 @@ func _physics_process(delta: float) -> void:
 	state.physics_process(delta)
 
 
-func transition_to(target_state_path: String, msg: = {}) -> void:
-	assert(has_node(target_state_path), "ERROR: the State %s does not exist!"%target_state_path)
-	
-	var target_state: = get_node(target_state_path)
-	
+func transition_to(target_state_path: String, msg := {}) -> void:
+	assert(has_node(target_state_path), "ERROR: the State %s does not exist!" % target_state_path)
+
+	var target_state := get_node(target_state_path)
+
 	state.exit()
 	self.state = target_state
 	state.enter(msg)
@@ -44,4 +45,3 @@ func transition_to(target_state_path: String, msg: = {}) -> void:
 func set_state(value: State) -> void:
 	state = value
 	_state_name = state.name
-	

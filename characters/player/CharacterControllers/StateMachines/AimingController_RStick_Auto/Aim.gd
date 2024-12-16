@@ -4,20 +4,20 @@ extends PlayerState
 var arrow_prefab = preload("res://assets/objects/weapons/toy_gun/Arrow.tscn")
 var _aiming_direction := Vector3.ZERO
 var _aim_input := Vector2.ZERO
-@onready var _timer : Timer = $Timer
+@onready var _timer: Timer = $Timer
 
 
 func process(delta) -> void:
 	if multiplayer.is_server():
 		_update_player_input()
-		
+
 		#TODO: Move this to a _on_weapon_updated() function
 		var weapon = player.inventory.weapons.get(player.current_weapon)
 		if weapon:
 			_timer.wait_time = (1.0 / weapon["fire_rate"])
-		
+
 		if _aiming_direction.length() <= 0.2:
-			_state_machine.transition_to("Rest")
+			state_machine.transition_to("Rest")
 		if _timer.time_left <= 0:
 			_timer.start()
 			call_deferred("_shoot_arrow")
@@ -25,8 +25,8 @@ func process(delta) -> void:
 		player.model.orient_model_to_direction(_aiming_direction, delta)
 
 
-func enter(msg: = {}) -> void:
-	super(msg) # parent send a signal and we dont want to override it!
+func enter(msg := {}) -> void:
+	super(msg)  # parent send a signal and we dont want to override it!
 	player.model.play_aiming.rpc(true)
 	_timer.start()
 	# NOTE: we delay the start of the shooting, kind of sucks for reactivity but

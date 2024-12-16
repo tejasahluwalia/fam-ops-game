@@ -8,7 +8,7 @@ var bodies: Array[Node3D] = []
 
 func deal_damage():
 	if hit_area.has_overlapping_bodies():
-		bodies  = hit_area.get_overlapping_bodies()
+		bodies = hit_area.get_overlapping_bodies()
 		for body in bodies:
 			if body is PlayerEntity:
-				body.health_manager.get_damage(attack_damage) 
+				body.health_manager.get_damage(attack_damage)

@@ -1,5 +1,6 @@
 extends MarginContainer
 
+
 class Property:
 	var num_format = "%4.2f"
 	var object  # The object being tracked.
@@ -29,6 +30,7 @@ class Property:
 					TYPE_VECTOR2, TYPE_VECTOR3:
 						s += str(p.round())
 		label_ref.text = s
+
 
 var props = []  # An array of the tracked properties.
 
@@ -62,7 +64,6 @@ func add_property(object, property, display):
 	object.tree_exiting.connect(on_property_exiting.bind(object))
 
 
-
 func on_property_exiting(object):
 	remove_all_properties_from(object)
 
@@ -79,7 +80,6 @@ func remove_property(object, property):
 		if prop.object == object and prop.property == property:
 			prop.label_ref.queue_free()
 			props.erase(prop)
-			
 
 
 func toggle_visibility():

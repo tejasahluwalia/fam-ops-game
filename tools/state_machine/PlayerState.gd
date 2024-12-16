@@ -5,6 +5,7 @@ var player: PlayerEntity
 var character_controller: CharacterController
 var input_synchronizer: InputSynchronizer
 
+
 func _ready() -> void:
 	await super._ready()
 	character_controller = owner

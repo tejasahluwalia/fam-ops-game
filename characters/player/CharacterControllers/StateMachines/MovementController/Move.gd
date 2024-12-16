@@ -1,13 +1,13 @@
 # MovementController for ALL controller modes
 extends PlayerState
 
-@export var max_speed: = 15.0
-@export var acceleration:= 50
-@export var gravity: = -30.0
+@export var max_speed := 15.0
+@export var acceleration := 50
+@export var gravity := -30.0
 @export var snap_length := 0.5
 @export var do_stop_on_slope := true
 
-var _switch_component :SwitchComponent = null
+var _switch_component: SwitchComponent = null
 var _move_direction := Vector3.ZERO
 var _player_input := Vector3.ZERO
 var _is_directing := true
@@ -27,7 +27,7 @@ func unhandled_input(event: InputEvent) -> void:
 	if not multiplayer.is_server() && player.player_id == multiplayer.get_unique_id():
 		if event.is_action_pressed("p1_interact"):
 			var interactibles = player.interaction_area.get_overlapping_areas()
-			for area:Area3D in interactibles:
+			for area: Area3D in interactibles:
 				var switch_component = area.get_node_or_null("SwitchComponent")
 				if switch_component:
 					print("SwitchComponent found")
@@ -41,16 +41,16 @@ func unhandled_input(event: InputEvent) -> void:
 func physics_process(delta: float) -> void:
 	if multiplayer.is_server():
 		_update_player_input()
-		
+
 		_move_direction.x = _player_input.x
 		_move_direction.z = _player_input.z
-		
+
 		_update_velocity(delta)
 		player.floor_snap_length = snap_length
 		player.floor_stop_on_slope = do_stop_on_slope
 		player.move_and_slide()
-		
-		if _is_directing and _player_input.length_squared() > 0.01: # last condition is made so that the player does not start face up
+
+		if _is_directing and _player_input.length_squared() > 0.01:  # last condition is made so that the player does not start face up
 			player.model.orient_model_to_direction(_move_direction, delta)
 		player.model.update_move_animation.rpc(velocity.length() / max_speed, delta)
 
@@ -70,7 +70,7 @@ func _update_velocity(delta: float):
 	var y_velocity := velocity.y
 	velocity.y = 0.0
 	velocity = velocity.lerp(_move_direction * max_speed, acceleration * delta)
-	velocity.y = y_velocity + gravity * delta # preserve y
+	velocity.y = y_velocity + gravity * delta  # preserve y
 
 
 func _on_aim_enter_state():

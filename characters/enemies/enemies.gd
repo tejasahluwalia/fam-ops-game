@@ -9,6 +9,7 @@ var _enemy_scene_map = {
 	"chaser" = _chaser_scene
 }
 
+
 func spawn_enemy(enemy_name: StringName, marker: Marker3D) -> void:
 	var _enemy_scene = _enemy_scene_map[enemy_name]
 	

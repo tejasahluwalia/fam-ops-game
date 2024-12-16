@@ -3,6 +3,7 @@ class_name GameOverMenu extends Control
 signal restart_pressed
 signal quit_pressed
 
+
 func _ready():
 	visible = false
 

@@ -6,39 +6,23 @@ var is_wave_active: bool = false
 
 var TIME_BETWEEN_WAVES: float = 10.0
 
-var _current_wave: Dictionary = {
-	"wave_number": 0,
-	"spawns_remaining": {}
-}
+var _current_wave: Dictionary = {"wave_number": 0, "spawns_remaining": {}}
 
 # flow_rate is seconds per spawn
 var _wave_tiers: Dictionary = {
-	1: {
+	1:
+	{
 		"range": [1, 99],
-		"base_spawn": {
-			"minion": {
-				"tier": 1,
-				"quantity": 1,
-				"flow_rate": 1,
-				"spawn_points": ["SW", "SE"]
-			}
-		}
+		"base_spawn":
+		{"minion": {"tier": 1, "quantity": 1, "flow_rate": 1, "spawn_points": ["SW", "SE"]}}
 	},
-	2: {
-		"range": [100,999],
-		"base_spawn": {
-			"minion": {
-				"tier": 1,
-				"quantity": 40,
-				"flow_rate": 0.5,
-				"spawn_points": ["SW", "SE"]
-			},
-			"chaser": {
-				"tier": 1,
-				"quantity": 10,
-				"flow_rate": 10,
-				"spawn_points": ["NW", "NE"]
-			}
+	2:
+	{
+		"range": [100, 999],
+		"base_spawn":
+		{
+			"minion": {"tier": 1, "quantity": 40, "flow_rate": 0.5, "spawn_points": ["SW", "SE"]},
+			"chaser": {"tier": 1, "quantity": 10, "flow_rate": 10, "spawn_points": ["NW", "NE"]}
 		}
 	}
 }
@@ -64,32 +48,38 @@ func start() -> void:
 func start_next_wave() -> void:
 	_current_wave.wave_number += 1
 	var _attrs = _get_wave_attributes()
-	
+
 	if _attrs.has("error"):
 		print(_attrs["error"])
 		return
-	
+
 	print("Starting wave: ", _current_wave.wave_number)
 	for _enemy_name in _attrs.base_spawn.keys():
 		var _enemy = _attrs.base_spawn[_enemy_name]
 		_current_wave.spawns_remaining[_enemy_name] = _enemy.quantity
 		var _timer = Timer.new()
 		_timer.wait_time = _enemy.flow_rate
-		_timer.timeout.connect(_on_enemy_spawn_timeout.bind(_enemy_name, _enemy.spawn_points, _timer, _enemy.quantity))
+		_timer.timeout.connect(
+			_on_enemy_spawn_timeout.bind(_enemy_name, _enemy.spawn_points, _timer, _enemy.quantity)
+		)
 		get_tree().current_scene.call_deferred("add_child", _timer)
 		_timer.autostart = true
-	
+
 	is_wave_active = true
 
 
-func _on_enemy_spawn_timeout(_enemy_name: StringName, _markers, _timer: Timer, _max_spawns: int) -> void:
+func _on_enemy_spawn_timeout(
+	_enemy_name: StringName, _markers, _timer: Timer, _max_spawns: int
+) -> void:
 	if _current_wave.spawns_remaining[_enemy_name] > 0:
 		_current_wave.spawns_remaining[_enemy_name] -= 1
-		var _marker_name = _markers[(_max_spawns - _current_wave.spawns_remaining[_enemy_name]) % len(_markers)]
+		var _marker_name = _markers[
+			(_max_spawns - _current_wave.spawns_remaining[_enemy_name]) % len(_markers)
+		]
 		var _marker = spawn_points.filter(func(m): return m.name == _marker_name)[0]
 		enemies_node.spawn_enemy(_enemy_name, _marker)
 		print("Spawning Enemy")
-	else: 
+	else:
 		_timer.stop()
 		print("Stopped spawning")
 
@@ -108,6 +98,9 @@ func _enemies_remaining() -> int:
 func _get_wave_attributes() -> Dictionary:
 	for wave_tier in _wave_tiers.values():
 		var wave_tier_range = wave_tier.range
-		if wave_tier_range[0] <= _current_wave.wave_number and _current_wave.wave_number <= wave_tier_range[1]:
+		if (
+			wave_tier_range[0] <= _current_wave.wave_number
+			and _current_wave.wave_number <= wave_tier_range[1]
+		):
 			return wave_tier
-	return { "error": "Could not find wave attributes." }
+	return {"error": "Could not find wave attributes."}

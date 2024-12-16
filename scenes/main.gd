@@ -13,7 +13,7 @@ var peer = ENetMultiplayerPeer.new()
 func _ready() -> void:
 	if OS.has_feature("dedicated_server") or DisplayServer.get_name() == "headless":
 		MultiplayerManager.start_server(player_spawn_node)
-	
+
 	WaveManager.enemies_node = enemies_node
 
 

@@ -1,18 +1,19 @@
 extends Node
 class_name CharacterController
 
-var _parent:PlayerEntity
+var _parent: PlayerEntity
 var _player_input
 @export var input_synchronizer: InputSynchronizer
 
 @export var _camera_rotation_speed = 0.05
-@export var cursor_arrow:Texture2D = null
-@export var cursor_hand:Texture2D = null
+@export var cursor_arrow: Texture2D = null
+@export var cursor_hand: Texture2D = null
+
 
 # Called when the node enters the scene tree for the first time.
 func _enter_tree():
 	_parent = get_parent()
-	var hotspot:Vector2 = Vector2(16,16) if cursor_arrow else Vector2.ZERO
+	var hotspot: Vector2 = Vector2(16, 16) if cursor_arrow else Vector2.ZERO
 	Input.set_custom_mouse_cursor(cursor_arrow, Input.CURSOR_ARROW, hotspot)
 	Input.set_custom_mouse_cursor(cursor_hand, Input.CURSOR_POINTING_HAND, hotspot)
 

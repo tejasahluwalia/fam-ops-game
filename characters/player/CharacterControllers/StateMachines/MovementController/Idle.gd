@@ -3,6 +3,7 @@ extends PlayerState
 const IDLE_BREAK_WAIT_TIME := 5.0
 var _break_timer := Timer.new()
 
+
 func _ready() -> void:
 	await super._ready()
 	# await owner.ready
@@ -21,10 +22,10 @@ func physics_process(delta: float) -> void:
 	if multiplayer.is_server():
 		_parent.physics_process(delta)
 		if player.is_on_floor() and _parent.velocity.length() > 0.01:
-			_state_machine.transition_to("Move/Run")
+			state_machine.transition_to("Move/Run")
 
 
-func enter(msg: = {}) -> void:
+func enter(msg := {}) -> void:
 	_break_timer.start(IDLE_BREAK_WAIT_TIME)
 	player.model.move_to_running.rpc()
 	_parent.velocity = Vector3.ZERO

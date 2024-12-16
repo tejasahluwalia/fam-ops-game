@@ -16,12 +16,12 @@ signal health_replenished
 @export var low_health_threshold: float = 0.3
 @export var low_health_regen_multiplier: float = 2.0
 
-var health_points: int = 0: set = set_health
+var health_points: int = 0:
+	set = set_health
 var damage_bar_value: float
 var damage_bar_timer: float
 var is_damage_bar_active: bool = false
 var accumulated_health: float = 0.0  # Add this as a class variable
-
 
 # Regeneration variables
 var regen_timer: float = 0.0
@@ -40,7 +40,7 @@ func _ready():
 
 func _process(delta):
 	handle_damage_bar(delta)
-	
+
 	# Only server handles regeneration logic
 	if multiplayer.is_server():
 		handle_health_regeneration(delta)
@@ -54,7 +54,7 @@ func handle_damage_bar(delta):
 			if new_value != damage_bar_value:
 				damage_bar_value = new_value
 				update_damage_bar()
-			
+
 			if damage_bar_value == health_points:
 				is_damage_bar_active = false
 
@@ -62,19 +62,19 @@ func handle_damage_bar(delta):
 func handle_health_regeneration(delta):
 	if health_points >= max_health:
 		return
-		
+
 	if regen_timer > 0:
 		regen_timer -= delta
 		return
-	
+
 	# Calculate regeneration rate based on current health percentage
 	var health_percentage = float(health_points) / max_health
 	var regen_multiplier = 1.0
-	
+
 	# Apply increased regeneration rate for low health
 	if health_percentage <= low_health_threshold:
 		regen_multiplier = low_health_regen_multiplier
-	
+
 	# Calculate health to regenerate this frame
 	accumulated_health += base_regen_rate * regen_multiplier * delta
 
@@ -92,11 +92,11 @@ func set_health(value: int):
 	health_points = clamp(value, 0, max_health)
 	health_changed.emit(old_value, health_points)
 	update_health_bar()
-	
-	if old_value > health_points: # Took damage
+
+	if old_value > health_points:  # Took damage
 		start_damage_bar_effect()
 		reset_regen_timer()
-	
+
 	if health_points <= 0:
 		health_depleted.emit()
 	elif health_points == max_health:

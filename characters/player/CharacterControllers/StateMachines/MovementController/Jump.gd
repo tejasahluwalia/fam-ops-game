@@ -7,10 +7,10 @@ func physics_process(delta: float) -> void:
 	if multiplayer.is_server():
 		_parent.physics_process(delta)
 		if _parent.velocity.y <= 0:
-			_state_machine.transition_to("Move/Fall")
+			state_machine.transition_to("Move/Fall")
 
 
-func enter(msg: = {}) -> void:
+func enter(msg := {}) -> void:
 	_parent.velocity.y = jump_initial_impulse
 	player.model.move_to_jumping.rpc()
 	_parent.enter(msg)

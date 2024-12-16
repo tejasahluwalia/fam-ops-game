@@ -1,9 +1,8 @@
 @icon("res://tools/state_machine/state.svg")
-class_name State 
+class_name State
 extends Node
 
-
-# @onready var _state_machine: = _get_state_machine(self) 
+@onready var state_machine := _get_state_machine(self)
 var _parent: State = null
 
 signal enter_state
@@ -12,9 +11,10 @@ signal exit_state
 
 func _ready() -> void:
 	await self.owner.ready
-	var parent: = get_parent()
+	var parent := get_parent()
 	if not parent.is_in_group("state_machine"):
 		_parent = parent
+
 
 func unhandled_input(_event: InputEvent) -> void:
 	return
@@ -28,7 +28,7 @@ func physics_process(_delta: float) -> void:
 	return
 
 
-func enter(_msg: = {}) -> void:
+func enter(_msg := {}) -> void:
 	enter_state.emit()
 	return
 

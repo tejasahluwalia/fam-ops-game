@@ -8,7 +8,7 @@ extends Node3D
 @export var rotation_speed := 12.0
 
 var _last_strong_direction := Vector3.FORWARD
-var muzzle_tween:Tween
+var muzzle_tween: Tween
 
 
 func _ready() -> void:
@@ -59,11 +59,13 @@ func play_idle_break(is_requested: bool) -> void:
 	if is_requested:
 		anim_tree["parameters/on_idle_break/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
 	else:
-		anim_tree["parameters/on_idle_break/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FADE_OUT
+		anim_tree["parameters/on_idle_break/request"] = (
+			AnimationNodeOneShot.ONE_SHOT_REQUEST_FADE_OUT
+		)
 
 
 @rpc("authority", "call_remote", "reliable", 0)
-func play_on_hit(is_requested:bool):
+func play_on_hit(is_requested: bool):
 	if is_requested:
 		anim_tree["parameters/on_hit/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
 	else:
@@ -84,16 +86,22 @@ func play_aiming(value: bool) -> void:
 func play_shooting(is_requested: bool) -> void:
 	muzzle_vfx.visible = true
 	#muzzle_vfx.rotate(Vector3(1,0,0), randf_range(-2*PI,2*PI))
-	muzzle_vfx.rotation.x = randf_range(-2*PI,2*PI)
+	muzzle_vfx.rotation.x = randf_range(-2 * PI, 2 * PI)
 
 	muzzle_tween = self.create_tween()
 	var scale_r = randf_range(0.9, 1.2)
-	(muzzle_tween.tween_property(muzzle_vfx, "scale", Vector3(scale_r,scale_r*1.5,scale_r), 0.06)
-		.set_trans(Tween.TRANS_QUAD)
-		.set_ease(Tween.EASE_OUT))
-	(muzzle_tween.tween_property(muzzle_vfx, "scale", Vector3(), 0.1)
-		.set_trans(Tween.TRANS_QUAD)
-		.set_ease(Tween.EASE_IN))
+	(
+		muzzle_tween
+		. tween_property(muzzle_vfx, "scale", Vector3(scale_r, scale_r * 1.5, scale_r), 0.06)
+		. set_trans(Tween.TRANS_QUAD)
+		. set_ease(Tween.EASE_OUT)
+	)
+	(
+		muzzle_tween
+		. tween_property(muzzle_vfx, "scale", Vector3(), 0.1)
+		. set_trans(Tween.TRANS_QUAD)
+		. set_ease(Tween.EASE_IN)
+	)
 	muzzle_tween.tween_callback(func(): muzzle_vfx.visible = false)
 	if is_requested:
 		anim_tree["parameters/on_shooting/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
@@ -111,5 +119,5 @@ func orient_model_to_direction(direction: Vector3, delta: float) -> void:
 	global_rotation.y = lerp_angle(
 		global_rotation.y,
 		Vector2(_last_strong_direction.z, _last_strong_direction.x).angle(),
-		delta*rotation_speed
+		delta * rotation_speed
 	)

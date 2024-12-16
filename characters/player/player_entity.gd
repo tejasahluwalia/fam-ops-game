@@ -1,8 +1,8 @@
 class_name PlayerEntity
 extends CharacterBody3D
 
-@onready var camera:Camera3D = $CameraPivot/ThirdPersonCamera
-@onready var camera_pivot:Node3D = $CameraPivot
+@onready var camera: Camera3D = $CameraPivot/ThirdPersonCamera
+@onready var camera_pivot: Node3D = $CameraPivot
 @onready var model := $IcySkin
 @onready var health_manager := $HealthManager
 @onready var anim_tree := $IcySkin/AnimationTree
@@ -14,9 +14,9 @@ extends CharacterBody3D
 
 var points: int = 0
 
-@export var use_saved_controller:bool = true
-@export var controller_schemes:Array[PackedScene]
-@export var game_data:GameDataStore
+@export var use_saved_controller: bool = true
+@export var controller_schemes: Array[PackedScene]
+@export var game_data: GameDataStore
 
 @export var player_id := 1:
 	set(id):
@@ -59,7 +59,7 @@ func _input(event: InputEvent) -> void:
 func _interact() -> void:
 	if player_id == multiplayer.get_remote_sender_id():
 		var interactibles = interaction_area.get_overlapping_areas()
-		for area:Area3D in interactibles:
+		for area: Area3D in interactibles:
 			if area is InteractableArea3D or area is PointDepositArea:
 				area.interact(self)
 
