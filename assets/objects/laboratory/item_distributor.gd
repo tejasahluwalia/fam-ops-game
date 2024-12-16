@@ -4,7 +4,7 @@ extends Node3D
 @export var dialog_timeline: Resource = null
 @export var jump_to_label: String = "OnDefault"
 
-signal pickedup(object_name:String)
+#signal pickedup(object_name:String)
 var tweens:Array[Tween] = []
 
 func _ready():

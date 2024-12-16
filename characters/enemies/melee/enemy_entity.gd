@@ -68,7 +68,7 @@ func update_target() -> void:
 		is_target_detected = false
 
 
-func update_navigation_agent(delta, target_object):
+func update_navigation_agent(delta, _target_object):
 	if multiplayer.is_server():
 		if self.navigation_agent.is_navigation_finished():
 			self.velocity = Vector3(0,0,0)

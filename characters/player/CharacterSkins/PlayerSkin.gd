@@ -29,7 +29,7 @@ func reset_animations():
 
 
 @rpc("authority", "call_remote", "reliable", 0)
-func update_move_animation(velocity_ratio, delta) -> void:
+func update_move_animation(velocity_ratio, _delta) -> void:
 	anim_tree["parameters/blend_running/blend_amount"] = velocity_ratio
 	anim_tree["parameters/blend_straffing/blend_amount"] = velocity_ratio
 

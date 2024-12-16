@@ -1,7 +1,7 @@
 extends RigidBody3D
 class_name Arrow
 
-signal exploded
+# signal exploded
 
 var shooter: PlayerEntity = null
 var damage: int = 1
@@ -12,7 +12,7 @@ var damage: int = 1
 var velocity = Vector3.ZERO
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if multiplayer.is_server():
 		if velocity.length_squared() > 0.01:
 			look_at(transform.origin + velocity.normalized(), Vector3.UP)

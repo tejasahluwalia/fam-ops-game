@@ -84,14 +84,14 @@ func update_animation_skin(delta):
 		if self.velocity_for_animations.length_squared() > 0.01:
 			self.move_to_running()
 	if anim_state == "Running":
-		var speed_scale = movement_speed / original_speed  # Normalize to original speed
+		# var speed_scale = movement_speed / original_speed  # Normalize to original speed
 		#anim_tree["parameters/run/TimeScale"] = speed_scale
 		self.orient_model_to_direction.rpc_id(1, Vector3(self.velocity_for_animations.x,0, self.velocity_for_animations.z), delta)
 		if self.velocity_for_animations.length_squared() <= 0.01:
 			self.move_to_idling()
 	
 
-func update_navigation_agent(delta, target_object):
+func update_navigation_agent(delta, _target_object):
 	if multiplayer.is_server():
 		if self.navigation_agent.is_navigation_finished():
 			self.velocity = Vector3(0,0,0)

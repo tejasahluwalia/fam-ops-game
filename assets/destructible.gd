@@ -12,7 +12,7 @@ func _ready():
 		body.body_entered.connect(self._on_frozen_body_entered)
 
 
-func _input(event):
+func _input(_event):
 	# Use for test purposes
 	pass
 	#if event.is_action_pressed("p1_jump"):

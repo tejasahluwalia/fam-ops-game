@@ -24,11 +24,6 @@ func _ready() -> void:
 	_update_text.rpc(total_cost - _current_value)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
-
 func _on_points_deposited(points: int):
 	if _is_accepting_deposits:
 		_current_value += points

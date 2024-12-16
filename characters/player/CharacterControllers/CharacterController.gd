@@ -21,7 +21,7 @@ func _ready():
 	pass
 
 
-func _process(delta) -> void:
+func _process(_delta) -> void:
 	if multiplayer.is_server():
 		_update_player_input()
 

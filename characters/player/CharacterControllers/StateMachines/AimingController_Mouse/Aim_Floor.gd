@@ -6,7 +6,7 @@ var _aiming_direction := Vector3.ZERO
 var _mouse_position := Vector2.ZERO
 var _mouse_position_3D := Vector3.ZERO
 var _floor_plane := Plane(Vector3.UP)
-var _player_trigger := false
+# var _player_trigger := false
 @onready var _timer : Timer = $Timer
 
 

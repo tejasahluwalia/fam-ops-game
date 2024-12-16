@@ -4,7 +4,7 @@ extends PlayerState
 var _player_input := Vector2.ZERO
 
 
-func process(delta: float) -> void:
+func process(_delta: float) -> void:
 	if multiplayer.is_server():
 		_update_player_input()
 		if _player_input.length() > 0.01 and player.inventory.weapons.size() > 0:

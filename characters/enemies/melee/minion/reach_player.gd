@@ -5,7 +5,7 @@ var delta_time
 var target_reached = false
 var target_lost = false
 
-func tick(actor, blackboard):
+func tick(actor, _blackboard):
 	actor.update_target()
 	if actor.current_state != actor.BehaviorState.Reaching:
 		actor.current_state = actor.BehaviorState.Reaching

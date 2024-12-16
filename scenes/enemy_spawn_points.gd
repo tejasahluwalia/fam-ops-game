@@ -10,8 +10,3 @@ func _ready() -> void:
 		if child is Marker3D:
 			spawn_markers.append(child)
 	WaveManager.spawn_points = spawn_markers
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass

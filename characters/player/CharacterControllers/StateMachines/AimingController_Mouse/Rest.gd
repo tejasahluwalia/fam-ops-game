@@ -1,8 +1,8 @@
 # AimingController with Mouse: Resting State
 extends PlayerState
 
-var _aiming_direction := Vector3.ZERO
-var _aim_input := Vector2.ZERO
+# var _aiming_direction := Vector3.ZERO
+# var _aim_input := Vector2.ZERO
 
 
 func unhandled_input(event: InputEvent) -> void:

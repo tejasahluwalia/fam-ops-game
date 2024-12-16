@@ -44,7 +44,7 @@ var _wave_tiers: Dictionary = {
 }
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if multiplayer and multiplayer.is_server():
 		var _spawns_remaining: int = 0
 		if _current_wave.wave_number > 0:
@@ -107,7 +107,7 @@ func _enemies_remaining() -> int:
 
 func _get_wave_attributes() -> Dictionary:
 	for wave_tier in _wave_tiers.values():
-		var range = wave_tier.range
-		if range[0] <= _current_wave.wave_number and _current_wave.wave_number <= range[1]:
+		var wave_tier_range = wave_tier.range
+		if wave_tier_range[0] <= _current_wave.wave_number and _current_wave.wave_number <= wave_tier_range[1]:
 			return wave_tier
 	return { "error": "Could not find wave attributes." }

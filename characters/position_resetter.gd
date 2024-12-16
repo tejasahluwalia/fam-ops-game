@@ -11,7 +11,7 @@ func _ready() -> void:
 	else:
 		initial_position = parent.global_transform
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if parent != null and parent.position.y < -1:
 		reset_position()
 

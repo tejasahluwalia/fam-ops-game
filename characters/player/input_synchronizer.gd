@@ -19,11 +19,11 @@ func _ready() -> void:
 	input_jump = false
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	input_movement_direction = Focus.input_get_vector("p1_move_left", "p1_move_right", "p1_move_up", "p1_move_down")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	input_camera = Focus.input_get_action_raw_strength("p1_camera_RR") - Focus.input_get_action_raw_strength("p1_camera_RL")
 	input_aim = Focus.input_get_vector("p1_aim_left", "p1_aim_right", "p1_aim_up", "p1_aim_down")
