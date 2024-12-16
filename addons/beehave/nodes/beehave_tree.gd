@@ -12,7 +12,7 @@ signal tree_enabled
 signal tree_disabled
 
 ## Whether this behavior tree should be enabled or not.
-var enabled: bool = OS.has_feature("dedicated_server"):
+@export var enabled: bool = true:
 	set(value):
 		enabled = value
 		set_physics_process(enabled and process_thread == ProcessThread.PHYSICS)
@@ -104,8 +104,11 @@ var _can_send_message: bool = false
 
 
 func _ready() -> void:
-	get_tree().node_added.connect(_on_scene_tree_node_added_removed.bind(true))
-	get_tree().node_removed.connect(_on_scene_tree_node_added_removed.bind(false))
+	var connect_scene_tree_signal = func(signal_name: String, is_added: bool):
+		if not get_tree().is_connected(signal_name, _on_scene_tree_node_added_removed.bind(is_added)):
+			get_tree().connect(signal_name, _on_scene_tree_node_added_removed.bind(is_added))
+	connect_scene_tree_signal.call("node_added", true)
+	connect_scene_tree_signal.call("node_removed", false)
 
 	if not process_thread:
 		process_thread = ProcessThread.PHYSICS
@@ -156,7 +159,9 @@ func _on_scene_tree_node_added_removed(node: Node, is_added: bool) -> void:
 			)
 		else:
 			sgnal.connect(
-				func() -> void: BeehaveDebuggerMessages.unregister_tree(get_instance_id())
+				func() -> void:
+					BeehaveDebuggerMessages.unregister_tree(get_instance_id())
+					request_ready()
 			)
 
 

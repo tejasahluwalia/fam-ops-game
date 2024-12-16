@@ -28,6 +28,7 @@ var velocity_for_animations = Vector3.ZERO
 
 signal target_reached
 
+
 func _ready() -> void:
 	if multiplayer.is_server():
 		self.navigation_agent.velocity_computed.connect(Callable(_on_velocity_computed))
@@ -38,10 +39,6 @@ func _ready() -> void:
 	anim_tree.set_multiplayer_authority(multiplayer.get_unique_id())
 	transition = anim_tree.tree_root.get("nodes/state/node")
 	self.move_to_idling()
-
-
-func _process(delta: float) -> void:
-	update_target()
 
 
 @rpc("authority", "call_remote", "reliable", 0)

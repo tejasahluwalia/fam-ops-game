@@ -25,7 +25,6 @@ BeehaveGlobalDebugger="*res://addons/beehave/debug/global_debugger.gd"
 MultiplayerManager="*res://scripts/multiplayer/multiplayer_manager.gd"
 Focus="*res://scripts/focus.gd"
 WaveManager="*res://scripts/wave_manager.gd"
-Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
 
 [dialogic]
 
@@ -77,7 +76,7 @@ version_control/autoload_on_startup=true
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/beehave/plugin.cfg", "res://addons/dialogic/plugin.cfg")
+enabled=PackedStringArray("res://addons/beehave/plugin.cfg")
 
 [file_customization]
 
