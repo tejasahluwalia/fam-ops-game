@@ -7,6 +7,7 @@ enum BehaviorState {Idling, Reaching, Attacking, Dead}
 @onready var anim_tree: AnimationTree = $AnimationTree
 @onready var detection_shape: CollisionShape3D = $DetectionRange/CollisionShape3D
 @onready var weapon_anchor: Node3D = $WeaponAnchor
+@onready var detection_area: Area3D = $DetectionRange
 
 @export var movement_speed: float = 8.0
 @export var rotation_speed := 12.0
@@ -90,6 +91,29 @@ func update_animation_skin(delta):
 		if self.velocity_for_animations.length_squared() <= 0.01:
 			self.move_to_idling()
 	
+
+func update_target() -> void:
+	var nearest_player = _get_nearest_player()
+	if nearest_player:
+		is_target_detected = true
+		target_object = nearest_player
+	else:
+		is_target_detected = false
+
+
+func _get_nearest_player() -> PlayerEntity:
+	var target_body: PlayerEntity = null
+	var target_distance: float = INF
+	
+	for body in detection_area.get_overlapping_bodies():
+		if body is PlayerEntity:
+			var distance = global_position.distance_squared_to(body.global_position)
+			if distance < target_distance:
+				target_body = body
+				target_distance = distance
+	
+	return target_body
+
 
 func update_navigation_agent(delta, _target_object):
 	if multiplayer.is_server():
