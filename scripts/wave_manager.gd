@@ -6,23 +6,39 @@ var is_wave_active: bool = false
 
 var TIME_BETWEEN_WAVES: float = 10.0
 
-var _current_wave: Dictionary = {"wave_number": 0, "spawns_remaining": {}}
+var _current_wave: Dictionary = {
+	"wave_number": 0,
+	"spawns_remaining": {}
+}
 
 # flow_rate is seconds per spawn
 var _wave_tiers: Dictionary = {
-	1:
-	{
+	1: {
 		"range": [1, 99],
-		"base_spawn":
-		{"minion": {"tier": 1, "quantity": 1, "flow_rate": 1, "spawn_points": ["SW", "SE"]}}
+		"base_spawn": {
+			"minion": {
+				"tier": 1,
+				"quantity": 1,
+				"flow_rate": 1,
+				"spawn_points": ["SW", "SE"]
+			}
+		}
 	},
-	2:
-	{
-		"range": [100, 999],
-		"base_spawn":
-		{
-			"minion": {"tier": 1, "quantity": 40, "flow_rate": 0.5, "spawn_points": ["SW", "SE"]},
-			"chaser": {"tier": 1, "quantity": 10, "flow_rate": 10, "spawn_points": ["NW", "NE"]}
+	2: {
+		"range": [100,999],
+		"base_spawn": {
+			"minion": {
+				"tier": 1,
+				"quantity": 40,
+				"flow_rate": 0.5,
+				"spawn_points": ["SW", "SE"]
+			},
+			"chaser": {
+				"tier": 1,
+				"quantity": 10,
+				"flow_rate": 10,
+				"spawn_points": ["NW", "NE"]
+			}
 		}
 	}
 }
