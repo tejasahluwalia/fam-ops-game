@@ -6,6 +6,7 @@ var target_reached = false
 var target_lost = false
 
 func tick(actor, blackboard):
+	actor.update_target()
 	if actor.current_state != actor.BehaviorState.Reaching:
 		actor.current_state = actor.BehaviorState.Reaching
 	if actor.is_target_in_reach:

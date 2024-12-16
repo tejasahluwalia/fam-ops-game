@@ -6,6 +6,7 @@ enum BehaviorState {Idling, Reaching, Attacking, Dead}
 @onready var navigation_agent:NavigationAgent3D=$NavigationAgent3D
 @onready var anim_tree: AnimationTree = $AnimationTree
 @onready var detection_shape: CollisionShape3D = $DetectionRange/CollisionShape3D
+@onready var detection_area: Area3D = $DetectionRange
 @onready var weapon_anchor: Node3D = $WeaponAnchor
 
 @export var movement_speed: float = 8.0
@@ -13,13 +14,13 @@ enum BehaviorState {Idling, Reaching, Attacking, Dead}
 @export var points_dropped: int = 5
 
 var target_object:Node3D = null
-var transition:AnimationNodeTransition=null
+var transition:AnimationNodeTransition = null
 var _last_strong_direction := Vector3.FORWARD
 var gravity = -30.0
 var anim_state = null
 var current_state = null
 var health_points = 3
-var is_target_detected = false
+var is_target_detected = true
 var is_target_in_reach = false
 var is_target_aligned = false
 var detection_range = null
@@ -39,19 +40,32 @@ func _ready() -> void:
 	self.move_to_idling()
 
 
+func _process(delta: float) -> void:
+	update_target()
+
+
 @rpc("authority", "call_remote", "reliable", 0)
 func update_animation_skin(delta):
 	anim_state = self.anim_tree["parameters/state/current_state"]
 	if anim_state == "Idling":
-		#if target_object: # align with target if any
-			#self.look_at(target_object.global_position)
+		if target_object: # align with target if any
+			self.look_at(target_object.global_position)
 		if self.velocity_for_animations.length_squared() > 0.01:
 			self.move_to_running()
 	if anim_state == "Running":
 		self.orient_model_to_direction.rpc_id(1, Vector3(self.velocity_for_animations.x,0, self.velocity_for_animations.z), delta)
 		if self.velocity_for_animations.length_squared() <= 0.01:
 			self.move_to_idling()
-	
+
+
+func update_target() -> void:
+	var nearest_player = _get_nearest_player()
+	if nearest_player:
+		is_target_detected = true
+		target_object = nearest_player
+	else:
+		is_target_detected = false
+
 
 func update_navigation_agent(delta, target_object):
 	if multiplayer.is_server():
@@ -145,26 +159,23 @@ func orient_model_to_direction(direction: Vector3, delta: float) -> void:
 	)
 
 
-func _on_detection_range_body_entered(body):
-	if multiplayer.is_server():
-		if body is PlayerEntity:
-			is_target_detected = true
-			target_object = body
-			detection_shape.shape.radius = detection_range*1.5
-
-
 func _on_attack_range_body_entered(body):
 	if multiplayer.is_server():
 		if body is PlayerEntity:
 			is_target_in_reach = true
 
 
-func _on_detection_range_body_exited(body):
-	if multiplayer.is_server():
+func _get_nearest_player() -> PlayerEntity:
+	var target_body: PlayerEntity = null
+	var target_distance: float = INF
+	
+	for body in detection_area.get_overlapping_bodies():
 		if body is PlayerEntity:
-			is_target_detected = false
-			target_object = null
-			detection_shape.shape.radius = detection_range
+			var distance = global_position.distance_squared_to(body.global_position)
+			if distance < target_distance:
+				target_body = body
+	
+	return target_body
 
 
 func _on_attack_range_body_exited(body):
@@ -185,6 +196,8 @@ func _on_hit_area_body_entered(colliding_body):
 			if health_points <= 0:
 				if colliding_body.shooter != null:
 					colliding_body.shooter.add_points(points_dropped)
+				get_tree().create_timer(1.0).timeout.connect(queue_free)
+			
 			else:
 				play_on_hit.rpc(true)
 			

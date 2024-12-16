@@ -41,9 +41,7 @@ signal points_changed_client(new_points: int)
 
 
 func _ready():
-	if multiplayer.is_server():
-		current_controller.on_start()
-	else:
+	if not multiplayer.is_server():
 		if multiplayer.get_unique_id() == player_id:
 			camera.make_current()
 		#game_data.controller_scheme_changed.connect(_on_controller_scheme_changed)
