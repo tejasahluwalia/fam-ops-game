@@ -1,0 +1,64 @@
+[gd_scene load_steps=16 format=3 uid="uid://bmkmpmsdqqvwy"]
+
+[ext_resource type="PackedScene" uid="uid://btfhhm4ayawj6" path="res://assets/low_poly/gas_station/ground_1.glb" id="1_nagii"]
+[ext_resource type="PackedScene" uid="uid://ci0eiq2ptkpay" path="res://assets/low_poly/gas_station/ground_2.glb" id="2_uv3ly"]
+[ext_resource type="PackedScene" uid="uid://b2wi2lax3ivwq" path="res://assets/low_poly/gas_station/ground_planks.glb" id="3_qqs8d"]
+[ext_resource type="PackedScene" uid="uid://msolqu5ul0ty" path="res://assets/low_poly/gas_station/ground_road_1_L.glb" id="4_jipc0"]
+[ext_resource type="PackedScene" uid="uid://7qajwpdm8mre" path="res://assets/low_poly/gas_station/ground_road_1_R.glb" id="5_8nr0y"]
+[ext_resource type="PackedScene" uid="uid://cqofj3eaxsd7o" path="res://assets/low_poly/gas_station/ground_road_2_L.glb" id="6_ikpdr"]
+[ext_resource type="PackedScene" uid="uid://dk5c2c2owoas6" path="res://assets/low_poly/gas_station/ground_road_2_R.glb" id="7_28bt6"]
+[ext_resource type="PackedScene" uid="uid://hueijqxamx" path="res://assets/low_poly/gas_station/wall_1_window_1.glb" id="15_3u34n"]
+[ext_resource type="PackedScene" uid="uid://dr4x31xi5gqwo" path="res://assets/low_poly/gas_station/wall_1_hole.glb" id="16_ovnx1"]
+[ext_resource type="PackedScene" uid="uid://diy5rllswvsyw" path="res://assets/low_poly/gas_station/wall_1_door_boarded.glb" id="17_bkog2"]
+[ext_resource type="PackedScene" uid="uid://cjpfh6ve2xie7" path="res://assets/low_poly/gas_station/wall_concrete_metal.glb" id="18_i84rq"]
+[ext_resource type="PackedScene" uid="uid://g3jfo1d4jx5i" path="res://assets/low_poly/gas_station/wall_metal_1.glb" id="19_in5ab"]
+[ext_resource type="PackedScene" uid="uid://hxtbwkxas4o2" path="res://assets/low_poly/gas_station/wall_metal_2.glb" id="20_76rvm"]
+[ext_resource type="PackedScene" uid="uid://d3ghs5d8551gu" path="res://assets/low_poly/gas_station/wall_spiked.glb" id="21_6tkmj"]
+[ext_resource type="PackedScene" uid="uid://d5btimdngrwi" path="res://assets/low_poly/gas_station/wooden_wall.glb" id="24_d8it1"]
+
+[node name="Library" type="Node3D"]
+
+[node name="ground_12" parent="." instance=ExtResource("1_nagii")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1)
+
+[node name="ground_22" parent="." instance=ExtResource("2_uv3ly")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 1)
+
+[node name="ground_planks2" parent="." instance=ExtResource("3_qqs8d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 1)
+
+[node name="ground_road_1_L2" parent="." instance=ExtResource("4_jipc0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 1)
+
+[node name="ground_road_1_R2" parent="." instance=ExtResource("5_8nr0y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 1)
+
+[node name="ground_road_2_L2" parent="." instance=ExtResource("6_ikpdr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, 1)
+
+[node name="ground_road_2_R2" parent="." instance=ExtResource("7_28bt6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, 1)
+
+[node name="wall_1_window_12" parent="." instance=ExtResource("15_3u34n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -1)
+
+[node name="wall_1_hole2" parent="." instance=ExtResource("16_ovnx1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, -1)
+
+[node name="wall_1_door_boarded" parent="." instance=ExtResource("17_bkog2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, -1)
+
+[node name="wall_concrete_metal2" parent="." instance=ExtResource("18_i84rq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, -1)
+
+[node name="wall_metal_12" parent="." instance=ExtResource("19_in5ab")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, -1)
+
+[node name="wall_metal_22" parent="." instance=ExtResource("20_76rvm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, -1)
+
+[node name="wall_spiked2" parent="." instance=ExtResource("21_6tkmj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 0, -1)
+
+[node name="wooden_wall2" parent="." instance=ExtResource("24_d8it1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19, 0, -1)
