@@ -200,6 +200,7 @@ grow_vertical = 2
 script = ExtResource("10_o67ro")
 
 [node name="PointsDisplay" type="Label" parent="HUD"]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -216,6 +217,7 @@ text = "Points: 0"
 script = ExtResource("11_44721")
 
 [node name="HealthDisplay" type="Control" parent="HUD"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -225,7 +227,6 @@ grow_vertical = 2
 script = ExtResource("17_rydh0")
 
 [node name="MyHealth" type="MarginContainer" parent="HUD/HealthDisplay"]
-visible = false
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0

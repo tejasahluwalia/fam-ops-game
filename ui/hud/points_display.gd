@@ -2,6 +2,7 @@ extends Label
 
 
 func set_player(player: PlayerEntity) -> void:
+	visible = true
 	player.points_changed_client.connect(Callable(self._on_points_changed))
 	_set_text(player.points)
 
