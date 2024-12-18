@@ -1,4 +1,6 @@
+class_name HealthManager
 extends Node
+
 
 signal health_changed(old_value, new_value)
 signal damage
@@ -27,15 +29,10 @@ var accumulated_health: float = 0.0  # Add this as a class variable
 var regen_timer: float = 0.0
 var can_regenerate: bool = true
 
-@onready var health_bar: ProgressBar = $HealthBar
-@onready var damage_bar: ProgressBar = $DamageBar
-
 
 func _ready():
 	health_points = start_health
 	damage_bar_value = start_health
-	update_health_bar()
-	update_damage_bar()
 
 
 func _process(delta):
@@ -53,7 +50,6 @@ func handle_damage_bar(delta):
 			var new_value = move_toward(damage_bar_value, health_points, damage_bar_speed * delta)
 			if new_value != damage_bar_value:
 				damage_bar_value = new_value
-				update_damage_bar()
 
 			if damage_bar_value == health_points:
 				is_damage_bar_active = false
@@ -86,12 +82,11 @@ func handle_health_regeneration(delta):
 		is_damage_bar_active = true
 
 
-@rpc("any_peer", "call_remote", "reliable")
+@rpc("any_peer", "call_remote", "reliable", 0)
 func set_health(value: int):
 	var old_value = health_points
 	health_points = clamp(value, 0, max_health)
 	health_changed.emit(old_value, health_points)
-	update_health_bar()
 
 	if old_value > health_points:  # Took damage
 		start_damage_bar_effect()
@@ -107,23 +102,14 @@ func reset_regen_timer():
 	regen_timer = health_regen_cooldown
 
 
-@rpc("any_peer", "call_remote", "reliable")
 func start_damage_bar_effect():
 	damage_bar_timer = damage_bar_cooldown
 	is_damage_bar_active = true
 
 
-func update_health_bar():
-	health_bar.value = health_points
-
-
-func update_damage_bar():
-	damage_bar.value = damage_bar_value
-
-
 func get_damage(amount: int):
 	if multiplayer.is_server():
-		set_health.rpc(health_points - amount)
+		set_health(health_points - amount)
 	else:
 		set_health.rpc_id(1, health_points - amount)
 	damage.emit()
@@ -131,22 +117,21 @@ func get_damage(amount: int):
 
 func get_health(amount: int):
 	if multiplayer.is_server():
-		set_health.rpc(health_points + amount)
+		set_health(health_points + amount)
 	else:
 		set_health.rpc_id(1, health_points + amount)
 
 
 func get_full_health():
 	if multiplayer.is_server():
-		set_health.rpc(max_health)
+		set_health(max_health)
 		damage_bar_value = max_health
-		update_damage_bar()
 	else:
 		set_health.rpc_id(1, max_health)
 
 
 func instant_death():
 	if multiplayer.is_server():
-		set_health.rpc(0)
+		set_health(0)
 	else:
 		set_health.rpc_id(1, 0)

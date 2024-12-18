@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://og0akbc31x1j"]
+[gd_scene load_steps=26 format=3 uid="uid://og0akbc31x1j"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_pw6e1"]
 [ext_resource type="MeshLibrary" uid="uid://dcjglgl7pvpgu" path="res://assets/kits/meshlib_space_ground.tres" id="3_ufuej"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://dm1eh0x3fd44j" path="res://characters/player/players.tscn" id="14_v8dni"]
 [ext_resource type="PackedScene" uid="uid://cskbagj1qsvfu" path="res://characters/enemies/enemies.tscn" id="15_bjega"]
 [ext_resource type="Script" path="res://scenes/enemy_spawn_points.gd" id="15_ie0uf"]
+[ext_resource type="Script" path="res://scenes/health_display.gd" id="17_rydh0"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i086e"]
 
@@ -38,6 +39,12 @@ agent_radius = 1.0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_hweso"]
 size = Vector2(32, 28)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aotmc"]
+bg_color = Color(0.889992, 0.861158, 0.981073, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wrkyf"]
+bg_color = Color(0.465425, 0.673909, 0.209438, 1)
 
 [node name="Main" type="Node3D" node_paths=PackedStringArray("main_menu", "hud", "player_spawn_node", "projectile_spawn_node", "enemies_node")]
 script = ExtResource("1_pw6e1")
@@ -183,7 +190,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.7231, 0, 42.438)
 
 [node name="Enemies" parent="." instance=ExtResource("15_bjega")]
 
-[node name="HUD" type="Control" parent="." node_paths=PackedStringArray("points_display")]
+[node name="HUD" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -191,7 +198,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("10_o67ro")
-points_display = NodePath("PointsDisplay")
 
 [node name="PointsDisplay" type="Label" parent="HUD"]
 layout_mode = 1
@@ -206,7 +212,72 @@ offset_right = 20.0
 offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
+text = "Points: 0"
 script = ExtResource("11_44721")
+
+[node name="HealthDisplay" type="Control" parent="HUD"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("17_rydh0")
+
+[node name="MyHealth" type="MarginContainer" parent="HUD/HealthDisplay"]
+visible = false
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -120.0
+offset_right = 480.0
+grow_vertical = 0
+rotation = 0.00249207
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="DamageBar" type="ProgressBar" parent="HUD/HealthDisplay/MyHealth"]
+z_index = 10
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_styles/fill = SubResource("StyleBoxFlat_aotmc")
+max_value = 20.0
+step = 1.0
+value = 20.0
+rounded = true
+show_percentage = false
+
+[node name="HealthBar" type="ProgressBar" parent="HUD/HealthDisplay/MyHealth"]
+z_index = 10
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_styles/fill = SubResource("StyleBoxFlat_wrkyf")
+max_value = 20.0
+step = 1.0
+value = 20.0
+rounded = true
+show_percentage = false
+
+[node name="TeamHealth" type="MarginContainer" parent="HUD/HealthDisplay"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -360.0
+offset_top = -100.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="TeamHealthBars" type="VBoxContainer" parent="HUD/HealthDisplay/TeamHealth"]
+custom_minimum_size = Vector2(320, 60)
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 20
 
 [node name="MainMenu" type="Control" parent="."]
 layout_mode = 3

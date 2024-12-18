@@ -1,10 +1,7 @@
 extends Label
 
-var player: PlayerEntity = null
 
-
-func set_player(p: PlayerEntity) -> void:
-	player = p
+func set_player(player: PlayerEntity) -> void:
 	player.points_changed_client.connect(Callable(self._on_points_changed))
 	_set_text(player.points)
 
