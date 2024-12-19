@@ -48,10 +48,10 @@ script = ExtResource("10_64fw7")
 inverse_polarity = false
 switch = NodePath("DoorSpawner2")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kl1qq"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6ouv8"]
 
 [sub_resource type="TextMesh" id="TextMesh_tda1b"]
-material = SubResource("StandardMaterial3D_kl1qq")
+material = SubResource("StandardMaterial3D_6ouv8")
 text = "Weapon Upgrade"
 font_size = 127
 
