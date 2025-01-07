@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=4 uid="uid://og0akbc31x1j"]
+[gd_scene load_steps=62 format=4 uid="uid://og0akbc31x1j"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_pw6e1"]
 [ext_resource type="Environment" uid="uid://13w4n7joxo58" path="res://scenes/world_environment.tres" id="8_5s5wh"]
@@ -26,6 +26,8 @@
 [ext_resource type="PackedScene" uid="uid://epyhho3gwtvy" path="res://assets/low_poly/Interiors/arm_chair_1.glb" id="28_fv68x"]
 [ext_resource type="PackedScene" uid="uid://cqe07ain1gwtu" path="res://assets/low_poly/Interiors/bathtub.glb" id="29_25ssv"]
 [ext_resource type="PackedScene" uid="uid://cmokno5htobap" path="res://assets/low_poly/Interiors/chair_1_destroyed_3.glb" id="30_6ac1w"]
+[ext_resource type="Texture2D" uid="uid://bakvty0svsxlg" path="res://ui/TitleScreenPlain.png" id="30_clmjy"]
+[ext_resource type="FontFile" uid="uid://bpxdtwnb3n8j" path="res://ui/fonts/RubikWetPaint-Regular.ttf" id="31_n0a4v"]
 [ext_resource type="PackedScene" uid="uid://b5aqdq4en8g7n" path="res://assets/low_poly/Interiors/small_bookshelf_1.glb" id="31_nf866"]
 [ext_resource type="PackedScene" uid="uid://cc0e4ysx8blmk" path="res://assets/low_poly/Interiors/sofa_1.glb" id="32_oohk5"]
 [ext_resource type="PackedScene" uid="uid://b4bve0bf0scby" path="res://assets/low_poly/Interiors/sofa_1_damaged.glb" id="33_r27iu"]
@@ -247,6 +249,15 @@ bg_color = Color(0.889992, 0.861158, 0.981073, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wrkyf"]
 bg_color = Color(0.465425, 0.673909, 0.209438, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_seum2"]
+texture = ExtResource("30_clmjy")
+
+[sub_resource type="FontVariation" id="FontVariation_5wdru"]
+base_font = ExtResource("31_n0a4v")
+
+[sub_resource type="FontVariation" id="FontVariation_2i5h7"]
+base_font = ExtResource("31_n0a4v")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o5b3e"]
 
@@ -801,6 +812,37 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="Background" type="Panel" parent="MainMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_seum2")
+
+[node name="Title" type="Label" parent="MainMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -337.0
+offset_top = -494.0
+offset_right = 337.0
+offset_bottom = -302.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.831373, 0.133333, 0, 0.721569)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = SubResource("FontVariation_5wdru")
+theme_override_font_sizes/font_size = 161
+text = "FamOps"
+
 [node name="JoinButton" type="Button" parent="MainMenu"]
 layout_mode = 1
 anchors_preset = 8
@@ -808,13 +850,34 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -19.0
-offset_top = -15.5
-offset_right = 19.0
-offset_bottom = 15.5
+offset_left = -737.0
+offset_top = 149.0
+offset_right = -537.0
+offset_bottom = 249.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = SubResource("FontVariation_2i5h7")
+theme_override_font_sizes/font_size = 70
 text = "Join"
+
+[node name="QuitButton" type="Button" parent="MainMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -737.0
+offset_top = 285.0
+offset_right = -537.0
+offset_bottom = 385.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = SubResource("FontVariation_2i5h7")
+theme_override_font_sizes/font_size = 70
+text = "Quit"
 
 [node name="WeaponUpgrade" type="MeshInstance3D" parent="."]
 transform = Transform3D(1.49012e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, 1.49012e-08, 18.8848, 3.67267, 1.01476)
@@ -834,3 +897,4 @@ shape = SubResource("BoxShape3D_bgx5s")
 
 [connection signal="child_entered_tree" from="Players" to="HUD" method="_on_player_entered_tree"]
 [connection signal="pressed" from="MainMenu/JoinButton" to="." method="_on_join_button_pressed"]
+[connection signal="pressed" from="MainMenu/QuitButton" to="." method="_on_join_button_pressed"]
