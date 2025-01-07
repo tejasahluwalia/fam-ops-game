@@ -13,9 +13,9 @@ func _ready() -> void:
 		initial_position = parent.global_transform
 
 
-func _physics_process(_delta: float) -> void:
-	if parent != null and parent.position.y < -1:
-		reset_position()
+#func _physics_process(_delta: float) -> void:
+	#if parent != null and parent.position.y < -1:
+		#reset_position()
 
 
 func update_reset_position(new_transform: Transform3D = Transform3D.IDENTITY):

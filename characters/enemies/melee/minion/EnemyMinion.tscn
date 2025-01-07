@@ -177,14 +177,17 @@ shape = SubResource("SphereShape3D_2ue0h")
 [node name="MeleeSkin" parent="." instance=ExtResource("2_dbrsx")]
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
-target_desired_distance = 2.0
+path_desired_distance = 0.5
+path_max_distance = 1.01
+avoidance_enabled = true
+debug_enabled = true
 debug_path_custom_color = Color(0.595041, 0.133162, 0.133162, 1)
 debug_path_custom_point_size = 10.04
 
 [node name="BeehaveTree" type="Node" parent="." node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("3_1stn8")
 actor_node_path = NodePath("..")
-blackboard = NodePath("@Node@17294")
+blackboard = NodePath("@Node@59627")
 actor = NodePath("..")
 
 [node name="SelectBehaviour" type="Node" parent="BeehaveTree"]
