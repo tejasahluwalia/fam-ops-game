@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=4 uid="uid://og0akbc31x1j"]
+[gd_scene load_steps=67 format=4 uid="uid://og0akbc31x1j"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_pw6e1"]
 [ext_resource type="Environment" uid="uid://13w4n7joxo58" path="res://scenes/world_environment.tres" id="8_5s5wh"]
@@ -32,6 +32,7 @@
 [ext_resource type="PackedScene" uid="uid://cc0e4ysx8blmk" path="res://assets/low_poly/Interiors/sofa_1.glb" id="32_oohk5"]
 [ext_resource type="PackedScene" uid="uid://b4bve0bf0scby" path="res://assets/low_poly/Interiors/sofa_1_damaged.glb" id="33_r27iu"]
 [ext_resource type="PackedScene" uid="uid://dehxpx4kvokbh" path="res://assets/low_poly/Interiors/table_1.glb" id="34_7sruh"]
+[ext_resource type="Texture2D" uid="uid://ccw764y6lxnj1" path="res://ui/FR_upgrade.png" id="35_emp1u"]
 [ext_resource type="PackedScene" uid="uid://dxeet8ybrtmhr" path="res://assets/low_poly/wild/bush_1.glb" id="35_puvci"]
 [ext_resource type="PackedScene" uid="uid://cmawjlbnhfh2f" path="res://assets/low_poly/wild/sleeping_bag.glb" id="36_1ha88"]
 
@@ -266,8 +267,27 @@ material = SubResource("StandardMaterial3D_o5b3e")
 text = "Weapon Upgrade"
 font_size = 127
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_bgx5s"]
-size = Vector3(10.5922, 7.81677, 5.44705)
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_kqpil"]
+radius = 6.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_rr2n1"]
+top_radius = 3.1
+bottom_radius = 3.1
+height = 0.2
+radial_segments = 10
+rings = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lunv1"]
+albedo_color = Color(0.14902, 0.729412, 0.380392, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7rq8g"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_fcpfy"]
+material = SubResource("StandardMaterial3D_7rq8g")
+top_radius = 6.5
+bottom_radius = 6.5
+height = 0.2
 
 [node name="Main" type="Node3D" node_paths=PackedStringArray("main_menu", "hud", "player_spawn_node", "projectile_spawn_node", "enemies_node")]
 script = ExtResource("1_pw6e1")
@@ -892,8 +912,22 @@ script = ExtResource("26_8nuuq")
 [node name="InteractionTip" parent="WeaponUpgrade/WeaponUpgradeArea" instance=ExtResource("27_dojsb")]
 
 [node name="WeaponUpgradeCollision" type="CollisionShape3D" parent="WeaponUpgrade/WeaponUpgradeArea"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.111223, -3.40839, 1.52647)
-shape = SubResource("BoxShape3D_bgx5s")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.978423, -5.68917, 3.10876)
+shape = SubResource("CylinderShape3D_kqpil")
+
+[node name="Platform" type="MeshInstance3D" parent="WeaponUpgrade/WeaponUpgradeArea"]
+transform = Transform3D(5.96048e-08, 0, 2, 0, 2, 0, -2, 0, 5.96048e-08, -0.902134, -7.11162, 3.19407)
+mesh = SubResource("CylinderMesh_rr2n1")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_lunv1")
+
+[node name="OutterPlatform" type="MeshInstance3D" parent="WeaponUpgrade/WeaponUpgradeArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.902134, -7.11162, 3.19407)
+mesh = SubResource("CylinderMesh_fcpfy")
+
+[node name="UpgradeImage" type="Sprite3D" parent="WeaponUpgrade/WeaponUpgradeArea"]
+transform = Transform3D(0.907662, 2.70505e-08, 2.98024e-08, -2.70505e-08, -3.96752e-08, 1, 2.70505e-08, -0.907662, -4.37114e-08, -1.29048, -6.69452, 3.53231)
+texture = ExtResource("35_emp1u")
 
 [connection signal="child_entered_tree" from="Players" to="HUD" method="_on_player_entered_tree"]
 [connection signal="pressed" from="MainMenu/JoinButton" to="." method="_on_join_button_pressed"]

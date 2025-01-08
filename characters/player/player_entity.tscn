@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://jga6pbb5xpug"]
+[gd_scene load_steps=22 format=3 uid="uid://jga6pbb5xpug"]
 
 [ext_resource type="Script" path="res://characters/player/player_entity.gd" id="1_eomfg"]
 [ext_resource type="PackedScene" uid="uid://d3yswfl2m7nue" path="res://characters/player/CharacterControllers/OneStickController.tscn" id="2_0hlv6"]
@@ -36,6 +36,12 @@ properties/4/replication_mode = 1
 properties/5/path = NodePath(".:inventory")
 properties/5/spawn = true
 properties/5/replication_mode = 1
+properties/6/path = NodePath("UpgradeParticles:emitting")
+properties/6/spawn = true
+properties/6/replication_mode = 1
+properties/7/path = NodePath("UpgradeParticles:position")
+properties/7/spawn = true
+properties/7/replication_mode = 1
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_5p5in"]
 properties/0/path = NodePath("InputSynchronizer:input_camera")
@@ -50,6 +56,42 @@ properties/2/replication_mode = 1
 properties/3/path = NodePath("InputSynchronizer:input_jump")
 properties/3/spawn = true
 properties/3/replication_mode = 1
+
+[sub_resource type="Curve" id="Curve_3dm2e"]
+_data = [Vector2(0.183099, 0.384615), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="CurveTexture" id="CurveTexture_otox1"]
+curve = SubResource("Curve_3dm2e")
+
+[sub_resource type="Gradient" id="Gradient_oadqw"]
+colors = PackedColorArray(0, 0.359885, 0.0255266, 1, 0, 0.792157, 0.105882, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_10oju"]
+gradient = SubResource("Gradient_oadqw")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kw32m"]
+lifetime_randomness = 0.05
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 1.0
+emission_ring_inner_radius = 0.0
+angle_min = -720.0
+angle_max = 550.2
+gravity = Vector3(0, 3, 0)
+scale_min = 0.1
+scale_max = 0.5
+color_ramp = SubResource("GradientTexture1D_10oju")
+alpha_curve = SubResource("CurveTexture_otox1")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2dlpe"]
+diffuse_mode = 3
+specular_mode = 1
+vertex_color_use_as_albedo = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_8bm1l"]
+material = SubResource("StandardMaterial3D_2dlpe")
 
 [node name="PlayerEntity" type="CharacterBody3D"]
 collision_mask = 27
@@ -95,6 +137,15 @@ replication_config = SubResource("SceneReplicationConfig_lc4er")
 unique_name_in_owner = true
 replication_config = SubResource("SceneReplicationConfig_5p5in")
 script = ExtResource("10_u5yos")
+
+[node name="UpgradeParticles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.86076, 0)
+emitting = false
+lifetime = 0.5
+speed_scale = 3.0
+randomness = 0.5
+process_material = SubResource("ParticleProcessMaterial_kw32m")
+draw_pass_1 = SubResource("SphereMesh_8bm1l")
 
 [connection signal="damage" from="HealthManager" to="." method="on_hit"]
 [connection signal="health_depleted" from="HealthManager" to="." method="on_death"]

@@ -110,6 +110,12 @@ func remove_points(amount: int) -> void:
 	points_changed_server.emit(points)
 	_on_points_changed.rpc(points)
 
+func upgrade_particle() -> void:
+	$UpgradeParticles.emitting =true
+	await get_tree().create_timer(3.0).timeout
+	$UpgradeParticles.emitting =false
+	
+	
 
 @rpc("call_remote", "authority", "reliable", 0)
 func _on_points_changed(new_points_value: int) -> void:
