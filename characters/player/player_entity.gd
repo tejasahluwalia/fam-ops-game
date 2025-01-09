@@ -66,6 +66,7 @@ func _interact() -> void:
 
 func on_hit():
 	model.play_on_hit(true)
+	AudioManager.player_hit_sfx.play()
 
 
 func on_death():

@@ -125,6 +125,7 @@ func move_to_dying() -> void:
 @rpc("authority", "call_remote", "reliable", 0)
 func play_on_attacking(is_requested: bool) -> void:
 	if is_requested:
+		AudioManager.enemy_attack_sfx.play()
 		anim_tree["parameters/on_attacking/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
 	else:
 		anim_tree["parameters/on_attacking/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FADE_OUT

@@ -15,6 +15,7 @@ func _ready() -> void:
 		MultiplayerManager.start_server(player_spawn_node)
 
 	WaveManager.enemies_node = enemies_node
+	AudioManager.main_menu_track.play()
 
 
 func _on_join_button_pressed() -> void:

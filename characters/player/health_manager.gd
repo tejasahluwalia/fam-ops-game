@@ -110,6 +110,7 @@ func start_damage_bar_effect():
 func get_damage(amount: int):
 	if multiplayer.is_server():
 		set_health(health_points - amount)
+		AudioManager.player_hit_sfx.play()
 	else:
 		set_health.rpc_id(1, health_points - amount)
 	damage.emit()

@@ -270,6 +270,7 @@ func trigger_explosion() -> void:
 		disable_radius_mesh.rpc_id(1)
 	
 	deal_explosion_damage.rpc_id(1)
+	AudioManager.explosion_sfx.play()
 	move_to_dying()
 
 

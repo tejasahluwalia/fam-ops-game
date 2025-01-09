@@ -25,6 +25,7 @@ BeehaveGlobalDebugger="*res://addons/beehave/debug/global_debugger.gd"
 MultiplayerManager="*res://scripts/multiplayer/multiplayer_manager.gd"
 Focus="*res://scripts/focus.gd"
 WaveManager="*res://scripts/wave_manager.gd"
+AudioManager="*res://scenes/audio_manager.tscn"
 
 [dialogic]
 
