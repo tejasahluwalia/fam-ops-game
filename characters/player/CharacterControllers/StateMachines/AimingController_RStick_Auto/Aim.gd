@@ -35,7 +35,6 @@ func enter(msg := {}) -> void:
 
 func _shoot_arrow(initial_velocity: int = 50, damage: int = 1) -> void:
 	var arrow = arrow_prefab.instantiate()
-	AudioManager.shoot_sfx.play()
 	arrow.global_transform = player.shoot_anchor.global_transform
 	arrow.set_shooter(player)
 	arrow.damage = damage

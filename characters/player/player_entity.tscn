@@ -36,12 +36,6 @@ properties/4/replication_mode = 1
 properties/5/path = NodePath(".:inventory")
 properties/5/spawn = true
 properties/5/replication_mode = 1
-properties/6/path = NodePath("UpgradeParticles:emitting")
-properties/6/spawn = true
-properties/6/replication_mode = 1
-properties/7/path = NodePath("UpgradeParticles:position")
-properties/7/spawn = true
-properties/7/replication_mode = 1
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_5p5in"]
 properties/0/path = NodePath("InputSynchronizer:input_camera")
@@ -139,6 +133,7 @@ replication_config = SubResource("SceneReplicationConfig_5p5in")
 script = ExtResource("10_u5yos")
 
 [node name="UpgradeParticles" type="GPUParticles3D" parent="."]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.86076, 0)
 emitting = false
 lifetime = 0.5

@@ -9,8 +9,6 @@ func interact(player: PlayerEntity) -> void:
 	if player.points >= cost:
 		player.remove_points(cost)
 		player.inventory.weapons.toygun["fire_rate"] += upgrade_increment
-		player.upgrade_particle()
-		AudioManager.upgrade_sfx.play()
-		
+		player.model.play_upgrading.rpc()
 	else:
 		print("Can't afford upgrade. Points required: %d" % cost)

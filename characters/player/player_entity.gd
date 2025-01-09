@@ -12,7 +12,7 @@ extends CharacterBody3D
 @onready var position_resetter := $PositionResetter
 @onready var start_position := global_transform.origin
 
-var points: int = 0
+var points: int = 1000
 
 @export var use_saved_controller: bool = true
 @export var controller_schemes: Array[PackedScene]
@@ -111,12 +111,6 @@ func remove_points(amount: int) -> void:
 	points_changed_server.emit(points)
 	_on_points_changed.rpc(points)
 
-func upgrade_particle() -> void:
-	$UpgradeParticles.emitting =true
-	await get_tree().create_timer(3.0).timeout
-	$UpgradeParticles.emitting =false
-	
-	
 
 @rpc("call_remote", "authority", "reliable", 0)
 func _on_points_changed(new_points_value: int) -> void:

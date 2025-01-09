@@ -5,7 +5,9 @@ extends Node3D
 @onready var anim_tree: AnimationTree = $AnimationTree
 @onready var shoot_anchor: Marker3D = %ShootAnchor
 @onready var muzzle_vfx: MeshInstance3D = %MuzzleVFX
+
 @export var rotation_speed := 12.0
+@onready var upgrade_particles: GPUParticles3D = %UpgradeParticles
 
 var _last_strong_direction := Vector3.FORWARD
 var muzzle_tween: Tween
@@ -83,6 +85,14 @@ func play_aiming(value: bool) -> void:
 
 
 @rpc("authority", "call_remote", "reliable", 0)
+func play_upgrading() -> void:
+	AudioManager.upgrade_sfx.play()
+	upgrade_particles.emitting =true
+	await get_tree().create_timer(3.0).timeout
+	upgrade_particles.emitting =false
+
+
+@rpc("authority", "call_remote", "reliable", 0)
 func play_shooting(is_requested: bool) -> void:
 	muzzle_vfx.visible = true
 	#muzzle_vfx.rotate(Vector3(1,0,0), randf_range(-2*PI,2*PI))
@@ -104,6 +114,7 @@ func play_shooting(is_requested: bool) -> void:
 	)
 	muzzle_tween.tween_callback(func(): muzzle_vfx.visible = false)
 	if is_requested:
+		AudioManager.shoot_sfx.play()
 		anim_tree["parameters/on_shooting/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
 	else:
 		anim_tree["parameters/on_shooting/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FADE_OUT
