@@ -30,7 +30,7 @@
 [ext_resource type="Script" path="res://ui/hud/points_display.gd" id="28_tdpp8"]
 [ext_resource type="Script" path="res://scenes/health_display.gd" id="29_47k64"]
 [ext_resource type="Script" path="res://scenes/weapon_upgrade.gd" id="30_sllfa"]
-[ext_resource type="Script" path="res://scripts/interactable_area_3d.gd" id="31_ib1ci"]
+[ext_resource type="Script" path="res://scripts/weapon_upgrade_interactable_area_3d.gd" id="31_ib1ci"]
 [ext_resource type="PackedScene" uid="uid://cpxkladyjcj8d" path="res://ui/interaction_tip.tscn" id="32_45g8h"]
 [ext_resource type="Script" path="res://characters/player/player_entity.gd" id="33_yk860"]
 [ext_resource type="PackedScene" uid="uid://d3yswfl2m7nue" path="res://characters/player/CharacterControllers/OneStickController.tscn" id="34_tjn14"]

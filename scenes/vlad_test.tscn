@@ -16,7 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://b2nlcgg1yuy7o" path="res://assets/objects/switches/door_switch.tscn" id="15_xpfth"]
 [ext_resource type="PackedScene" uid="uid://hcqc6rr7cqwf" path="res://assets/objects/switches/long_interaction_switch.tscn" id="16_fsnf8"]
 [ext_resource type="Script" path="res://scenes/weapon_upgrade.gd" id="16_n20vi"]
-[ext_resource type="Script" path="res://scripts/interactable_area_3d.gd" id="17_d48ad"]
+[ext_resource type="Script" path="res://scripts/weapon_upgrade_interactable_area_3d.gd" id="17_d48ad"]
 [ext_resource type="PackedScene" uid="uid://cpxkladyjcj8d" path="res://ui/interaction_tip.tscn" id="18_m4rbw"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i086e"]

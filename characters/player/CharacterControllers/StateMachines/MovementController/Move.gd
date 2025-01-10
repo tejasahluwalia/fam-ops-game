@@ -2,7 +2,7 @@
 extends PlayerState
 
 @export var max_speed := 15.0
-@export var acceleration := 50
+@export var acceleration := 50.0
 @export var gravity := -30.0
 @export var snap_length := 0.5
 @export var do_stop_on_slope := true

@@ -33,6 +33,14 @@ var points: int = 1000
 			}
 	}
 
+var stats: Dictionary = {
+	"movement": {
+		"acceleration": 50,
+		"max_speed": 15
+	},
+	"health": 100
+}
+
 var current_weapon = "toygun"
 
 signal is_dead
@@ -60,7 +68,7 @@ func _interact() -> void:
 	if player_id == multiplayer.get_remote_sender_id():
 		var interactibles = interaction_area.get_overlapping_areas()
 		for area: Area3D in interactibles:
-			if area is InteractableArea3D or area is PointDepositArea:
+			if area is Area3D:
 				area.interact(self)
 
 

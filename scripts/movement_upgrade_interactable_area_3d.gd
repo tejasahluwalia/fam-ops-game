@@ -1,4 +1,3 @@
-class_name InteractableArea3D
 extends Area3D
 
 @export var cost: int = 100
@@ -8,7 +7,7 @@ extends Area3D
 func interact(player: PlayerEntity) -> void:
 	if player.points >= cost:
 		player.remove_points(cost)
-		player.inventory.weapons.toygun["fire_rate"] += upgrade_increment
-		player.model.play_upgrading.rpc()
+		player.current_controller.get_node("MovementController/Move").acceleration += 2
+		player.current_controller.get_node("MovementController/Move").max_speed += 5
 	else:
 		print("Can't afford upgrade. Points required: %d" % cost)
