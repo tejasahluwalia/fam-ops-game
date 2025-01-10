@@ -555,6 +555,42 @@ transform = Transform3D(3.26053, 0, 0, 0, 2.00394, 0, 0, 0, 4.7246, -40.5588, -0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.565587, 0)
 shape = SubResource("BoxShape3D_g02av")
 
+[node name="box_2" parent="NavigationRegion3D" instance=ExtResource("24_g5p6o")]
+transform = Transform3D(3.26053, 0, 0, 0, 2.00394, 0, 0, 0, 4.7246, 112.874, -0.1857, 155.605)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/box_2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/box_2/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.565587, 0)
+shape = SubResource("BoxShape3D_g02av")
+
+[node name="box_3" parent="NavigationRegion3D" instance=ExtResource("24_g5p6o")]
+transform = Transform3D(3.26053, 0, 0, 0, 2.00394, 0, 0, 0, 4.7246, 112.528, -0.1857, -116.105)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/box_3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/box_3/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.565587, 0)
+shape = SubResource("BoxShape3D_g02av")
+
+[node name="box_4" parent="NavigationRegion3D" instance=ExtResource("24_g5p6o")]
+transform = Transform3D(3.26053, 0, 0, 0, 2.00394, 0, 0, 0, 4.7246, -132.952, -0.1857, -114.54)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/box_4"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/box_4/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.565587, 0)
+shape = SubResource("BoxShape3D_g02av")
+
+[node name="box_5" parent="NavigationRegion3D" instance=ExtResource("24_g5p6o")]
+transform = Transform3D(3.26053, 0, 0, 0, 2.00394, 0, 0, 0, 4.7246, -132.952, -0.1857, 155.271)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/box_5"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/box_5/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.565587, 0)
+shape = SubResource("BoxShape3D_g02av")
+
 [node name="barrel2" parent="NavigationRegion3D" instance=ExtResource("25_enpxq")]
 transform = Transform3D(3.26053, 0, 0, 0, 2.00394, 0, 0, 0, 4.7246, 34.589, -0.1857, 88.2765)
 
@@ -706,6 +742,774 @@ transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -33.1449, 0.0405259, 19.3938)
 
 [node name="bush_1" parent="Map" instance=ExtResource("35_puvci")]
 transform = Transform3D(-2.95577, 0, -4.03279, 0, 5, 0, 4.03279, 0, -2.95577, 27.4211, 0.510721, 28.6278)
+
+[node name="bush_2" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-2.95577, 0, -4.03279, 0, 5, 0, 4.03279, 0, -2.95577, 53.5967, 0.510721, -53.9497)
+
+[node name="bush_3" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(3.46417, 0, 3.60548, 0, 5, 0, -3.60548, 0, 3.46417, 64.7125, 0.510721, -53.9497)
+
+[node name="bush_4" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(3.46417, 0, 3.60548, 0, 5, 0, -3.60548, 0, 3.46417, 43.4619, 0.510721, -53.9497)
+
+[node name="bush_5" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(1.87837, 0, -4.63375, 0, 5, 0, 4.63375, 0, 1.87837, 32.3515, 0.510721, -53.9497)
+
+[node name="bush_6" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-2.95577, 0, -4.03279, 0, 5, 0, 4.03279, 0, -2.95577, 10.4194, 0.510721, -53.9497)
+
+[node name="bush_7" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(3.46417, 0, 3.60548, 0, 5, 0, -3.60548, 0, 3.46417, 21.5352, 0.510721, -53.9497)
+
+[node name="bush_8" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(3.46417, 0, 3.60548, 0, 5, 0, -3.60548, 0, 3.46417, 0.284588, 0.510721, -53.9497)
+
+[node name="bush_9" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(1.87837, 0, -4.63375, 0, 5, 0, 4.63375, 0, 1.87837, -10.8258, 0.510721, -53.9497)
+
+[node name="bush_10" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-2.95577, 0, -4.03279, 0, 5, 0, 4.03279, 0, -2.95577, -32.2149, 0.510721, -53.9497)
+
+[node name="bush_11" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(3.46417, 0, 3.60548, 0, 5, 0, -3.60548, 0, 3.46417, -21.0991, 0.510721, -53.9497)
+
+[node name="bush_12" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(3.46417, 0, 3.60548, 0, 5, 0, -3.60548, 0, 3.46417, -42.3497, 0.510721, -53.9497)
+
+[node name="bush_13" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(1.87837, 0, -4.63375, 0, 5, 0, 4.63375, 0, 1.87837, -53.46, 0.510721, -53.9497)
+
+[node name="bush_14" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-2.95577, 0, -4.03279, 0, 5, 0, 4.03279, 0, -2.95577, -74.9453, 0.510721, -53.9497)
+
+[node name="bush_15" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(3.46417, 0, 3.60548, 0, 5, 0, -3.60548, 0, 3.46417, -63.8295, 0.510721, -53.9497)
+
+[node name="bush_16" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(3.46417, 0, 3.60548, 0, 5, 0, -3.60548, 0, 3.46417, -85.08, 0.510721, -53.9497)
+
+[node name="bush_17" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(1.87837, 0, -4.63375, 0, 5, 0, 4.63375, 0, 1.87837, -96.1904, 0.510721, -53.9497)
+
+[node name="bush_18" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(2.95577, 0, 4.03279, 0, 5, 0, -4.03279, 0, 2.95577, -80.9384, 0.510721, -65.1843)
+
+[node name="bush_19" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-3.46417, 0, -3.60548, 0, 5, 0, 3.60548, 0, -3.46417, -92.0542, 0.510721, -65.1843)
+
+[node name="bush_20" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-3.46417, 0, -3.60548, 0, 5, 0, 3.60548, 0, -3.46417, -70.8036, 0.510721, -65.1843)
+
+[node name="bush_21" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-1.87837, 0, 4.63375, 0, 5, 0, -4.63375, 0, -1.87837, -59.6933, 0.510721, -65.1843)
+
+[node name="bush_22" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(2.95577, 0, 4.03279, 0, 5, 0, -4.03279, 0, 2.95577, -37.7611, 0.510721, -65.1843)
+
+[node name="bush_23" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-3.46417, 0, -3.60548, 0, 5, 0, 3.60548, 0, -3.46417, -48.8769, 0.510721, -65.1843)
+
+[node name="bush_24" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-3.46417, 0, -3.60548, 0, 5, 0, 3.60548, 0, -3.46417, -27.6263, 0.510721, -65.1843)
+
+[node name="bush_25" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-1.87837, 0, 4.63375, 0, 5, 0, -4.63375, 0, -1.87837, -16.516, 0.510721, -65.1843)
+
+[node name="bush_26" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(2.95577, 0, 4.03279, 0, 5, 0, -4.03279, 0, 2.95577, 4.87313, 0.510721, -65.1843)
+
+[node name="bush_27" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-3.46417, 0, -3.60548, 0, 5, 0, 3.60548, 0, -3.46417, -6.24267, 0.510721, -65.1843)
+
+[node name="bush_28" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-3.46417, 0, -3.60548, 0, 5, 0, 3.60548, 0, -3.46417, 15.0079, 0.510721, -65.1843)
+
+[node name="bush_29" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-1.87837, 0, 4.63375, 0, 5, 0, -4.63375, 0, -1.87837, 26.1183, 0.510721, -65.1843)
+
+[node name="bush_30" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(2.95577, 0, 4.03279, 0, 5, 0, -4.03279, 0, 2.95577, 47.6035, 0.510721, -65.1843)
+
+[node name="bush_31" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-3.46417, 0, -3.60548, 0, 5, 0, 3.60548, 0, -3.46417, 36.4877, 0.510721, -65.1843)
+
+[node name="bush_32" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-3.46417, 0, -3.60548, 0, 5, 0, 3.60548, 0, -3.46417, 57.7383, 0.510721, -65.1843)
+
+[node name="bush_33" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-1.87837, 0, 4.63375, 0, 5, 0, -4.63375, 0, -1.87837, 68.8487, 0.510721, -65.1843)
+
+[node name="bush_34" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-2.95577, 0, -4.03279, 0, 5, 0, 4.03279, 0, -2.95577, 52.0222, 0.510721, -76.1829)
+
+[node name="bush_35" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(3.46417, 0, 3.60548, 0, 5, 0, -3.60548, 0, 3.46417, 63.138, 0.510721, -76.1829)
+
+[node name="bush_36" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(3.46417, 0, 3.60548, 0, 5, 0, -3.60548, 0, 3.46417, 41.8874, 0.510721, -76.1829)
+
+[node name="bush_37" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(1.87837, 0, -4.63376, 0, 5, 0, 4.63376, 0, 1.87837, 30.7771, 0.510721, -76.1829)
+
+[node name="bush_38" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-2.95577, 0, -4.03279, 0, 5, 0, 4.03279, 0, -2.95577, 8.84496, 0.510721, -76.1829)
+
+[node name="bush_39" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(3.46417, 0, 3.60548, 0, 5, 0, -3.60548, 0, 3.46417, 19.9608, 0.510721, -76.1829)
+
+[node name="bush_40" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(3.46417, 0, 3.60548, 0, 5, 0, -3.60548, 0, 3.46417, -1.28983, 0.510721, -76.1828)
+
+[node name="bush_41" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(1.87837, 0, -4.63376, 0, 5, 0, 4.63376, 0, 1.87837, -12.4002, 0.510721, -76.1828)
+
+[node name="bush_42" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-2.95577, 0, -4.03279, 0, 5, 0, 4.03279, 0, -2.95577, -33.7893, 0.510721, -76.1828)
+
+[node name="bush_43" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(3.46417, 0, 3.60548, 0, 5, 0, -3.60548, 0, 3.46417, -22.6735, 0.510721, -76.1828)
+
+[node name="bush_44" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(3.46417, 0, 3.60548, 0, 5, 0, -3.60548, 0, 3.46417, -43.9241, 0.510721, -76.1828)
+
+[node name="bush_45" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(1.87837, 0, -4.63376, 0, 5, 0, 4.63376, 0, 1.87837, -55.0345, 0.510721, -76.1828)
+
+[node name="bush_46" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-2.95577, 0, -4.03279, 0, 5, 0, 4.03279, 0, -2.95577, -76.5197, 0.510721, -76.1829)
+
+[node name="bush_47" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(3.46417, 0, 3.60548, 0, 5, 0, -3.60548, 0, 3.46417, -65.4039, 0.510721, -76.1829)
+
+[node name="bush_48" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(3.46417, 0, 3.60548, 0, 5, 0, -3.60548, 0, 3.46417, -86.6545, 0.510721, -76.1829)
+
+[node name="bush_49" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(1.87837, 0, -4.63376, 0, 5, 0, 4.63376, 0, 1.87837, -97.7648, 0.510721, -76.1829)
+
+[node name="bush_50" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(2.95577, 0, 4.03279, 0, 5, 0, -4.03279, 0, 2.95577, -77.5, 0.510721, -88.4565)
+
+[node name="bush_51" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-3.46417, 0, -3.60548, 0, 5, 0, 3.60548, 0, -3.46417, -88.6158, 0.510721, -88.4565)
+
+[node name="bush_52" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-3.46417, 0, -3.60548, 0, 5, 0, 3.60548, 0, -3.46417, -67.3652, 0.510721, -88.4565)
+
+[node name="bush_53" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-1.87837, 0, 4.63375, 0, 5, 0, -4.63375, 0, -1.87837, -56.2548, 0.510721, -88.4565)
+
+[node name="bush_54" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(2.95577, 0, 4.03279, 0, 5, 0, -4.03279, 0, 2.95577, -34.3227, 0.510721, -88.4565)
+
+[node name="bush_55" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-3.46417, 0, -3.60548, 0, 5, 0, 3.60548, 0, -3.46417, -45.4385, 0.510721, -88.4565)
+
+[node name="bush_56" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-3.46417, 0, -3.60548, 0, 5, 0, 3.60548, 0, -3.46417, -24.1879, 0.510721, -88.4565)
+
+[node name="bush_57" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-1.87837, 0, 4.63375, 0, 5, 0, -4.63375, 0, -1.87837, -13.0775, 0.510721, -88.4565)
+
+[node name="bush_58" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(2.95577, 0, 4.03279, 0, 5, 0, -4.03279, 0, 2.95577, 8.31159, 0.510721, -88.4565)
+
+[node name="bush_59" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-3.46417, 0, -3.60548, 0, 5, 0, 3.60548, 0, -3.46417, -2.80422, 0.510721, -88.4565)
+
+[node name="bush_60" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-3.46417, 0, -3.60548, 0, 5, 0, 3.60548, 0, -3.46417, 18.4464, 0.510721, -88.4565)
+
+[node name="bush_61" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-1.87837, 0, 4.63375, 0, 5, 0, -4.63375, 0, -1.87837, 29.5567, 0.510721, -88.4565)
+
+[node name="bush_62" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(2.95577, 0, 4.03279, 0, 5, 0, -4.03279, 0, 2.95577, 51.042, 0.510721, -88.4566)
+
+[node name="bush_63" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-3.46417, 0, -3.60548, 0, 5, 0, 3.60548, 0, -3.46417, 39.9262, 0.510721, -88.4566)
+
+[node name="bush_64" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-3.46417, 0, -3.60548, 0, 5, 0, 3.60548, 0, -3.46417, 61.1768, 0.510721, -88.4566)
+
+[node name="bush_65" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-1.87837, 0, 4.63375, 0, 5, 0, -4.63375, 0, -1.87837, 72.2871, 0.510721, -88.4566)
+
+[node name="bush_66" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(4.03279, 0, -2.95577, 0, 5, 0, 2.95577, 0, 4.03279, -88.5945, 0.510721, -63.3656)
+
+[node name="bush_67" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-3.60548, 0, 3.46417, 0, 5, 0, -3.46417, 0, -3.60548, -88.5945, 0.510721, -74.4814)
+
+[node name="bush_68" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-3.60548, 0, 3.46417, 0, 5, 0, -3.46417, 0, -3.60548, -88.5945, 0.510721, -53.2308)
+
+[node name="bush_69" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(4.63375, 0, 1.87837, 0, 5, 0, -1.87837, 0, 4.63375, -88.5945, 0.510721, -42.1205)
+
+[node name="bush_70" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(4.03279, 0, -2.95577, 0, 5, 0, 2.95577, 0, 4.03279, -88.5945, 0.510721, -20.1883)
+
+[node name="bush_71" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-3.60548, 0, 3.46417, 0, 5, 0, -3.46417, 0, -3.60548, -88.5945, 0.510721, -31.3041)
+
+[node name="bush_72" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-3.60548, 0, 3.46417, 0, 5, 0, -3.46417, 0, -3.60548, -88.5945, 0.510721, -10.0535)
+
+[node name="bush_73" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(4.63375, 0, 1.87837, 0, 5, 0, -1.87837, 0, 4.63375, -88.5945, 0.510721, 1.05682)
+
+[node name="bush_74" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(4.03279, 0, -2.95577, 0, 5, 0, 2.95577, 0, 4.03279, -88.5945, 0.510721, 22.4459)
+
+[node name="bush_75" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-3.60548, 0, 3.46417, 0, 5, 0, -3.46417, 0, -3.60548, -88.5945, 0.510721, 11.3301)
+
+[node name="bush_76" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-3.60548, 0, 3.46417, 0, 5, 0, -3.46417, 0, -3.60548, -88.5945, 0.510721, 32.5807)
+
+[node name="bush_77" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(4.63375, 0, 1.87837, 0, 5, 0, -1.87837, 0, 4.63375, -88.5945, 0.510721, 43.6911)
+
+[node name="bush_78" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(4.03279, 0, -2.95577, 0, 5, 0, 2.95577, 0, 4.03279, -88.5945, 0.510721, 65.1763)
+
+[node name="bush_79" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-3.60548, 0, 3.46417, 0, 5, 0, -3.46417, 0, -3.60548, -88.5945, 0.510721, 54.0605)
+
+[node name="bush_80" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-3.60548, 0, 3.46417, 0, 5, 0, -3.46417, 0, -3.60548, -88.5945, 0.510721, 75.3111)
+
+[node name="bush_81" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(4.63375, 0, 1.87837, 0, 5, 0, -1.87837, 0, 4.63375, -88.5945, 0.510721, 86.4215)
+
+[node name="bush_82" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-4.03279, 0, 2.95577, 0, 5, 0, -2.95577, 0, -4.03279, -99.8291, 0.510721, 71.1694)
+
+[node name="bush_83" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(3.60548, 0, -3.46417, 0, 5, 0, 3.46417, 0, 3.60548, -99.8291, 0.510721, 82.2853)
+
+[node name="bush_84" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(3.60548, 0, -3.46417, 0, 5, 0, 3.46417, 0, 3.60548, -99.8291, 0.510721, 61.0347)
+
+[node name="bush_85" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-4.63376, 0, -1.87837, 0, 5, 0, 1.87837, 0, -4.63376, -99.8291, 0.510721, 49.9243)
+
+[node name="bush_86" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-4.03279, 0, 2.95577, 0, 5, 0, -2.95577, 0, -4.03279, -99.8291, 0.510721, 27.9922)
+
+[node name="bush_87" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(3.60548, 0, -3.46417, 0, 5, 0, 3.46417, 0, 3.60548, -99.8291, 0.510721, 39.108)
+
+[node name="bush_88" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(3.60548, 0, -3.46417, 0, 5, 0, 3.46417, 0, 3.60548, -99.8291, 0.510721, 17.8574)
+
+[node name="bush_89" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-4.63376, 0, -1.87837, 0, 5, 0, 1.87837, 0, -4.63376, -99.8291, 0.510721, 6.74705)
+
+[node name="bush_90" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-4.03279, 0, 2.95577, 0, 5, 0, -2.95577, 0, -4.03279, -99.8291, 0.510721, -14.6421)
+
+[node name="bush_91" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(3.60548, 0, -3.46417, 0, 5, 0, 3.46417, 0, 3.60548, -99.8291, 0.510721, -3.52627)
+
+[node name="bush_92" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(3.60548, 0, -3.46417, 0, 5, 0, 3.46417, 0, 3.60548, -99.8292, 0.510721, -24.7769)
+
+[node name="bush_93" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-4.63376, 0, -1.87837, 0, 5, 0, 1.87837, 0, -4.63376, -99.8292, 0.510721, -35.8872)
+
+[node name="bush_94" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-4.03279, 0, 2.95577, 0, 5, 0, -2.95577, 0, -4.03279, -99.8292, 0.510721, -57.3725)
+
+[node name="bush_95" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(3.60548, 0, -3.46417, 0, 5, 0, 3.46417, 0, 3.60548, -99.8292, 0.510721, -46.2566)
+
+[node name="bush_96" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(3.60548, 0, -3.46417, 0, 5, 0, 3.46417, 0, 3.60548, -99.8292, 0.510721, -67.5072)
+
+[node name="bush_97" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-4.63376, 0, -1.87837, 0, 5, 0, 1.87837, 0, -4.63376, -99.8292, 0.510721, -78.6176)
+
+[node name="bush_98" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(4.03279, 0, -2.95577, 0, 5, 0, 2.95577, 0, 4.03279, -110.828, 0.510721, -61.7912)
+
+[node name="bush_99" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-3.60548, 0, 3.46417, 0, 5, 0, -3.46417, 0, -3.60548, -110.828, 0.510721, -72.907)
+
+[node name="bush_100" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-3.60548, 0, 3.46417, 0, 5, 0, -3.46417, 0, -3.60548, -110.828, 0.510721, -51.6564)
+
+[node name="bush_101" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(4.63375, 0, 1.87837, 0, 5, 0, -1.87837, 0, 4.63375, -110.828, 0.510721, -40.546)
+
+[node name="bush_102" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(4.03279, 0, -2.95577, 0, 5, 0, 2.95577, 0, 4.03279, -110.828, 0.510721, -18.6139)
+
+[node name="bush_103" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-3.60548, 0, 3.46417, 0, 5, 0, -3.46417, 0, -3.60548, -110.828, 0.510721, -29.7297)
+
+[node name="bush_104" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-3.60548, 0, 3.46417, 0, 5, 0, -3.46417, 0, -3.60548, -110.828, 0.510721, -8.47911)
+
+[node name="bush_105" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(4.63375, 0, 1.87837, 0, 5, 0, -1.87837, 0, 4.63375, -110.828, 0.510721, 2.63125)
+
+[node name="bush_106" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(4.03279, 0, -2.95577, 0, 5, 0, 2.95577, 0, 4.03279, -110.828, 0.510721, 24.0204)
+
+[node name="bush_107" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-3.60548, 0, 3.46417, 0, 5, 0, -3.46417, 0, -3.60548, -110.828, 0.510721, 12.9046)
+
+[node name="bush_108" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-3.60548, 0, 3.46417, 0, 5, 0, -3.46417, 0, -3.60548, -110.828, 0.510721, 34.1552)
+
+[node name="bush_109" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(4.63375, 0, 1.87837, 0, 5, 0, -1.87837, 0, 4.63375, -110.828, 0.510721, 45.2655)
+
+[node name="bush_110" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(4.03279, 0, -2.95577, 0, 5, 0, 2.95577, 0, 4.03279, -110.828, 0.510721, 66.7507)
+
+[node name="bush_111" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-3.60548, 0, 3.46417, 0, 5, 0, -3.46417, 0, -3.60548, -110.828, 0.510721, 55.6349)
+
+[node name="bush_112" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-3.60548, 0, 3.46417, 0, 5, 0, -3.46417, 0, -3.60548, -110.828, 0.510721, 76.8855)
+
+[node name="bush_113" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(4.63375, 0, 1.87837, 0, 5, 0, -1.87837, 0, 4.63375, -110.828, 0.510721, 87.9959)
+
+[node name="bush_114" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-4.03279, 0, 2.95577, 0, 5, 0, -2.95577, 0, -4.03279, -123.101, 0.510721, 67.731)
+
+[node name="bush_115" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(3.60548, 0, -3.46417, 0, 5, 0, 3.46417, 0, 3.60548, -123.101, 0.510721, 78.8468)
+
+[node name="bush_116" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(3.60548, 0, -3.46417, 0, 5, 0, 3.46417, 0, 3.60548, -123.101, 0.510721, 57.5962)
+
+[node name="bush_117" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-4.63375, 0, -1.87837, 0, 5, 0, 1.87837, 0, -4.63375, -123.101, 0.510721, 46.4859)
+
+[node name="bush_118" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-4.03279, 0, 2.95577, 0, 5, 0, -2.95577, 0, -4.03279, -123.101, 0.510721, 24.5537)
+
+[node name="bush_119" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(3.60548, 0, -3.46417, 0, 5, 0, 3.46417, 0, 3.60548, -123.101, 0.510721, 35.6695)
+
+[node name="bush_120" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(3.60548, 0, -3.46417, 0, 5, 0, 3.46417, 0, 3.60548, -123.101, 0.510721, 14.419)
+
+[node name="bush_121" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-4.63375, 0, -1.87837, 0, 5, 0, 1.87837, 0, -4.63375, -123.101, 0.510721, 3.30859)
+
+[node name="bush_122" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-4.03279, 0, 2.95577, 0, 5, 0, -2.95577, 0, -4.03279, -123.101, 0.510721, -18.0805)
+
+[node name="bush_123" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(3.60548, 0, -3.46417, 0, 5, 0, 3.46417, 0, 3.60548, -123.101, 0.510721, -6.96472)
+
+[node name="bush_124" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(3.60548, 0, -3.46417, 0, 5, 0, 3.46417, 0, 3.60548, -123.101, 0.510721, -28.2153)
+
+[node name="bush_125" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-4.63375, 0, -1.87837, 0, 5, 0, 1.87837, 0, -4.63375, -123.101, 0.510721, -39.3257)
+
+[node name="bush_126" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-4.03279, 0, 2.95577, 0, 5, 0, -2.95577, 0, -4.03279, -123.101, 0.510721, -60.8109)
+
+[node name="bush_127" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(3.60548, 0, -3.46417, 0, 5, 0, 3.46417, 0, 3.60548, -123.101, 0.510721, -49.6951)
+
+[node name="bush_128" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(3.60548, 0, -3.46417, 0, 5, 0, 3.46417, 0, 3.60548, -123.101, 0.510721, -70.9457)
+
+[node name="bush_129" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-4.63375, 0, -1.87837, 0, 5, 0, 1.87837, 0, -4.63375, -123.101, 0.510721, -82.0561)
+
+[node name="bush_130" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(4.03279, 0, -2.95577, 0, 5, 0, 2.95577, 0, 4.03279, 111.534, 0.510721, -63.3656)
+
+[node name="bush_131" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-3.60548, 0, 3.46417, 0, 5, 0, -3.46417, 0, -3.60548, 111.534, 0.510721, -74.4814)
+
+[node name="bush_132" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-3.60548, 0, 3.46417, 0, 5, 0, -3.46417, 0, -3.60548, 111.534, 0.510721, -53.2308)
+
+[node name="bush_133" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(4.63375, 0, 1.87837, 0, 5, 0, -1.87837, 0, 4.63375, 111.534, 0.510721, -42.1205)
+
+[node name="bush_134" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(4.03279, 0, -2.95577, 0, 5, 0, 2.95577, 0, 4.03279, 111.534, 0.510721, -20.1883)
+
+[node name="bush_135" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-3.60548, 0, 3.46417, 0, 5, 0, -3.46417, 0, -3.60548, 111.534, 0.510721, -31.3041)
+
+[node name="bush_136" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-3.60548, 0, 3.46417, 0, 5, 0, -3.46417, 0, -3.60548, 111.534, 0.510721, -10.0535)
+
+[node name="bush_137" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(4.63375, 0, 1.87837, 0, 5, 0, -1.87837, 0, 4.63375, 111.534, 0.510721, 1.05682)
+
+[node name="bush_138" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(4.03279, 0, -2.95577, 0, 5, 0, 2.95577, 0, 4.03279, 111.534, 0.510721, 22.4459)
+
+[node name="bush_139" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-3.60548, 0, 3.46417, 0, 5, 0, -3.46417, 0, -3.60548, 111.534, 0.510721, 11.3301)
+
+[node name="bush_140" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-3.60548, 0, 3.46417, 0, 5, 0, -3.46417, 0, -3.60548, 111.534, 0.510721, 32.5807)
+
+[node name="bush_141" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(4.63375, 0, 1.87837, 0, 5, 0, -1.87837, 0, 4.63375, 111.534, 0.510721, 43.6911)
+
+[node name="bush_142" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(4.03279, 0, -2.95577, 0, 5, 0, 2.95577, 0, 4.03279, 111.534, 0.510721, 65.1763)
+
+[node name="bush_143" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-3.60548, 0, 3.46417, 0, 5, 0, -3.46417, 0, -3.60548, 111.534, 0.510721, 54.0605)
+
+[node name="bush_144" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-3.60548, 0, 3.46417, 0, 5, 0, -3.46417, 0, -3.60548, 111.534, 0.510721, 75.3111)
+
+[node name="bush_145" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(4.63375, 0, 1.87837, 0, 5, 0, -1.87837, 0, 4.63375, 111.534, 0.510721, 86.4215)
+
+[node name="bush_146" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-4.03279, 0, 2.95577, 0, 5, 0, -2.95577, 0, -4.03279, 100.299, 0.510721, 71.1694)
+
+[node name="bush_147" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(3.60548, 0, -3.46417, 0, 5, 0, 3.46417, 0, 3.60548, 100.299, 0.510721, 82.2853)
+
+[node name="bush_148" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(3.60548, 0, -3.46417, 0, 5, 0, 3.46417, 0, 3.60548, 100.299, 0.510721, 61.0347)
+
+[node name="bush_149" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-4.63376, 0, -1.87837, 0, 5, 0, 1.87837, 0, -4.63376, 100.299, 0.510721, 49.9243)
+
+[node name="bush_150" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-4.03279, 0, 2.95577, 0, 5, 0, -2.95577, 0, -4.03279, 100.299, 0.510721, 27.9922)
+
+[node name="bush_151" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(3.60548, 0, -3.46417, 0, 5, 0, 3.46417, 0, 3.60548, 100.299, 0.510721, 39.108)
+
+[node name="bush_152" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(3.60548, 0, -3.46417, 0, 5, 0, 3.46417, 0, 3.60548, 100.299, 0.510721, 17.8574)
+
+[node name="bush_153" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-4.63376, 0, -1.87837, 0, 5, 0, 1.87837, 0, -4.63376, 100.299, 0.510721, 6.74705)
+
+[node name="bush_154" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-4.03279, 0, 2.95577, 0, 5, 0, -2.95577, 0, -4.03279, 100.299, 0.510721, -14.6421)
+
+[node name="bush_155" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(3.60548, 0, -3.46417, 0, 5, 0, 3.46417, 0, 3.60548, 100.299, 0.510721, -3.52627)
+
+[node name="bush_156" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(3.60548, 0, -3.46417, 0, 5, 0, 3.46417, 0, 3.60548, 100.299, 0.510721, -24.7769)
+
+[node name="bush_157" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-4.63376, 0, -1.87837, 0, 5, 0, 1.87837, 0, -4.63376, 100.299, 0.510721, -35.8872)
+
+[node name="bush_158" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-4.03279, 0, 2.95577, 0, 5, 0, -2.95577, 0, -4.03279, 100.299, 0.510721, -57.3725)
+
+[node name="bush_159" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(3.60548, 0, -3.46417, 0, 5, 0, 3.46417, 0, 3.60548, 100.299, 0.510721, -46.2566)
+
+[node name="bush_160" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(3.60548, 0, -3.46417, 0, 5, 0, 3.46417, 0, 3.60548, 100.299, 0.510721, -67.5072)
+
+[node name="bush_161" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-4.63376, 0, -1.87837, 0, 5, 0, 1.87837, 0, -4.63376, 100.299, 0.510721, -78.6176)
+
+[node name="bush_162" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(4.03279, 0, -2.95577, 0, 5, 0, 2.95577, 0, 4.03279, 89.3004, 0.510721, -61.7912)
+
+[node name="bush_163" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-3.60548, 0, 3.46417, 0, 5, 0, -3.46417, 0, -3.60548, 89.3004, 0.510721, -72.907)
+
+[node name="bush_164" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-3.60548, 0, 3.46417, 0, 5, 0, -3.46417, 0, -3.60548, 89.3004, 0.510721, -51.6564)
+
+[node name="bush_165" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(4.63375, 0, 1.87837, 0, 5, 0, -1.87837, 0, 4.63375, 89.3004, 0.510721, -40.546)
+
+[node name="bush_166" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(4.03279, 0, -2.95577, 0, 5, 0, 2.95577, 0, 4.03279, 89.3004, 0.510721, -18.6139)
+
+[node name="bush_167" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-3.60548, 0, 3.46417, 0, 5, 0, -3.46417, 0, -3.60548, 89.3004, 0.510721, -29.7297)
+
+[node name="bush_168" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-3.60548, 0, 3.46417, 0, 5, 0, -3.46417, 0, -3.60548, 89.3004, 0.510721, -8.47911)
+
+[node name="bush_169" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(4.63375, 0, 1.87837, 0, 5, 0, -1.87837, 0, 4.63375, 89.3004, 0.510721, 2.63125)
+
+[node name="bush_170" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(4.03279, 0, -2.95577, 0, 5, 0, 2.95577, 0, 4.03279, 89.3004, 0.510721, 24.0204)
+
+[node name="bush_171" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-3.60548, 0, 3.46417, 0, 5, 0, -3.46417, 0, -3.60548, 89.3004, 0.510721, 12.9046)
+
+[node name="bush_172" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-3.60548, 0, 3.46417, 0, 5, 0, -3.46417, 0, -3.60548, 89.3004, 0.510721, 34.1552)
+
+[node name="bush_173" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(4.63375, 0, 1.87837, 0, 5, 0, -1.87837, 0, 4.63375, 89.3004, 0.510721, 45.2655)
+
+[node name="bush_174" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(4.03279, 0, -2.95577, 0, 5, 0, 2.95577, 0, 4.03279, 89.3004, 0.510721, 66.7507)
+
+[node name="bush_175" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-3.60548, 0, 3.46417, 0, 5, 0, -3.46417, 0, -3.60548, 89.3004, 0.510721, 55.6349)
+
+[node name="bush_176" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-3.60548, 0, 3.46417, 0, 5, 0, -3.46417, 0, -3.60548, 89.3004, 0.510721, 76.8855)
+
+[node name="bush_177" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(4.63375, 0, 1.87837, 0, 5, 0, -1.87837, 0, 4.63375, 89.3004, 0.510721, 87.9959)
+
+[node name="bush_178" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-4.03279, 0, 2.95577, 0, 5, 0, -2.95577, 0, -4.03279, 77.0267, 0.510721, 67.731)
+
+[node name="bush_179" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(3.60548, 0, -3.46417, 0, 5, 0, 3.46417, 0, 3.60548, 77.0267, 0.510721, 78.8468)
+
+[node name="bush_180" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(3.60548, 0, -3.46417, 0, 5, 0, 3.46417, 0, 3.60548, 77.0267, 0.510721, 57.5962)
+
+[node name="bush_181" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-4.63375, 0, -1.87837, 0, 5, 0, 1.87837, 0, -4.63375, 77.0267, 0.510721, 46.4859)
+
+[node name="bush_182" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-4.03279, 0, 2.95577, 0, 5, 0, -2.95577, 0, -4.03279, 77.0268, 0.510721, 24.5537)
+
+[node name="bush_183" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(3.60548, 0, -3.46417, 0, 5, 0, 3.46417, 0, 3.60548, 77.0268, 0.510721, 35.6695)
+
+[node name="bush_184" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(3.60548, 0, -3.46417, 0, 5, 0, 3.46417, 0, 3.60548, 77.0267, 0.510721, 14.419)
+
+[node name="bush_185" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-4.63375, 0, -1.87837, 0, 5, 0, 1.87837, 0, -4.63375, 77.0267, 0.510721, 3.30859)
+
+[node name="bush_186" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-4.03279, 0, 2.95577, 0, 5, 0, -2.95577, 0, -4.03279, 77.0267, 0.510721, -18.0805)
+
+[node name="bush_187" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(3.60548, 0, -3.46417, 0, 5, 0, 3.46417, 0, 3.60548, 77.0267, 0.510721, -6.96472)
+
+[node name="bush_188" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(3.60548, 0, -3.46417, 0, 5, 0, 3.46417, 0, 3.60548, 77.0267, 0.510721, -28.2153)
+
+[node name="bush_189" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-4.63375, 0, -1.87837, 0, 5, 0, 1.87837, 0, -4.63375, 77.0267, 0.510721, -39.3257)
+
+[node name="bush_190" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-4.03279, 0, 2.95577, 0, 5, 0, -2.95577, 0, -4.03279, 77.0267, 0.510721, -60.8109)
+
+[node name="bush_191" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(3.60548, 0, -3.46417, 0, 5, 0, 3.46417, 0, 3.60548, 77.0267, 0.510721, -49.6951)
+
+[node name="bush_192" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(3.60548, 0, -3.46417, 0, 5, 0, 3.46417, 0, 3.60548, 77.0267, 0.510721, -70.9457)
+
+[node name="bush_193" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-4.63375, 0, -1.87837, 0, 5, 0, 1.87837, 0, -4.63375, 77.0267, 0.510721, -82.0561)
+
+[node name="bush_194" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-2.95577, 0, -4.03279, 0, 5, 0, 4.03279, 0, -2.95577, 63.3618, 0.510721, 109.888)
+
+[node name="bush_195" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(3.46417, 0, 3.60548, 0, 5, 0, -3.60548, 0, 3.46417, 74.4777, 0.510721, 109.888)
+
+[node name="bush_196" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(3.46417, 0, 3.60548, 0, 5, 0, -3.60548, 0, 3.46417, 53.2271, 0.510721, 109.888)
+
+[node name="bush_197" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(1.87837, 0, -4.63375, 0, 5, 0, 4.63375, 0, 1.87837, 42.1167, 0.510721, 109.888)
+
+[node name="bush_198" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-2.95577, 0, -4.03279, 0, 5, 0, 4.03279, 0, -2.95577, 20.1846, 0.510721, 109.888)
+
+[node name="bush_199" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(3.46417, 0, 3.60548, 0, 5, 0, -3.60548, 0, 3.46417, 31.3004, 0.510721, 109.888)
+
+[node name="bush_200" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(3.46417, 0, 3.60548, 0, 5, 0, -3.60548, 0, 3.46417, 10.0498, 0.510721, 109.888)
+
+[node name="bush_201" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(1.87837, 0, -4.63375, 0, 5, 0, 4.63375, 0, 1.87837, -1.06057, 0.510721, 109.888)
+
+[node name="bush_202" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-2.95577, 0, -4.03279, 0, 5, 0, 4.03279, 0, -2.95577, -22.4497, 0.510721, 109.888)
+
+[node name="bush_203" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(3.46417, 0, 3.60548, 0, 5, 0, -3.60548, 0, 3.46417, -11.3339, 0.510721, 109.888)
+
+[node name="bush_204" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(3.46417, 0, 3.60548, 0, 5, 0, -3.60548, 0, 3.46417, -32.5845, 0.510721, 109.888)
+
+[node name="bush_205" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(1.87837, 0, -4.63375, 0, 5, 0, 4.63375, 0, 1.87837, -43.6948, 0.510721, 109.888)
+
+[node name="bush_206" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-2.95577, 0, -4.03279, 0, 5, 0, 4.03279, 0, -2.95577, -65.1801, 0.510721, 109.888)
+
+[node name="bush_207" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(3.46417, 0, 3.60548, 0, 5, 0, -3.60548, 0, 3.46417, -54.0642, 0.510721, 109.888)
+
+[node name="bush_208" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(3.46417, 0, 3.60548, 0, 5, 0, -3.60548, 0, 3.46417, -75.3148, 0.510721, 109.888)
+
+[node name="bush_209" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(1.87837, 0, -4.63375, 0, 5, 0, 4.63375, 0, 1.87837, -86.4252, 0.510721, 109.888)
+
+[node name="bush_210" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(2.95577, 0, 4.03279, 0, 5, 0, -4.03279, 0, 2.95577, -71.1732, 0.510721, 98.6534)
+
+[node name="bush_211" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-3.46417, 0, -3.60548, 0, 5, 0, 3.60548, 0, -3.46417, -82.289, 0.510721, 98.6534)
+
+[node name="bush_212" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-3.46417, 0, -3.60548, 0, 5, 0, 3.60548, 0, -3.46417, -61.0384, 0.510721, 98.6534)
+
+[node name="bush_213" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-1.87837, 0, 4.63375, 0, 5, 0, -4.63375, 0, -1.87837, -49.928, 0.510721, 98.6534)
+
+[node name="bush_214" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(2.95577, 0, 4.03279, 0, 5, 0, -4.03279, 0, 2.95577, -27.9959, 0.510721, 98.6534)
+
+[node name="bush_215" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-3.46417, 0, -3.60548, 0, 5, 0, 3.60548, 0, -3.46417, -39.1117, 0.510721, 98.6534)
+
+[node name="bush_216" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-3.46417, 0, -3.60548, 0, 5, 0, 3.60548, 0, -3.46417, -17.8611, 0.510721, 98.6534)
+
+[node name="bush_217" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-1.87837, 0, 4.63375, 0, 5, 0, -4.63375, 0, -1.87837, -6.75079, 0.510721, 98.6534)
+
+[node name="bush_218" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(2.95577, 0, 4.03279, 0, 5, 0, -4.03279, 0, 2.95577, 14.6383, 0.510721, 98.6534)
+
+[node name="bush_219" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-3.46417, 0, -3.60548, 0, 5, 0, 3.60548, 0, -3.46417, 3.52252, 0.510721, 98.6534)
+
+[node name="bush_220" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-3.46417, 0, -3.60548, 0, 5, 0, 3.60548, 0, -3.46417, 24.7731, 0.510721, 98.6534)
+
+[node name="bush_221" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-1.87837, 0, 4.63375, 0, 5, 0, -4.63375, 0, -1.87837, 35.8835, 0.510721, 98.6534)
+
+[node name="bush_222" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(2.95577, 0, 4.03279, 0, 5, 0, -4.03279, 0, 2.95577, 57.3687, 0.510721, 98.6534)
+
+[node name="bush_223" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-3.46417, 0, -3.60548, 0, 5, 0, 3.60548, 0, -3.46417, 46.2529, 0.510721, 98.6534)
+
+[node name="bush_224" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-3.46417, 0, -3.60548, 0, 5, 0, 3.60548, 0, -3.46417, 67.5035, 0.510721, 98.6534)
+
+[node name="bush_225" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-1.87837, 0, 4.63375, 0, 5, 0, -4.63375, 0, -1.87837, 78.6139, 0.510721, 98.6534)
+
+[node name="bush_226" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-2.95577, 0, -4.03279, 0, 5, 0, 4.03279, 0, -2.95577, 61.7874, 0.510721, 87.6549)
+
+[node name="bush_227" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(3.46417, 0, 3.60548, 0, 5, 0, -3.60548, 0, 3.46417, 72.9032, 0.510721, 87.6549)
+
+[node name="bush_228" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(3.46417, 0, 3.60548, 0, 5, 0, -3.60548, 0, 3.46417, 51.6526, 0.510721, 87.6549)
+
+[node name="bush_229" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(1.87837, 0, -4.63375, 0, 5, 0, 4.63375, 0, 1.87837, 40.5423, 0.510721, 87.6549)
+
+[node name="bush_230" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-2.95577, 0, -4.03279, 0, 5, 0, 4.03279, 0, -2.95577, 18.6102, 0.510721, 87.6549)
+
+[node name="bush_231" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(3.46417, 0, 3.60548, 0, 5, 0, -3.60548, 0, 3.46417, 29.726, 0.510721, 87.6549)
+
+[node name="bush_232" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(3.46417, 0, 3.60548, 0, 5, 0, -3.60548, 0, 3.46417, 8.47536, 0.510721, 87.6549)
+
+[node name="bush_233" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(1.87837, 0, -4.63375, 0, 5, 0, 4.63375, 0, 1.87837, -2.63499, 0.510721, 87.6549)
+
+[node name="bush_234" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-2.95577, 0, -4.03279, 0, 5, 0, 4.03279, 0, -2.95577, -24.0241, 0.510721, 87.6549)
+
+[node name="bush_235" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(3.46417, 0, 3.60548, 0, 5, 0, -3.60548, 0, 3.46417, -12.9083, 0.510721, 87.6549)
+
+[node name="bush_236" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(3.46417, 0, 3.60548, 0, 5, 0, -3.60548, 0, 3.46417, -34.1589, 0.510721, 87.6549)
+
+[node name="bush_237" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(1.87837, 0, -4.63375, 0, 5, 0, 4.63375, 0, 1.87837, -45.2693, 0.510721, 87.6549)
+
+[node name="bush_238" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-2.95577, 0, -4.03279, 0, 5, 0, 4.03279, 0, -2.95577, -66.7545, 0.510721, 87.6549)
+
+[node name="bush_239" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(3.46417, 0, 3.60548, 0, 5, 0, -3.60548, 0, 3.46417, -55.6387, 0.510721, 87.6549)
+
+[node name="bush_240" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(3.46417, 0, 3.60548, 0, 5, 0, -3.60548, 0, 3.46417, -76.8893, 0.510721, 87.6549)
+
+[node name="bush_241" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(1.87837, 0, -4.63375, 0, 5, 0, 4.63375, 0, 1.87837, -87.9996, 0.510721, 87.6549)
+
+[node name="bush_242" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(2.95577, 0, 4.03279, 0, 5, 0, -4.03279, 0, 2.95577, -67.7347, 0.510721, 75.3812)
+
+[node name="bush_243" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-3.46417, 0, -3.60548, 0, 5, 0, 3.60548, 0, -3.46417, -78.8505, 0.510721, 75.3812)
+
+[node name="bush_244" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-3.46417, 0, -3.60548, 0, 5, 0, 3.60548, 0, -3.46417, -57.6, 0.510721, 75.3812)
+
+[node name="bush_245" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-1.87837, 0, 4.63375, 0, 5, 0, -4.63375, 0, -1.87837, -46.4896, 0.510721, 75.3812)
+
+[node name="bush_246" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(2.95577, 0, 4.03279, 0, 5, 0, -4.03279, 0, 2.95577, -24.5575, 0.510721, 75.3812)
+
+[node name="bush_247" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-3.46417, 0, -3.60548, 0, 5, 0, 3.60548, 0, -3.46417, -35.6733, 0.510721, 75.3812)
+
+[node name="bush_248" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-3.46417, 0, -3.60548, 0, 5, 0, 3.60548, 0, -3.46417, -14.4227, 0.510721, 75.3812)
+
+[node name="bush_249" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-1.87837, 0, 4.63375, 0, 5, 0, -4.63375, 0, -1.87837, -3.31234, 0.510721, 75.3812)
+
+[node name="bush_250" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(2.95577, 0, 4.03279, 0, 5, 0, -4.03279, 0, 2.95577, 18.0768, 0.510721, 75.3812)
+
+[node name="bush_251" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-3.46417, 0, -3.60548, 0, 5, 0, 3.60548, 0, -3.46417, 6.96098, 0.510721, 75.3812)
+
+[node name="bush_252" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-3.46417, 0, -3.60548, 0, 5, 0, 3.60548, 0, -3.46417, 28.2116, 0.510721, 75.3812)
+
+[node name="bush_253" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-1.87837, 0, 4.63375, 0, 5, 0, -4.63375, 0, -1.87837, 39.3219, 0.510721, 75.3812)
+
+[node name="bush_254" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(2.95577, 0, 4.03279, 0, 5, 0, -4.03279, 0, 2.95577, 60.8072, 0.510721, 75.3812)
+
+[node name="bush_255" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-3.46417, 0, -3.60548, 0, 5, 0, 3.60548, 0, -3.46417, 49.6914, 0.510721, 75.3812)
+
+[node name="bush_256" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-3.46417, 0, -3.60548, 0, 5, 0, 3.60548, 0, -3.46417, 70.942, 0.510721, 75.3812)
+
+[node name="bush_257" parent="Map" instance=ExtResource("35_puvci")]
+transform = Transform3D(-1.87837, 0, 4.63375, 0, 5, 0, -4.63375, 0, -1.87837, 82.0523, 0.510721, 75.3812)
 
 [node name="sleeping_bag2" parent="Map" instance=ExtResource("36_1ha88")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 30.2411, 0.499998, 13.146)
