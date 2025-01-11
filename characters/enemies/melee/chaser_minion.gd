@@ -10,7 +10,7 @@ enum BehaviorState {Idling, Reaching, Attacking, Dead}
 @onready var detection_area: Area3D = $DetectionRange
 @onready var beehave_tree: BeehaveTree = $BeehaveTree
 
-@export var movement_speed: float = 8.0
+@export var movement_speed: float = 12.0
 @export var rotation_speed := 12.0
 @export var points_dropped: int = 10
 
@@ -30,15 +30,16 @@ var velocity_for_animations = Vector3.ZERO
 
 
 # Add only these new properties
-@export var explosion_delay: float = 2.0
-@export var explosion_damage: float = 20.0
-@export var explosion_radius: float = 5.0
+@export var explosion_delay: float = 1.0
+@export var explosion_damage: float = 10.0
+@export var explosion_radius: float = 7.0
 @export var blink_speed: float = 8.0
-@export var explosion_movement_speed: float = 0.3  # Controls how fast the blinking happens
+@export var explosion_movement_speed: float = 0.4  # Controls how fast the blinking happens
 
 # Add minimal state tracking
 var is_exploding: bool = false
 var explosion_timer: float = 0.0
+var has_exploded: bool = false
 
 #@onready var mesh_instance: MeshInstance3D = $Body_001  # Reference to your model
 @onready var radius_mesh: MeshInstance3D = $RadiusMesh   # Add this in editor
@@ -143,7 +144,6 @@ func _on_velocity_computed(safe_velocity: Vector3):
 	velocity_for_animations = safe_velocity
 
 
-
 @rpc("authority", "call_remote", "reliable", 0)
 func move_to_running() -> void:
 	transition.xfade_time = 0.1
@@ -160,16 +160,7 @@ func move_to_idling() -> void:
 func move_to_dying() -> void:
 	transition.xfade_time = 0
 	anim_tree["parameters/state/transition_request"] = "Dying"
-	self.process_mode = Node.PROCESS_MODE_DISABLED
-	# Note: we set the MeleeSkin so that it does not inherit the parent's state
-	# This way it can continue to play the animation and then we use a tween to
-	# disable it with a 2 sec delay.
-	(get_tree().create_tween()
-	.tween_callback(func(): 
-		$MeleeSkin.process_mode = Node.PROCESS_MODE_DISABLED
-		anim_tree.process_mode = Node.PROCESS_MODE_DISABLED
-		)
-	.set_delay(2))
+	AudioManager.explosion_sfx.play()
 
 
 @rpc("authority", "call_remote", "reliable", 0)
@@ -197,7 +188,6 @@ func deal_damage():
 
 @rpc("any_peer", "call_remote", "reliable", 0)
 func orient_model_to_direction(direction: Vector3, delta: float) -> void:
-	
 	#if direction.length() > 0.05:
 	_last_strong_direction = direction
 	if target_object: # prioritize aligning with target if any
@@ -252,31 +242,31 @@ func start_explosion_sequence() -> void:
 
 @rpc("any_peer")
 func disable_radius_mesh() -> void:
-	radius_mesh.visible = false
+	radius_mesh.call_deferred('queue_free')
 
 
 func _physics_process(delta: float) -> void:
 	if not multiplayer.is_server():
-		if is_exploding:
+		if is_exploding and not has_exploded:
 			explosion_timer += delta
 			#update_blinking(delta)
 			if explosion_timer >= explosion_delay:
 				trigger_explosion()
+				has_exploded = true
 
 
 func trigger_explosion() -> void:
 	# Hide the radius visualization immediately
-	if radius_mesh:
-		disable_radius_mesh.rpc_id(1)
-	
+	#if radius_mesh:
+		#disable_radius_mesh.rpc_id(1)
+	print("trigger_explosion")
 	deal_explosion_damage.rpc_id(1)
-	AudioManager.explosion_sfx.play()
-	move_to_dying()
 
 
 @rpc("any_peer", "call_remote", "reliable", 0)
 func deal_explosion_damage() -> void:
-	print("deal_explosion_damage()")
+	self.health_points = 0
+	
 	var space_state = get_world_3d().direct_space_state
 	var query = PhysicsShapeQueryParameters3D.new()
 	var shape = SphereShape3D.new()
@@ -287,14 +277,12 @@ func deal_explosion_damage() -> void:
 	for result in results:
 		var collider = result.collider
 		if collider is PlayerEntity:
-			print ("damage dealt")
 			var distance = global_position.distance_squared_to(collider.global_position)
-			print(distance)
-			if distance < explosion_radius:
+			if distance < explosion_radius**2:
 				var damage = explosion_damage
 				collider.health_manager.get_damage(damage)
-	
-	get_tree().create_timer(1.0).timeout.connect(queue_free)
+	disable_radius_mesh()
+	get_tree().create_timer(2.0).timeout.connect(queue_free)
 
 
 #func update_blinking(delta: float) -> void:
@@ -321,7 +309,7 @@ func _on_hit_area_body_entered(colliding_body):
 			if health_points <= 0:
 				if colliding_body.shooter != null:
 					colliding_body.shooter.add_points(points_dropped)
-				get_tree().create_timer(1.0).timeout.connect(queue_free)
+				get_tree().create_timer(2.0).timeout.connect(queue_free)
 			
 			else:
 				play_on_hit.rpc(true)

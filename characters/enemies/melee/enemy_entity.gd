@@ -10,6 +10,7 @@ enum BehaviorState {Idling, Reaching, Attacking, Dead}
 @onready var weapon_anchor: Node3D = $WeaponAnchor
 @onready var beehave_tree: BeehaveTree = $BeehaveTree
 @onready var attack_range: Area3D = $AttackRange
+@onready var melee_skin: Node3D = $MeleeSkin
 
 @export var movement_speed: float = 8.0
 @export var rotation_speed := 12.0
@@ -110,16 +111,6 @@ func move_to_idling() -> void:
 func move_to_dying() -> void:
 	transition.xfade_time = 0
 	anim_tree["parameters/state/transition_request"] = "Dying"
-	self.process_mode = Node.PROCESS_MODE_DISABLED
-	# Note: we set the MeleeSkin so that it does not inherit the parent's state
-	# This way it can continue to play the animation and then we use a tween to
-	# disable it with a 2 sec delay.
-	(get_tree().create_tween()
-	.tween_callback(func():
-		$MeleeSkin.process_mode = Node.PROCESS_MODE_DISABLED
-		anim_tree.process_mode = Node.PROCESS_MODE_DISABLED
-		)
-	.set_delay(2))
 
 
 @rpc("authority", "call_remote", "reliable", 0)
@@ -200,9 +191,14 @@ func _on_hit_area_body_entered(colliding_body):
 			if health_points <= 0:
 				if colliding_body.shooter != null:
 					colliding_body.shooter.add_points(points_dropped)
-				get_tree().create_timer(1.0).timeout.connect(queue_free)
-			
+				get_tree().create_timer(2.0).timeout.connect(_on_death)
 			else:
 				play_on_hit.rpc(true)
 			
 			colliding_body.remove_from_group("bullet")
+
+
+func _on_death():
+	#print_debug("_on_death called")
+	#push_error("_on_death called")
+	call_deferred("queue_free")
