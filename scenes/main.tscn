@@ -245,7 +245,6 @@ radius = 0.3
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xj7ah"]
 resource_name = "mat21"
-albedo_color = Color(1, 1, 1, 1)
 emission_enabled = true
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_wpnhe"]
@@ -509,6 +508,33 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_3ukby")
 
+[sub_resource type="Animation" id="Animation_loweq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.140072, 0.175778, 0.522771)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.68575, 0.194263, -0.0125815)]
+}
+
 [sub_resource type="Animation" id="Animation_2b8j6"]
 resource_name = "swing"
 length = 2.0
@@ -536,33 +562,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector3(-0.68575, 0.194263, -0.0125815), Vector3(-0.352554, 0.173197, -0.0369566), Vector3(-0.0610086, 0.154765, -0.0582848), Vector3(0.230537, 0.136332, -0.079613), Vector3(0.702767, 0.101456, -0.154954)]
-}
-
-[sub_resource type="Animation" id="Animation_loweq"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0.140072, 0.175778, 0.522771)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(-0.68575, 0.194263, -0.0125815)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4kxg1"]
@@ -1980,7 +1979,7 @@ mesh = SubResource("ArrayMesh_gv804")
 skeleton = NodePath("")
 
 [node name="rightswing" type="Node3D" parent="Map/swing set"]
-transform = Transform3D(0.982653, -0.109891, 0.149405, -0.00973714, 0.773886, 0.633255, -0.185211, -0.623724, 0.759388, 0.140072, 0.175778, 0.522771)
+transform = Transform3D(0.982653, -0.109892, 0.149405, -0.00973715, 0.773886, 0.633255, -0.185211, -0.623724, 0.759388, 0.140072, 0.175778, 0.522771)
 
 [node name="swingrightleg" type="MeshInstance3D" parent="Map/swing set/rightswing"]
 transform = Transform3D(1, 0, -1.49012e-08, 0, 1, 0, 1.49012e-08, 0, 1, 0, 0, 0)
@@ -2073,7 +2072,6 @@ text = "Points: 0"
 script = ExtResource("11_44721")
 
 [node name="HealthDisplay" type="Control" parent="HUD"]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2254,6 +2252,7 @@ script = ExtResource("36_xvutp")
 [node name="MovementUpgradeArea" type="Area3D" parent="MovementUpgrade"]
 collision_layer = 8
 script = ExtResource("37_gti0l")
+upgrade_increment = 1
 
 [node name="InteractionTip" parent="MovementUpgrade/MovementUpgradeArea" instance=ExtResource("27_dojsb")]
 

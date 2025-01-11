@@ -1,7 +1,7 @@
 extends Area3D
 
 @export var cost: int = 100
-@export var upgrade_increment: int = 2
+@export var upgrade_increment: int = 1.5
 
 
 func interact(player: PlayerEntity) -> void:

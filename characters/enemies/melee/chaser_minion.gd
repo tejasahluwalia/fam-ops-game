@@ -170,6 +170,8 @@ func move_to_dying() -> void:
 		anim_tree.process_mode = Node.PROCESS_MODE_DISABLED
 		)
 	.set_delay(2))
+	if radius_mesh:
+		disable_radius_mesh.rpc_id(1)
 
 
 @rpc("authority", "call_remote", "reliable", 0)
