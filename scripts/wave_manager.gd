@@ -4,7 +4,7 @@ var enemies_node: Enemies
 var spawn_points: Array[Marker3D] = []
 var is_wave_active: bool = false
 
-var TIME_BETWEEN_WAVES: float = 10.0
+var TIME_BETWEEN_WAVES: float = 4.0
 
 var _current_wave: Dictionary = {
 	"wave_number": 0,
@@ -18,25 +18,76 @@ var _wave_tiers: Dictionary = {
 		"base_spawn": {
 			"minion": {
 				"tier": 1,
-				"quantity": 1,
+				"quantity": 4,
 				"flow_rate": 1,
 				"spawn_points": ["SW", "SE"]
 			}
 		}
 	},
 	2: {
-		"range": [2, 999],
+		"range": [2, 5],
 		"base_spawn": {
 			"minion": {
 				"tier": 1,
-				"quantity": 40,
+				"quantity": 10,
+				"flow_rate": 0.75,
+				"spawn_points": ["SW", "SE"]
+			},
+			"chaser": {
+				"tier": 1,
+				"quantity": 5,
+				"flow_rate": 4,
+				"spawn_points": ["NW", "NE"]
+			}
+		}
+	},
+	3: {
+		"range": [6, 9],
+		"base_spawn": {
+			"minion": {
+				"tier": 1,
+				"quantity": 16,
+				"flow_rate": 0.5,
+				"spawn_points": ["SW", "SE"]
+			},
+			"chaser": {
+				"tier": 1,
+				"quantity": 8,
+				"flow_rate": 4,
+				"spawn_points": ["NW", "NE"]
+			}
+		}
+	},
+	4: {
+		"range": [10, 14],
+		"base_spawn": {
+			"minion": {
+				"tier": 1,
+				"quantity": 22,
 				"flow_rate": 0.5,
 				"spawn_points": ["SW", "SE"]
 			},
 			"chaser": {
 				"tier": 1,
 				"quantity": 10,
-				"flow_rate": 10,
+				"flow_rate": 2,
+				"spawn_points": ["NW", "NE"]
+			}
+		}
+	},
+	5: {
+		"range": [15, 20],
+		"base_spawn": {
+			"minion": {
+				"tier": 1,
+				"quantity": 26,
+				"flow_rate": 0.5,
+				"spawn_points": ["SW", "SE"]
+			},
+			"chaser": {
+				"tier": 1,
+				"quantity": 12,
+				"flow_rate": 2,
 				"spawn_points": ["NW", "NE"]
 			}
 		}

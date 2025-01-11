@@ -91,7 +91,7 @@ radius = 200.0
 radius = 2.06982
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_2ue0h"]
-radius = 0.56734
+radius = 3.0
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_344ha"]
 properties/0/path = NodePath(".:position")
@@ -108,6 +108,7 @@ properties/2/replication_mode = 1
 collision_layer = 16
 collision_mask = 27
 script = ExtResource("1_p1qno")
+movement_speed = 12.0
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 process_mode = 1
@@ -154,7 +155,7 @@ monitorable = false
 shape = SubResource("SphereShape3D_vfolx")
 
 [node name="WeaponAnchor" type="BoneAttachment3D" parent="."]
-transform = Transform3D(0.393251, -0.0232529, 0.919137, 0.79503, 0.510733, -0.327232, -0.461824, 0.859426, 0.219333, -0.599293, 0.00299174, -9.52384)
+transform = Transform3D(0.393252, -0.0232529, 0.919137, 0.750542, 0.585546, -0.306305, -0.531074, 0.810306, 0.247719, -0.477003, 0.381067, -6.0132)
 bone_name = "DEF-weapon-anchor"
 bone_idx = 25
 use_external_skeleton = true
@@ -187,7 +188,7 @@ debug_path_custom_point_size = 10.04
 [node name="BeehaveTree" type="Node" parent="." node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("3_1stn8")
 actor_node_path = NodePath("..")
-blackboard = NodePath("@Node@33810")
+blackboard = NodePath("@Node@23631")
 actor = NodePath("..")
 
 [node name="SelectBehaviour" type="Node" parent="BeehaveTree"]

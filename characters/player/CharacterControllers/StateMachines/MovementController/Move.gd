@@ -1,7 +1,7 @@
 # MovementController for ALL controller modes
 extends PlayerState
 
-@export var max_speed := 15.0
+@export var max_speed := 11.0
 @export var acceleration := 50.0
 @export var gravity := -30.0
 @export var snap_length := 0.5
