@@ -1,4 +1,4 @@
-[gd_scene load_steps=93 format=4 uid="uid://og0akbc31x1j"]
+[gd_scene load_steps=96 format=4 uid="uid://og0akbc31x1j"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_pw6e1"]
 [ext_resource type="Environment" uid="uid://13w4n7joxo58" path="res://scenes/world_environment.tres" id="8_5s5wh"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://dsik8dj4tckyc" path="res://assets/low_poly/roads/road_I_1.glb" id="18_uh1eo"]
 [ext_resource type="PackedScene" uid="uid://dd2k68agf21th" path="res://assets/low_poly/roads/road_I_2.glb" id="19_faqmm"]
 [ext_resource type="PackedScene" uid="uid://blvl1sxmjpc3l" path="res://assets/low_poly/roads/traffic_barell_1.glb" id="20_2yhh4"]
+[ext_resource type="PackedScene" uid="uid://cnl4x8ihom8i0" path="res://assets/low_poly/Manhole Cover.glb" id="20_nnxmu"]
 [ext_resource type="MeshLibrary" uid="uid://dcjy1mlojhnpw" path="res://LevelDesign/low_poly_roads.tres" id="21_188le"]
 [ext_resource type="PackedScene" uid="uid://dit211c1ekian" path="res://assets/low_poly/gas_station/wooden_spike_barricade.glb" id="22_gp4kp"]
 [ext_resource type="PackedScene" uid="uid://cb2ryv60cn5bt" path="res://assets/low_poly/gas_station/box_1.glb" id="24_g5p6o"]
@@ -702,6 +703,15 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_oqn7t")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yu8xv"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_hquet"]
+material = SubResource("StandardMaterial3D_yu8xv")
+height = 0.1
+radial_segments = 8
+rings = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aotmc"]
 bg_color = Color(0.889992, 0.861158, 0.981073, 1)
@@ -2034,14 +2044,46 @@ script = ExtResource("15_ie0uf")
 [node name="SE" type="Marker3D" parent="EnemySpawnPoints"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.0818, 0, -29.2975)
 
+[node name="SpawnArea" type="MeshInstance3D" parent="EnemySpawnPoints/SE"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0.0228778, 0)
+mesh = SubResource("CylinderMesh_hquet")
+skeleton = NodePath("Root Scene")
+
+[node name="Root Scene" parent="EnemySpawnPoints/SE/SpawnArea" instance=ExtResource("20_nnxmu")]
+transform = Transform3D(1.4, 0, 0, 0, 1.4, 0, 0, 0, 1.4, -0.214682, 0.0874478, -0.693314)
+
 [node name="SW" type="Marker3D" parent="EnemySpawnPoints"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.1557, 0, -39.3311)
+
+[node name="SpawnArea2" type="MeshInstance3D" parent="EnemySpawnPoints/SW"]
+transform = Transform3D(-2.5, 0, -4.33013, 0, 5, 0, 4.33013, 0, -2.5, 0.00609207, -0.0969833, -0.034256)
+mesh = SubResource("CylinderMesh_hquet")
+skeleton = NodePath("Root Scene")
+
+[node name="Root Scene" parent="EnemySpawnPoints/SW/SpawnArea2" instance=ExtResource("20_nnxmu")]
+transform = Transform3D(1.4, 0, 0, 0, 1.4, 0, 0, 0, 1.4, -0.214682, 0.0874478, -0.693314)
 
 [node name="NW" type="Marker3D" parent="EnemySpawnPoints"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.2698, 0, 52.9925)
 
+[node name="SpawnArea3" type="MeshInstance3D" parent="EnemySpawnPoints/NW"]
+transform = Transform3D(-2.18557e-07, 0, -5, 0, 5, 0, 5, 0, -2.18557e-07, 0.0662308, -0.106448, -0.00133514)
+mesh = SubResource("CylinderMesh_hquet")
+skeleton = NodePath("Root Scene")
+
+[node name="Root Scene" parent="EnemySpawnPoints/NW/SpawnArea3" instance=ExtResource("20_nnxmu")]
+transform = Transform3D(1.4, 0, 0, 0, 1.4, 0, 0, 0, 1.4, -0.214682, 0.0874478, -0.693314)
+
 [node name="NE" type="Marker3D" parent="EnemySpawnPoints"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.7231, 0, 42.438)
+
+[node name="SpawnArea4" type="MeshInstance3D" parent="EnemySpawnPoints/NE"]
+transform = Transform3D(1.2941, 0, 4.82963, 0, 5, 0, -4.82963, 0, 1.2941, 0.035759, -0.0534525, 0.221867)
+mesh = SubResource("CylinderMesh_hquet")
+skeleton = NodePath("Root Scene")
+
+[node name="Root Scene" parent="EnemySpawnPoints/NE/SpawnArea4" instance=ExtResource("20_nnxmu")]
+transform = Transform3D(1.4, 0, 0, 0, 1.4, 0, 0, 0, 1.4, -0.214682, 0.0874478, -0.693314)
 
 [node name="Enemies" parent="." instance=ExtResource("15_bjega")]
 
@@ -2072,6 +2114,7 @@ text = "Points: 0"
 script = ExtResource("11_44721")
 
 [node name="HealthDisplay" type="Control" parent="HUD"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2133,6 +2176,20 @@ custom_minimum_size = Vector2(320, 60)
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_constants/separation = 20
+
+[node name="WaveStatus" type="Label" parent="HUD"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -28.5
+offset_right = 28.5
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.0214346, 0.0214346, 0.0214346, 1)
+theme_override_fonts/font = ExtResource("31_n0a4v")
+theme_override_font_sizes/font_size = 71
+text = "Wave 1"
 
 [node name="MainMenu" type="Control" parent="."]
 layout_mode = 3
