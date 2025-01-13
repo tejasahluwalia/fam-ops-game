@@ -25,51 +25,51 @@ var _wave_tiers: Dictionary = {
 		}
 	},
 	2: {
-		"range": [2, 5],
+		"range": [2, 4],
 		"base_spawn": {
 			"minion": {
 				"tier": 1,
-				"quantity": 10,
+				"quantity": 12,
 				"flow_rate": 0.75,
 				"spawn_points": ["SW", "SE"]
 			},
 			"chaser": {
 				"tier": 1,
-				"quantity": 5,
+				"quantity": 6,
 				"flow_rate": 4,
 				"spawn_points": ["NW", "NE"]
 			}
 		}
 	},
 	3: {
-		"range": [6, 9],
+		"range": [5, 8],
 		"base_spawn": {
 			"minion": {
 				"tier": 1,
-				"quantity": 16,
+				"quantity": 25,
 				"flow_rate": 0.5,
 				"spawn_points": ["SW", "SE"]
 			},
 			"chaser": {
 				"tier": 1,
-				"quantity": 8,
+				"quantity": 12,
 				"flow_rate": 4,
 				"spawn_points": ["NW", "NE"]
 			}
 		}
 	},
 	4: {
-		"range": [10, 14],
+		"range": [9, 14],
 		"base_spawn": {
 			"minion": {
 				"tier": 1,
-				"quantity": 22,
+				"quantity": 35,
 				"flow_rate": 0.5,
 				"spawn_points": ["SW", "SE"]
 			},
 			"chaser": {
 				"tier": 1,
-				"quantity": 10,
+				"quantity": 18,
 				"flow_rate": 2,
 				"spawn_points": ["NW", "NE"]
 			}
@@ -80,13 +80,13 @@ var _wave_tiers: Dictionary = {
 		"base_spawn": {
 			"minion": {
 				"tier": 1,
-				"quantity": 26,
+				"quantity": 50,
 				"flow_rate": 0.5,
 				"spawn_points": ["SW", "SE"]
 			},
 			"chaser": {
 				"tier": 1,
-				"quantity": 12,
+				"quantity": 20,
 				"flow_rate": 2,
 				"spawn_points": ["NW", "NE"]
 			}

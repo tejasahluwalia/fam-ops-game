@@ -22,9 +22,15 @@ func _on_join_button_pressed() -> void:
 	MultiplayerManager.join_game()
 	_remove_buttons()
 
+
+
 	await get_tree().create_timer(3).timeout
 	WaveManager.start.rpc_id(1)
 
 
 func _remove_buttons() -> void:
 	main_menu.queue_free()
+
+
+func _on_quit_button_pressed():
+	get_tree().quit()
