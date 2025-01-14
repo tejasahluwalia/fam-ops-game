@@ -1,5 +1,7 @@
 extends Node
 
+signal wave_started(wave_number: int)
+
 var enemies_node: Enemies
 var spawn_points: Array[Marker3D] = []
 var is_wave_active: bool = false
@@ -114,6 +116,8 @@ func start() -> void:
 
 func start_next_wave() -> void:
 	_current_wave.wave_number += 1
+	wave_started.emit(_current_wave.wave_number)
+	
 	var _attrs = _get_wave_attributes()
 
 	if _attrs.has("error"):

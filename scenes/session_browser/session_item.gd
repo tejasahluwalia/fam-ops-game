@@ -3,7 +3,7 @@ extends PanelContainer
 var session_id: String
 var player: String
 
-@onready var label = $HBoxContainer/Label
+@onready var label = %Label
 
 
 func setup(_session_id: String, server_name: String, player_name: String):

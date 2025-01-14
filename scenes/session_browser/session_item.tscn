@@ -10,17 +10,27 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_b1oy5")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="HBoxContainer"]
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 36
+text = "Example Text"
 
-[node name="JoinButton" type="Button" parent="HBoxContainer"]
+[node name="JoinButton" type="Button" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 24
 text = "Join"
 
-[connection signal="pressed" from="HBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]

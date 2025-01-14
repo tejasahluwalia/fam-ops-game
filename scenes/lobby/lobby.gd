@@ -2,7 +2,7 @@ extends Control
 
 @onready var start_button = %StartButton
 @onready var player_list = %PlayerList
-@onready var session_name: Label = $Panel/VBoxContainer/SessionName
+@onready var session_name: Label = %SessionName
 @onready var timer: Timer = $Timer
 
 var home_menu_scene = load("res://scenes/home_menu/home_menu.tscn")

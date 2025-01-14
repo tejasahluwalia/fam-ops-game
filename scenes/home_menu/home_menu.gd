@@ -9,6 +9,7 @@ var session_browser_scene = load("res://scenes/session_browser/session_browser.t
 @onready var host_lobby_input_panel: PanelContainer = $HostLobbyInputPanel
 @onready var join_lobby_input_panel: PanelContainer = $JoinLobbyInputPanel
 @onready var player_name: LineEdit = $JoinLobbyInputPanel/MarginContainer/VBoxContainer/PlayerName
+@onready var controls: Control = $Controls
 
 
 # Called when the node enters the scene tree for the first time.
@@ -17,6 +18,7 @@ func _ready() -> void:
 
 
 func _on_join_button_pressed() -> void:
+	host_lobby_input_panel.visible = false
 	join_lobby_input_panel.visible = true
 
 
@@ -28,6 +30,7 @@ func _on_join_submit_button_pressed() -> void:
 
 
 func _on_host_button_pressed() -> void:
+	join_lobby_input_panel.visible = false
 	host_lobby_input_panel.visible = true
 
 
@@ -44,3 +47,11 @@ func _on_quit_button_pressed() -> void:
 func _on_host_submit_button_pressed() -> void:
 	if server_name.text != "" and host_name.text != "":
 		SessionManager.create_session(server_name.text, host_name.text)
+
+
+func _on_controls_button_pressed():
+	controls.visible = true
+
+
+func _on_back_button_pressed():
+	controls.visible = false

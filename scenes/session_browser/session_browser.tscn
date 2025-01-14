@@ -59,14 +59,24 @@ size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 48
 text = "Refresh"
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Panel/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/VBoxContainer/MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="SessionList" type="VBoxContainer" parent="Panel/VBoxContainer/ScrollContainer"]
+[node name="SessionList" type="VBoxContainer" parent="Panel/VBoxContainer/MarginContainer/ScrollContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_constants/separation = 20
 
 [connection signal="pressed" from="Panel/VBoxContainer/Header/HBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/Header/HBoxContainer/RefreshButton" to="." method="_on_refresh_button_pressed"]

@@ -25,7 +25,6 @@
 [ext_resource type="Script" path="res://scripts/weapon_upgrade_interactable_area_3d.gd" id="26_8nuuq"]
 [ext_resource type="PackedScene" uid="uid://bjlcoarj0qxqh" path="res://assets/low_poly/gas_station/electric_pole_1.glb" id="26_oi7rw"]
 [ext_resource type="PackedScene" uid="uid://cpxkladyjcj8d" path="res://ui/interaction_tip.tscn" id="27_dojsb"]
-[ext_resource type="Texture2D" uid="uid://bhmt2vogyrbl7" path="res://ui/controls.png" id="27_oihwf"]
 [ext_resource type="Texture2D" uid="uid://bakvty0svsxlg" path="res://ui/TitleScreenPlain.png" id="30_clmjy"]
 [ext_resource type="FontFile" uid="uid://bpxdtwnb3n8j" path="res://ui/fonts/RubikWetPaint-Regular.ttf" id="31_n0a4v"]
 [ext_resource type="Texture2D" uid="uid://ccw764y6lxnj1" path="res://ui/FR_upgrade.png" id="35_emp1u"]
@@ -247,7 +246,6 @@ radius = 0.3
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xj7ah"]
 resource_name = "mat21"
-albedo_color = Color(1, 1, 1, 1)
 emission_enabled = true
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_wpnhe"]
@@ -724,16 +722,13 @@ bg_color = Color(0.465425, 0.673909, 0.209438, 1)
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_seum2"]
 texture = ExtResource("30_clmjy")
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_a74f2"]
+
 [sub_resource type="FontVariation" id="FontVariation_5wdru"]
 base_font = ExtResource("31_n0a4v")
 
 [sub_resource type="FontVariation" id="FontVariation_2i5h7"]
 base_font = ExtResource("31_n0a4v")
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_h1fmr"]
-texture = ExtResource("27_oihwf")
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_a74f2"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_kqpil"]
 radius = 6.0
@@ -2236,82 +2231,6 @@ theme_override_constants/margin_left = 80
 theme_override_constants/margin_top = 80
 theme_override_constants/margin_right = 80
 theme_override_constants/margin_bottom = 80
-
-[node name="Controls" type="Control" parent="."]
-visible = false
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Background" type="Panel" parent="Controls"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_seum2")
-
-[node name="ColorRect" type="ColorRect" parent="Controls"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 0.741176)
-
-[node name="Controls" type="Panel" parent="Controls"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_h1fmr")
-
-[node name="Title" type="Label" parent="Controls"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -337.0
-offset_top = -494.0
-offset_right = 337.0
-offset_bottom = -302.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0.227451, 0.854902, 0.556863, 0.721569)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_y = 5
-theme_override_constants/outline_size = 10
-theme_override_fonts/font = SubResource("FontVariation_5wdru")
-theme_override_font_sizes/font_size = 161
-text = "How To Play"
-
-[node name="BackButton" type="Button" parent="Controls"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -877.0
-offset_top = 404.0
-offset_right = -677.0
-offset_bottom = 504.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/outline_size = 5
-theme_override_fonts/font = SubResource("FontVariation_2i5h7")
-theme_override_font_sizes/font_size = 70
-text = "Back"
 
 [node name="GameOver" type="Control" parent="."]
 visible = false

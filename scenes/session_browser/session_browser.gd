@@ -6,7 +6,7 @@ var home_menu_scene = load("res://scenes/home_menu/home_menu.tscn")
 
 var player_name: StringName = ""
 
-@onready var session_list = $Panel/VBoxContainer/ScrollContainer/SessionList
+@onready var session_list = %SessionList
 
 
 func _ready():

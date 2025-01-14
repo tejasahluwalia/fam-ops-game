@@ -21,11 +21,3 @@ func _ready() -> void:
 
 	WaveManager.enemies_node = enemies_node
 	AudioManager.main_menu_track.play()
-
-
-func _on_controls_button_pressed():
-	controls.visible = true
-
-
-func _on_back_button_pressed():
-	controls.visible = false

@@ -3,6 +3,15 @@ class_name HUD
 
 @onready var points_display: Label = $PointsDisplay
 @onready var health_display: Control = $HealthDisplay
+@onready var wave_status: Label = $WaveStatus
+
+
+func _ready() -> void:
+	WaveManager.wave_started.connect(_on_wave_started)
+
+
+func _on_wave_started(wave_number: int) -> void:
+	wave_status.text = "Wave " + str(wave_number)
 
 
 func _on_player_entered_tree(node: Node) -> void:
