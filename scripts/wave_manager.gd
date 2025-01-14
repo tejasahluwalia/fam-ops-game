@@ -159,7 +159,7 @@ func _on_enemy_spawn_timeout(
 func _end_wave() -> void:
 	print("Ending wave: ", _current_wave.wave_number)
 	is_wave_active = false
-	if _current_wave.wave_number == 1:
+	if _current_wave.wave_number == 20:
 		all_waves_survived.emit()
 	else:
 		await get_tree().create_timer(TIME_BETWEEN_WAVES).timeout

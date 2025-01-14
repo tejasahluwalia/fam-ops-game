@@ -12,7 +12,7 @@ extends CharacterBody3D
 @onready var position_resetter := $PositionResetter
 @onready var start_position := global_transform.origin
 
-var points: int = 1000
+var points: int = 0
 
 @export var use_saved_controller: bool = true
 @export var controller_schemes: Array[PackedScene]

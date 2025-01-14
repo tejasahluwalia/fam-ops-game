@@ -30,11 +30,13 @@ func _ready() -> void:
 
 @rpc("authority", "call_remote", "reliable", 0)
 func _game_won():
+	hud.visible = false
 	game_win.visible = true
 
 
 @rpc("authority", "call_remote", "reliable", 0)
 func _game_lost():
+	hud.visible = false
 	game_over.visible = true
 
 
