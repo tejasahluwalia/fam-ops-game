@@ -1,12 +1,12 @@
 [gd_scene load_steps=8 format=3 uid="uid://codrh050hbdgm"]
 
 [ext_resource type="Script" path="res://scripts/audio_manager.gd" id="1_28cyv"]
-[ext_resource type="AudioStream" uid="uid://ho1jjqx5k5y8" path="res://Sounds/Shoot.wav" id="2_aq3x3"]
-[ext_resource type="AudioStream" uid="uid://8y1wkpn3xn1d" path="res://Sounds/Upgrade3.wav" id="3_fr4va"]
-[ext_resource type="AudioStream" uid="uid://bgh70o82y5pb8" path="res://Sounds/EnemyAttack.wav" id="4_5vk5x"]
-[ext_resource type="AudioStream" uid="uid://cmsoc7imkdlpo" path="res://Sounds/Hit.wav" id="5_v6qcn"]
-[ext_resource type="AudioStream" uid="uid://c2tgtbeoh0psv" path="res://Sounds/MainMenu_BG.wav" id="6_dh4l2"]
-[ext_resource type="AudioStream" uid="uid://bda2oemh4gafs" path="res://Sounds/Explosion.wav" id="7_78527"]
+[ext_resource type="AudioStream" uid="uid://ho1jjqx5k5y8" path="res://sounds/Shoot.wav" id="2_aq3x3"]
+[ext_resource type="AudioStream" uid="uid://8y1wkpn3xn1d" path="res://sounds/Upgrade3.wav" id="3_fr4va"]
+[ext_resource type="AudioStream" uid="uid://bgh70o82y5pb8" path="res://sounds/EnemyAttack.wav" id="4_5vk5x"]
+[ext_resource type="AudioStream" uid="uid://cmsoc7imkdlpo" path="res://sounds/Hit.wav" id="5_v6qcn"]
+[ext_resource type="AudioStream" uid="uid://c2tgtbeoh0psv" path="res://sounds/MainMenu_BG.wav" id="6_dh4l2"]
+[ext_resource type="AudioStream" uid="uid://bda2oemh4gafs" path="res://sounds/Explosion.wav" id="7_78527"]
 
 [node name="AudioManager" type="Node"]
 script = ExtResource("1_28cyv")

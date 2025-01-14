@@ -1,0 +1,168 @@
+[gd_scene load_steps=5 format=3 uid="uid://bxv5ly2vuej0e"]
+
+[ext_resource type="Script" path="res://scenes/home_menu/home_menu.gd" id="1_ba8e2"]
+[ext_resource type="FontFile" uid="uid://bpxdtwnb3n8j" path="res://ui/fonts/RubikWetPaint-Regular.ttf" id="2_flywx"]
+
+[sub_resource type="FontVariation" id="FontVariation_2i5h7"]
+base_font = ExtResource("2_flywx")
+
+[sub_resource type="FontVariation" id="FontVariation_5wdru"]
+base_font = ExtResource("2_flywx")
+
+[node name="HomeMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ba8e2")
+
+[node name="JoinOrHost" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -240.0
+offset_right = 280.0
+grow_vertical = 0
+theme_override_constants/separation = 40
+
+[node name="HostButton" type="Button" parent="JoinOrHost"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = SubResource("FontVariation_2i5h7")
+theme_override_font_sizes/font_size = 70
+text = "Host"
+
+[node name="JoinButton" type="Button" parent="JoinOrHost"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = SubResource("FontVariation_2i5h7")
+theme_override_font_sizes/font_size = 70
+text = "Join"
+
+[node name="Quit" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -240.0
+offset_top = -100.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="QuitButton" type="Button" parent="Quit"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = SubResource("FontVariation_2i5h7")
+theme_override_font_sizes/font_size = 70
+text = "Quit"
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -337.0
+offset_right = 337.0
+offset_bottom = 192.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.831373, 0.133333, 0, 0.721569)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = SubResource("FontVariation_5wdru")
+theme_override_font_sizes/font_size = 161
+text = "FamOps"
+
+[node name="JoinLobbyInputPanel" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 2
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = -69.0
+offset_right = 120.0
+offset_bottom = 69.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="JoinLobbyInputPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="JoinLobbyInputPanel/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="PlayerName" type="LineEdit" parent="JoinLobbyInputPanel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+placeholder_text = "Player name"
+
+[node name="SubmitButton" type="Button" parent="JoinLobbyInputPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Join a lobby"
+
+[node name="HostLobbyInputPanel" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -33.5312
+offset_top = -20.0
+offset_right = 33.5312
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HostLobbyInputPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HostLobbyInputPanel/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="ServerName" type="LineEdit" parent="HostLobbyInputPanel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+placeholder_text = "Server name"
+
+[node name="PlayerName" type="LineEdit" parent="HostLobbyInputPanel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+placeholder_text = "Player name"
+
+[node name="SubmitButton" type="Button" parent="HostLobbyInputPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Create lobby"
+
+[connection signal="pressed" from="JoinOrHost/HostButton" to="." method="_on_host_button_pressed"]
+[connection signal="pressed" from="JoinOrHost/JoinButton" to="." method="_on_join_button_pressed"]
+[connection signal="pressed" from="Quit/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="JoinLobbyInputPanel/MarginContainer/VBoxContainer/SubmitButton" to="." method="_on_join_submit_button_pressed"]
+[connection signal="pressed" from="HostLobbyInputPanel/MarginContainer/VBoxContainer/SubmitButton" to="." method="_on_host_submit_button_pressed"]
