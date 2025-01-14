@@ -2487,7 +2487,7 @@ texture = ExtResource("35_emp1u")
 [node name="Label3D" type="Label3D" parent="WeaponUpgrade/WeaponUpgradeArea"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.829558, -6.73647, 6.85125)
 modulate = Color(0, 0, 0, 1)
-text = "200 Points"
+text = "150 Points"
 font_size = 277
 
 [node name="MovementUpgrade" type="MeshInstance3D" parent="."]
@@ -2523,7 +2523,7 @@ texture = ExtResource("36_s2byj")
 [node name="Label3D" type="Label3D" parent="MovementUpgrade/MovementUpgradeArea"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.829558, -6.73647, 6.85125)
 modulate = Color(0, 0, 0, 1)
-text = "150 Points"
+text = "100 Points"
 font_size = 277
 
 [connection signal="child_entered_tree" from="Players" to="." method="_on_player_entered_tree"]
