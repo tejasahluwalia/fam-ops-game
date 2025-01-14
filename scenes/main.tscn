@@ -1,4 +1,4 @@
-[gd_scene load_steps=99 format=4 uid="uid://og0akbc31x1j"]
+[gd_scene load_steps=97 format=4 uid="uid://og0akbc31x1j"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_pw6e1"]
 [ext_resource type="Environment" uid="uid://13w4n7joxo58" path="res://scenes/world_environment.tres" id="8_5s5wh"]
@@ -17,7 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://dd2k68agf21th" path="res://assets/low_poly/roads/road_I_2.glb" id="19_faqmm"]
 [ext_resource type="PackedScene" uid="uid://blvl1sxmjpc3l" path="res://assets/low_poly/roads/traffic_barell_1.glb" id="20_2yhh4"]
 [ext_resource type="PackedScene" uid="uid://cnl4x8ihom8i0" path="res://assets/low_poly/Manhole Cover.glb" id="20_nnxmu"]
-[ext_resource type="MeshLibrary" uid="uid://dcjy1mlojhnpw" path="res://LevelDesign/low_poly_roads.tres" id="21_188le"]
+[ext_resource type="MeshLibrary" uid="uid://dcjy1mlojhnpw" path="res://level_design/low_poly_roads.tres" id="21_188le"]
 [ext_resource type="PackedScene" uid="uid://dit211c1ekian" path="res://assets/low_poly/gas_station/wooden_spike_barricade.glb" id="22_gp4kp"]
 [ext_resource type="PackedScene" uid="uid://cb2ryv60cn5bt" path="res://assets/low_poly/gas_station/box_1.glb" id="24_g5p6o"]
 [ext_resource type="Script" path="res://scenes/weapon_upgrade.gd" id="25_87cgj"]
@@ -247,6 +247,7 @@ radius = 0.3
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xj7ah"]
 resource_name = "mat21"
+albedo_color = Color(1, 1, 1, 1)
 emission_enabled = true
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_wpnhe"]
@@ -759,9 +760,8 @@ height = 0.2
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4icwt"]
 albedo_color = Color(0.262745, 0.54902, 0.294118, 1)
 
-[node name="Main" type="Node3D" node_paths=PackedStringArray("main_menu", "hud", "player_spawn_node", "projectile_spawn_node", "enemies_node")]
+[node name="Main" type="Node3D" node_paths=PackedStringArray("hud", "player_spawn_node", "projectile_spawn_node", "enemies_node")]
 script = ExtResource("1_pw6e1")
-main_menu = NodePath("MainMenu")
 hud = NodePath("HUD")
 player_spawn_node = NodePath("Players")
 projectile_spawn_node = NodePath("Projectiles")
@@ -2225,81 +2225,17 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_seum2")
 
-[node name="Title" type="Label" parent="MainMenu"]
+[node name="MarginContainer" type="MarginContainer" parent="MainMenu"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -337.0
-offset_top = -494.0
-offset_right = 337.0
-offset_bottom = -302.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_color = Color(0.831373, 0.133333, 0, 0.721569)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_y = 5
-theme_override_constants/outline_size = 10
-theme_override_fonts/font = SubResource("FontVariation_5wdru")
-theme_override_font_sizes/font_size = 161
-text = "FamOps"
-
-[node name="JoinButton" type="Button" parent="MainMenu"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -737.0
-offset_top = 106.0
-offset_right = -537.0
-offset_bottom = 206.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/outline_size = 5
-theme_override_fonts/font = SubResource("FontVariation_2i5h7")
-theme_override_font_sizes/font_size = 70
-text = "Join"
-
-[node name="ControlsButton" type="Button" parent="MainMenu"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -737.0
-offset_top = 254.0
-offset_right = -537.0
-offset_bottom = 354.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/outline_size = 5
-theme_override_fonts/font = SubResource("FontVariation_2i5h7")
-theme_override_font_sizes/font_size = 70
-text = "Controls"
-
-[node name="QuitButton" type="Button" parent="MainMenu"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -737.0
-offset_top = 404.0
-offset_right = -537.0
-offset_bottom = 504.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/outline_size = 5
-theme_override_fonts/font = SubResource("FontVariation_2i5h7")
-theme_override_font_sizes/font_size = 70
-text = "Quit"
+theme_override_constants/margin_left = 80
+theme_override_constants/margin_top = 80
+theme_override_constants/margin_right = 80
+theme_override_constants/margin_bottom = 80
 
 [node name="Controls" type="Control" parent="."]
 visible = false
@@ -2672,9 +2608,3 @@ text = "150 Points"
 font_size = 277
 
 [connection signal="child_entered_tree" from="Players" to="HUD" method="_on_player_entered_tree"]
-[connection signal="pressed" from="MainMenu/JoinButton" to="." method="_on_join_button_pressed"]
-[connection signal="pressed" from="MainMenu/ControlsButton" to="." method="_on_controls_button_pressed"]
-[connection signal="pressed" from="MainMenu/QuitButton" to="." method="_on_quit_button_pressed"]
-[connection signal="pressed" from="Controls/BackButton" to="." method="_on_back_button_pressed"]
-[connection signal="pressed" from="GameOver/QuitButton" to="." method="_on_quit_button_pressed"]
-[connection signal="pressed" from="GameWin/QuitButton" to="." method="_on_quit_button_pressed"]
