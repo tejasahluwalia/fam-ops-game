@@ -2526,4 +2526,5 @@ modulate = Color(0, 0, 0, 1)
 text = "150 Points"
 font_size = 277
 
+[connection signal="child_entered_tree" from="Players" to="." method="_on_player_entered_tree"]
 [connection signal="child_entered_tree" from="Players" to="HUD" method="_on_player_entered_tree"]

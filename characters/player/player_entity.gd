@@ -43,7 +43,7 @@ var stats: Dictionary = {
 
 var current_weapon = "toygun"
 
-signal is_dead
+signal is_dead(player_id: int)
 signal points_changed_server(new_points: int)
 signal points_changed_client(new_points: int)
 
@@ -78,7 +78,7 @@ func on_hit():
 
 
 func on_death():
-	is_dead.emit()
+	is_dead.emit(player_id)
 	model.move_to_dead()
 	self.set_collision_layer_value(1, false)
 	#current_controller.process_mode = Node.PROCESS_MODE_DISABLED

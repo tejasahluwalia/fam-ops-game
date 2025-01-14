@@ -1,6 +1,7 @@
 extends Node
 
 signal wave_started(wave_number: int)
+signal all_waves_survived()
 
 var enemies_node: Enemies
 var spawn_points: Array[Marker3D] = []
@@ -158,8 +159,12 @@ func _on_enemy_spawn_timeout(
 func _end_wave() -> void:
 	print("Ending wave: ", _current_wave.wave_number)
 	is_wave_active = false
-	await get_tree().create_timer(TIME_BETWEEN_WAVES).timeout
-	start_next_wave()
+	if _current_wave.wave_number == 1:
+		all_waves_survived.emit()
+	else:
+		await get_tree().create_timer(TIME_BETWEEN_WAVES).timeout
+		start_next_wave()
+
 
 
 func _enemies_remaining() -> int:
