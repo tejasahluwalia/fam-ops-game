@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://codrh050hbdgm"]
+[gd_scene load_steps=8 format=3 uid="uid://b55s5u4fjjmd6"]
 
 [ext_resource type="Script" path="res://scripts/audio_manager.gd" id="1_28cyv"]
 [ext_resource type="AudioStream" uid="uid://ho1jjqx5k5y8" path="res://sounds/Shoot.wav" id="2_aq3x3"]
@@ -33,7 +33,7 @@ pitch_scale = 1.5
 
 [node name="MainMenuTrack" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_dh4l2")
-volume_db = -10.0
+volume_db = -30.0
 
 [node name="ExplosionSFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_78527")
