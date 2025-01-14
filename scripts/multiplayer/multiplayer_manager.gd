@@ -75,6 +75,8 @@ func _add_player(id: int = 1):
 	player_instantiated.emit(player)
 	_player_spawn_node.call_deferred("add_child", player)
 	
+	WaveManager.start()
+	
 	if ServerConfig.is_aws_mode():
 		_send_server_update()
 

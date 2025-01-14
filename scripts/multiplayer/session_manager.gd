@@ -57,7 +57,7 @@ func create_session(server_name: StringName, host_name: StringName):
 
 func list_sessions():
 	if _http_request.get_http_client_status() != HTTPClient.STATUS_DISCONNECTED:
-    	# Request is already in progress
+		# Request is already in progress
 		return
 	
 	_http_request.request(
@@ -96,7 +96,7 @@ func join_session(session_id: StringName, player_name: StringName):
 
 func get_session():
 	if _http_request.get_http_client_status() != HTTPClient.STATUS_DISCONNECTED:
-    	# Request is already in progress
+		# Request is already in progress
 		return
 	
 	var data = {
