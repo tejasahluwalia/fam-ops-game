@@ -1,6 +1,6 @@
 extends Area3D
 
-@export var cost: int = 150
+@export var cost: int = 100
 @export var upgrade_increment: int = 2
 
 

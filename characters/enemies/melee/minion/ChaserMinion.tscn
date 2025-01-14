@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://b2edwi7wulkxq"]
+[gd_scene load_steps=50 format=3 uid="uid://b2edwi7wulkxq"]
 
 [ext_resource type="Script" path="res://characters/enemies/melee/chaser_minion.gd" id="1_bgrwq"]
 [ext_resource type="ArrayMesh" uid="uid://bptnevpcunpnm" path="res://assets/objects/weapons/grass_hockey_bat/grass_hockey.res" id="2_bvm3m"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://duds002tisele" path="res://characters/enemies/melee/minion/small_ennemy_animated.glb" id="6_6ov1q"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/composites/selector.gd" id="6_tk8b7"]
 [ext_resource type="Script" path="res://characters/enemies/melee/minion/is_dead.gd" id="7_gu6mg"]
+[ext_resource type="Texture2D" uid="uid://cfp20n7ciw0vs" path="res://assets/kits/kaykit_prototype_bits_prototypebits_texture.png" id="7_p6e2c"]
 [ext_resource type="Script" path="res://addons/beehave/nodes/composites/sequence.gd" id="8_cimi7"]
 [ext_resource type="Script" path="res://characters/enemies/melee/minion/health_below_zero.gd" id="9_8e7t0"]
 [ext_resource type="Script" path="res://characters/enemies/melee/minion/play_death.gd" id="10_eqn7w"]
@@ -168,6 +169,10 @@ collision_mode = 1
 collision_friction = 0.1
 collision_bounce = 0.12
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_koqen"]
+albedo_color = Color(1, 0.137255, 0.286275, 1)
+albedo_texture = ExtResource("7_p6e2c")
+
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_chcap"]
 properties/0/path = NodePath(".:position")
 properties/0/spawn = true
@@ -190,7 +195,6 @@ collision_layer = 16
 collision_mask = 27
 script = ExtResource("1_bgrwq")
 movement_speed = 14.0
-explosion_damage = 5.0
 explosion_movement_speed = 0.5
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
@@ -388,6 +392,9 @@ bones/35/position = Vector3(-0.350154, 0.332725, -4.27492)
 bones/35/rotation = Quaternion(-0.0607627, 0.41532, 0.791487, 0.444259)
 bones/35/scale = Vector3(0.865316, 1.33552, 0.865315)
 
+[node name="Body_001" parent="MeleeSkin/Skin/Skeleton3D" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_koqen")
+
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 target_desired_distance = 2.0
 debug_path_custom_color = Color(0.595041, 0.133162, 0.133162, 1)
@@ -396,7 +403,7 @@ debug_path_custom_point_size = 10.04
 [node name="BeehaveTree" type="Node" parent="." node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("5_s2oxv")
 actor_node_path = NodePath("..")
-blackboard = NodePath("@Node@243197")
+blackboard = NodePath("@Node@24473")
 actor = NodePath("..")
 
 [node name="SelectBehaviour" type="Node" parent="BeehaveTree"]

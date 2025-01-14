@@ -31,7 +31,7 @@ var velocity_for_animations = Vector3.ZERO
 
 # Add only these new properties
 @export var explosion_delay: float = 1.0
-@export var explosion_damage: float = 10.0
+@export var explosion_damage: float = 5.0
 @export var explosion_radius: float = 7.0
 @export var blink_speed: float = 8.0
 @export var explosion_movement_speed: float = 0.4  # Controls how fast the blinking happens
