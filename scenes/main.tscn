@@ -2284,6 +2284,7 @@ theme_override_font_sizes/font_size = 161
 text = "Game Over"
 
 [node name="Survived" type="Label" parent="GameOver"]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -2308,6 +2309,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="RetryButton" type="Button" parent="GameOver"]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -2323,9 +2325,10 @@ grow_vertical = 2
 theme_override_constants/outline_size = 5
 theme_override_fonts/font = SubResource("FontVariation_2i5h7")
 theme_override_font_sizes/font_size = 145
-text = "Retry"
+text = "Main Menu"
 
 [node name="QuitButton" type="Button" parent="GameOver"]
+visible = false
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -2420,6 +2423,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="MainMenuButton" type="Button" parent="GameWin"]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -2438,6 +2442,7 @@ theme_override_font_sizes/font_size = 145
 text = "Main Menu"
 
 [node name="QuitButton" type="Button" parent="GameWin"]
+visible = false
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
