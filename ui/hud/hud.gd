@@ -11,7 +11,12 @@ func _ready() -> void:
 
 
 func _on_wave_started(wave_number: int) -> void:
-	wave_status.text = "Wave " + str(wave_number)
+	_update_wave_counter.rpc("Wave " + str(wave_number))
+
+
+@rpc("call_remote", "authority", "reliable", 0)
+func _update_wave_counter(text: String) -> void:
+	wave_status.text = text
 
 
 func _on_player_entered_tree(node: Node) -> void:

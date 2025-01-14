@@ -6,7 +6,6 @@ var peer = ENetMultiplayerPeer.new()
 @export var player_spawn_node: Node3D
 @export var projectile_spawn_node: Node3D
 @export var enemies_node: Enemies
-@onready var controls = $Controls
 
 var home_menu_scene = preload("res://scenes/home_menu/home_menu.tscn")
 
