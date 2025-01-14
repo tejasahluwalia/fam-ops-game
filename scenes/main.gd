@@ -7,6 +7,7 @@ var peer = ENetMultiplayerPeer.new()
 @export var player_spawn_node: Node3D
 @export var projectile_spawn_node: Node3D
 @export var enemies_node: Enemies
+@onready var controls = $Controls
 
 
 # Called when the node enters the scene tree for the first time.
@@ -32,5 +33,14 @@ func _remove_buttons() -> void:
 	main_menu.queue_free()
 
 
+
 func _on_quit_button_pressed():
 	get_tree().quit()
+
+
+func _on_controls_button_pressed():
+	controls.visible = true
+
+
+func _on_back_button_pressed():
+	controls.visible = false

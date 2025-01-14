@@ -1,4 +1,4 @@
-[gd_scene load_steps=96 format=4 uid="uid://og0akbc31x1j"]
+[gd_scene load_steps=99 format=4 uid="uid://og0akbc31x1j"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_pw6e1"]
 [ext_resource type="Environment" uid="uid://13w4n7joxo58" path="res://scenes/world_environment.tres" id="8_5s5wh"]
@@ -25,6 +25,7 @@
 [ext_resource type="Script" path="res://scripts/weapon_upgrade_interactable_area_3d.gd" id="26_8nuuq"]
 [ext_resource type="PackedScene" uid="uid://bjlcoarj0qxqh" path="res://assets/low_poly/gas_station/electric_pole_1.glb" id="26_oi7rw"]
 [ext_resource type="PackedScene" uid="uid://cpxkladyjcj8d" path="res://ui/interaction_tip.tscn" id="27_dojsb"]
+[ext_resource type="Texture2D" uid="uid://bhmt2vogyrbl7" path="res://ui/controls.png" id="27_oihwf"]
 [ext_resource type="Texture2D" uid="uid://bakvty0svsxlg" path="res://ui/TitleScreenPlain.png" id="30_clmjy"]
 [ext_resource type="FontFile" uid="uid://bpxdtwnb3n8j" path="res://ui/fonts/RubikWetPaint-Regular.ttf" id="31_n0a4v"]
 [ext_resource type="Texture2D" uid="uid://ccw764y6lxnj1" path="res://ui/FR_upgrade.png" id="35_emp1u"]
@@ -727,6 +728,11 @@ base_font = ExtResource("31_n0a4v")
 
 [sub_resource type="FontVariation" id="FontVariation_2i5h7"]
 base_font = ExtResource("31_n0a4v")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_h1fmr"]
+texture = ExtResource("27_oihwf")
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_a74f2"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_kqpil"]
 radius = 6.0
@@ -2249,15 +2255,33 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -737.0
-offset_top = 149.0
+offset_top = 106.0
 offset_right = -537.0
-offset_bottom = 249.0
+offset_bottom = 206.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/outline_size = 5
 theme_override_fonts/font = SubResource("FontVariation_2i5h7")
 theme_override_font_sizes/font_size = 70
 text = "Join"
+
+[node name="ControlsButton" type="Button" parent="MainMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -737.0
+offset_top = 254.0
+offset_right = -537.0
+offset_bottom = 354.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = SubResource("FontVariation_2i5h7")
+theme_override_font_sizes/font_size = 70
+text = "Controls"
 
 [node name="QuitButton" type="Button" parent="MainMenu"]
 layout_mode = 1
@@ -2267,11 +2291,310 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -737.0
-offset_top = 285.0
+offset_top = 404.0
 offset_right = -537.0
-offset_bottom = 385.0
+offset_bottom = 504.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = SubResource("FontVariation_2i5h7")
+theme_override_font_sizes/font_size = 70
+text = "Quit"
+
+[node name="Controls" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="Panel" parent="Controls"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_seum2")
+
+[node name="ColorRect" type="ColorRect" parent="Controls"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.741176)
+
+[node name="Controls" type="Panel" parent="Controls"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_h1fmr")
+
+[node name="Title" type="Label" parent="Controls"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -337.0
+offset_top = -494.0
+offset_right = 337.0
+offset_bottom = -302.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.227451, 0.854902, 0.556863, 0.721569)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = SubResource("FontVariation_5wdru")
+theme_override_font_sizes/font_size = 161
+text = "How To Play"
+
+[node name="BackButton" type="Button" parent="Controls"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -877.0
+offset_top = 404.0
+offset_right = -677.0
+offset_bottom = 504.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = SubResource("FontVariation_2i5h7")
+theme_override_font_sizes/font_size = 70
+text = "Back"
+
+[node name="GameOver" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="Panel" parent="GameOver"]
+modulate = Color(0.521318, 0.169834, 0.277108, 1)
+material = SubResource("CanvasItemMaterial_a74f2")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_seum2")
+
+[node name="ColorRect" type="ColorRect" parent="GameOver"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.545098)
+
+[node name="Title" type="Label" parent="GameOver"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -337.0
+offset_top = -494.0
+offset_right = 337.0
+offset_bottom = -302.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.831373, 0.133333, 0, 0.721569)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = SubResource("FontVariation_5wdru")
+theme_override_font_sizes/font_size = 161
+text = "Game Over"
+
+[node name="Survived" type="Label" parent="GameOver"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -452.0
+offset_top = -249.0
+offset_right = 452.0
+offset_bottom = -57.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.854902, 0, 0.721569)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = SubResource("FontVariation_5wdru")
+theme_override_font_sizes/font_size = 71
+text = "You Survived: "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RetryButton" type="Button" parent="GameOver"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -223.0
+offset_top = 10.0
+offset_right = 223.0
+offset_bottom = 191.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = SubResource("FontVariation_2i5h7")
+theme_override_font_sizes/font_size = 145
+text = "Retry"
+
+[node name="QuitButton" type="Button" parent="GameOver"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -181.0
+offset_right = 100.0
+offset_bottom = -81.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = SubResource("FontVariation_2i5h7")
+theme_override_font_sizes/font_size = 70
+text = "Quit"
+
+[node name="GameWin" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="Panel" parent="GameWin"]
+modulate = Color(0.959356, 0.926139, 0.857527, 1)
+material = SubResource("CanvasItemMaterial_a74f2")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_seum2")
+
+[node name="ColorRect" type="ColorRect" parent="GameWin"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 0.0745098, 0.368627)
+
+[node name="Title" type="Label" parent="GameWin"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -337.0
+offset_top = -494.0
+offset_right = 337.0
+offset_bottom = -302.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.176471, 0.964706, 0, 0.721569)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = SubResource("FontVariation_5wdru")
+theme_override_font_sizes/font_size = 161
+text = "You Won!"
+
+[node name="Survived" type="Label" parent="GameWin"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -452.0
+offset_top = -249.0
+offset_right = 452.0
+offset_bottom = -57.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.854902, 0, 0.721569)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = SubResource("FontVariation_5wdru")
+theme_override_font_sizes/font_size = 71
+text = "You Survived: "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MainMenuButton" type="Button" parent="GameWin"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -223.0
+offset_top = 10.0
+offset_right = 223.0
+offset_bottom = 191.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = SubResource("FontVariation_2i5h7")
+theme_override_font_sizes/font_size = 145
+text = "Main Menu"
+
+[node name="QuitButton" type="Button" parent="GameWin"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -181.0
+offset_right = 100.0
+offset_bottom = -81.0
+grow_horizontal = 2
+grow_vertical = 0
 theme_override_constants/outline_size = 5
 theme_override_fonts/font = SubResource("FontVariation_2i5h7")
 theme_override_font_sizes/font_size = 70
@@ -2350,4 +2673,8 @@ font_size = 277
 
 [connection signal="child_entered_tree" from="Players" to="HUD" method="_on_player_entered_tree"]
 [connection signal="pressed" from="MainMenu/JoinButton" to="." method="_on_join_button_pressed"]
+[connection signal="pressed" from="MainMenu/ControlsButton" to="." method="_on_controls_button_pressed"]
 [connection signal="pressed" from="MainMenu/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="Controls/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="GameOver/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="GameWin/QuitButton" to="." method="_on_quit_button_pressed"]
